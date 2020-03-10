@@ -36,6 +36,7 @@ for LinkIdx = 1:NLinks
         return
     end
 end
+MasterInfo.DataSheetNum = MasterInfo.Links(end).ImageNrHigh;
 
 
 
