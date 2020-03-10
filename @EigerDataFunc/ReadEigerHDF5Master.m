@@ -1,7 +1,7 @@
 function MasterInfo =ReadEigerHDF5Master(MasterFP)
 setenv('HDF5_PLUGIN_PATH','/blsw/opt/areaDetector/root/usr/lib/h5plugin');
 
-[MasterFF MasterFN] = AnalyzeMasterFP(MasterFP);
+[MasterFF,MasterFN] = AnalyzeMasterFP(MasterFP);
 
 MasterInfo.MasterFF = MasterFF;
 MasterInfo.MasterFN = MasterFN;
@@ -19,9 +19,26 @@ MasterInfo.BeamCenterX= round(double(h5read(MasterFP,'/entry/instrument/detector
 MasterInfo.BeamCenterY= round(double(h5read(MasterFP,'/entry/instrument/detector/beam_center_y')));
 MasterInfo.PixelMask = logical(transpose(h5read(MasterFP,'/entry/instrument/detector/detectorSpecific/pixel_mask')));
 
-
-
 temp = h5info(MasterFP,'/entry/data');
+Links = temp.Links;
+NLinks = length(Links); 
+for LinkIdx = 1:NLinks
+    LinkedFN = Links(LinkIdx).Value{1};
+    LinkedFP = fullfile(MasterInfo.MasterFF, LinkedFN);
+    if exist(LinkedFP,'file')
+        MasterInfo.Links(LinkIdx).FN = LinkedFN;
+        MasterInfo.Links(LinkIdx).FF = MasterInfo.MasterFF;
+        MasterInfo.Links(LinkIdx).FP = LinkedFP;
+        MasterInfo.Links(LinkIdx).Location = Links(LinkIdx).Value{2};
+        MasterInfo.Links(LinkIdx).ImageNrLow = h5readatt(MasterInfo.Links(LinkIdx).FP,MasterInfo.Links(LinkIdx).Location,'image_nr_low');
+        MasterInfo.Links(LinkIdx).ImageNrHigh = h5readatt(MasterInfo.Links(LinkIdx).FP,MasterInfo.Links(LinkIdx).Location,'image_nr_high');
+    else
+        return
+    end
+end
+
+
+
 
 function [MasterFF,MasterFN] = AnalyzeMasterFP(MasterFP)
 
