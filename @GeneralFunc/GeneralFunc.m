@@ -6,6 +6,8 @@ classdef GeneralFunc
         UpdateMasterInfoFromTable(app, event);
         UpdateDataSheetSelectionItems(app, event);
         
+        SingleDataProcess(app,event);
+        
         PlotCurrentImage(app,event);
     end
 end

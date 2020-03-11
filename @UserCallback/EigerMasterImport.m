@@ -21,3 +21,6 @@ GeneralFunc.UpdateDataSheetSelectionItems(app,event);
 
 %% Update Exp. Cond. Table
 GeneralFunc.UpdateExpCondTableFromMasterInfo(app, event);
+
+%% Plot The First Data
+UserCallback.DataSheetSelect(app,event)

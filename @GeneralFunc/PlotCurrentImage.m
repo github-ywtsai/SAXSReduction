@@ -1,4 +1,4 @@
 function PlotCurrentImage(app,event)
 
-imagesc(app.ImageUIAxes,app.CurrentData.RawData);
+app.PlotHandles.Image = imagesc(app.ImageUIAxes,app.CurrentData.MaskedData);
 axis(app.ImageUIAxes,'image')
