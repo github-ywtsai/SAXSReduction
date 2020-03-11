@@ -20,4 +20,4 @@ end
 GeneralFunc.UpdateDataSheetSelectionItems(app,event);
 
 %% Update Exp. Cond. Table
-GeneralFunc.UpdateExpCondTable(app, event);
+GeneralFunc.UpdateExpCondTableFromMasterInfo(app, event);

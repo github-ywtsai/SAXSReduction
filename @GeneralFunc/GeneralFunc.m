@@ -2,7 +2,8 @@ classdef GeneralFunc
     methods (Static = true)
         PresetVariables(app);
         
-        UpdateExpCondTable(app, event);
+        UpdateExpCondTableFromMasterInfo(app, event);
+        UpdateMasterInfoFromTable(app, event);
         UpdateDataSheetSelectionItems(app, event);
         
         PlotCurrentImage(app,event);
