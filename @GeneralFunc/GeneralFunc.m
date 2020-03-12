@@ -6,6 +6,8 @@ classdef GeneralFunc
         EffectiveMaskPreview(app, event);
         UpdateEffectiveMask(app, event);
         
+        ImageProfileConfig(app,event);
+        
         UpdateExpCondTableFromMasterInfo(app, event);
         UpdateMasterInfoFromTable(app, event);
         UpdateDataSheetSelectionItems(app, event);

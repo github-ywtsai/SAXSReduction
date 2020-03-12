@@ -19,3 +19,6 @@ for MaskID = 1:10
 end
 
 app.CurrentData.MaskInfo.EffectiveMask = or(EffectiveMask,app.CurrentData.MasterInfo.PixelMask);
+
+% Update image to profile configuration
+GeneralFunc.ImageProfileConfig(app,event);
