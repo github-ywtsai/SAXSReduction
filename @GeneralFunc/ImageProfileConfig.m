@@ -43,9 +43,14 @@ qAxisRightShift = [-Inf qAxis];
 qAxisLeftShift = [qAxis Inf];
 qSortingEdge = (qAxisRightShift + qAxisLeftShift)/2;
 [NumPixelInqSection,~,GuidingIdxMatrix] = histcounts(MaskedqMatrix,qSortingEdge);
+IgnoreIdx = (GuidingIdxMatrix(:) == 0);
+GuidingIdxVector = GuidingIdxMatrix(:);
+GuidingIdxVector(IgnoreIdx) = [];
 
 app.CurrentData.ImageProfileConvertor.qSpace.NumPixelInqSection = NumPixelInqSection;
 app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxMatrix = GuidingIdxMatrix;
+app.CurrentData.ImageProfileConvertor.qSpace.IgnoreIdx = IgnoreIdx;
+app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxVector = GuidingIdxVector;
 app.CurrentData.ImageProfileConvertor.qSpace.Axis = qAxis;
 
 %{
@@ -58,9 +63,14 @@ TwoThetaAxisRightShift = [-Inf TwoThetaAxis];
 TwoThetaAxisLeftShift = [TwoThetaAxis Inf];
 TwoThetaSortingEdge = (TwoThetaAxisRightShift + TwoThetaAxisLeftShift)/2;
 [NumPixelInTwoThetaSection,~,TwoThetaGuidingIdxMatrix] = histcounts(MaskedTwoThetaMatrix,TwoThetaSortingEdge);
+IgnoreIdx = (GuidingIdxMatrix(:) == 0);
+GuidingIdxVector = GuidingIdxMatrix(:);
+GuidingIdxVector(IgnoreIdx) = [];
 
 app.CurrentData.ImageProfileConvertor.TwoThetaSpace.NumPixelInqSection = NumPixelInqSection;
 app.CurrentData.ImageProfileConvertor.TwoThetaSpace.GuidingIdxMatrix = GuidingIdxMatrix;
+app.CurrentData.ImageProfileConvertor.TwoThetaSpace.IgnoreIdx = IgnoreIdx;
+app.CurrentData.ImageProfileConvertor.TwoThetaSpace.GuidingIdxVector = GuidingIdxVector;
 app.CurrentData.ImageProfileConvertor.TwoThetaSpace.Axis = TwoThetaAxis;
 %}
 

@@ -11,15 +11,12 @@ end
 
 % 1D profile part
 RawDataVector = RawData(:);
-GuidingIdxVector = app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxMatrix(:);
+GuidingIdxVector = app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxVector;
 XAxis = app.CurrentData.ImageProfileConvertor.qSpace.Axis;
 NumPixelInqSection = app.CurrentData.ImageProfileConvertor.qSpace.NumPixelInqSection;
 
-IgnoreIdx = (GuidingIdxVector == 0);
+IgnoreIdx = app.CurrentData.ImageProfileConvertor.qSpace.IgnoreIdx;
 RawDataVector(IgnoreIdx) = [];
-GuidingIdxVector(IgnoreIdx) = [];
 
 Intensity = transpose(accumarray(GuidingIdxVector,RawDataVector))./NumPixelInqSection;
 app.CurrentData.ProfileForDrawing = [XAxis;Intensity];
-
-
