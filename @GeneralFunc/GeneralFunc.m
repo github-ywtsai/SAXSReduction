@@ -15,5 +15,6 @@ classdef GeneralFunc
         SingleDataProcess(app,event);
         
         PlotCurrentImage(app,event);
+        PlotCurrentProfile(app,event);
     end
 end

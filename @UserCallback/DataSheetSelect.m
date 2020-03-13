@@ -4,6 +4,8 @@ if event.Source == app.CurrentDataSheetSpinner
     SourceItem = 'Spinner';
 elseif event.Source == app.EigerMasterMenu
     SourceItem = 'DataImport';
+elseif event.Source == app.CurrentDataSheetReDrawButton
+    SourceItem = 'CurrentDataSheetReDraw';
 end
 
 switch SourceItem
@@ -11,9 +13,12 @@ switch SourceItem
         app.CurrentData.RequestSN = app.CurrentDataSheetSpinner.Value;
     case 'Spinner'
         app.CurrentData.RequestSN = app.CurrentDataSheetSpinner.Value;
+    case 'CurrentDataSheetReDraw'
+        app.CurrentData.RequestSN = app.CurrentDataSheetSpinner.Value;
 end
 
 app.CurrentData.RawData = double(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData.MasterInfo,app.CurrentData.RequestSN,[],[]));
 
 GeneralFunc.SingleDataProcess(app,event);
 GeneralFunc.PlotCurrentImage(app,event);
+GeneralFunc.PlotCurrentProfile(app,event);
