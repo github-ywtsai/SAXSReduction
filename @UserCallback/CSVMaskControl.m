@@ -73,7 +73,7 @@ TextData = temp.textdata;
 
 % 1:    CSV format difference using Tool/XY coordininate in different imageJ version
 %       New imageJ
-%       Col_1:x; Col_2:y
+%       Col_1:x; Col_2:y; Col_3;value
 %       early imageJ
 %       Col_1:idx; Col_2:x; Col_3:y; Col_4: value
 % 2:    x(col) and y(row) indice start from 0 in imageJ but 1 from Matlab 

@@ -47,6 +47,8 @@ IgnoreIdx = (GuidingIdxMatrix(:) == 0);
 GuidingIdxVector = GuidingIdxMatrix(:);
 GuidingIdxVector(IgnoreIdx) = [];
 
+app.CurrentData.ImageProfileConvertor.qSpace.DsitributionMatrix = qMatrix; % record q or th distribution
+app.CurrentData.ImageProfileConvertor.qSpace.PixelDisMatrix = PixelDisMatrix; % record pixel distance
 app.CurrentData.ImageProfileConvertor.qSpace.NumPixelInqSection = NumPixelInqSection;
 app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxMatrix = GuidingIdxMatrix;
 app.CurrentData.ImageProfileConvertor.qSpace.IgnoreIdx = IgnoreIdx;
@@ -67,6 +69,8 @@ IgnoreIdx = (GuidingIdxMatrix(:) == 0);
 GuidingIdxVector = GuidingIdxMatrix(:);
 GuidingIdxVector(IgnoreIdx) = [];
 
+app.CurrentData.ImageProfileConvertor.TwoThetaSpace.DsitributionMatrix = TwoThetaMatrix;
+app.CurrentData.ImageProfileConvertor.TwoThetaSpace.PixelDisMatrix = PixelDisMatrix;
 app.CurrentData.ImageProfileConvertor.TwoThetaSpace.NumPixelInqSection = NumPixelInqSection;
 app.CurrentData.ImageProfileConvertor.TwoThetaSpace.GuidingIdxMatrix = GuidingIdxMatrix;
 app.CurrentData.ImageProfileConvertor.TwoThetaSpace.IgnoreIdx = IgnoreIdx;

@@ -5,6 +5,7 @@ classdef GeneralFunc
         UpdateCSVMaskTable(app,event);
         EffectiveMaskPreview(app, event);
         UpdateEffectiveMask(app, event);
+        MaskGenerator(app,event);
         
         ImageProfileConfig(app,event);
         
