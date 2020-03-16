@@ -1,6 +1,6 @@
 function SingleDataProcess(app,event)
 
-RawData = app.CurrentData.RawData;
+RawData = app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime;
 
 % 2D image part
 if isempty(app.CurrentData.MaskInfo.EffectiveMask)
