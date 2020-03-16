@@ -6,6 +6,7 @@ classdef GeneralFunc
         EffectiveMaskPreview(app, event);
         UpdateEffectiveMask(app, event);
         MaskGenerator(app,event);
+        MaskGenPreview(app, event);
         
         ImageProfileConfig(app,event);
         
