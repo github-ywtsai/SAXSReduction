@@ -23,7 +23,10 @@ GeneralFunc.UpdateDataSheetSelectionItems(app,event);
 GeneralFunc.UpdateExpCondTableFromMasterInfo(app, event);
 
 %% Create image to profile convertor
-GeneralFunc.ImageProfileConfig(app,event);
+%% Update the effective pixel mask and effective mask
+
+GeneralFunc.UpdateEffectiveMask(app, event);
+ % GeneralFunc.ImageProfileConfig(app,event) included within GeneralFunc.UpdateEffectiveMask(app, event);
 
 %% Plot The First Data
 UserCallback.DataSheetSelect(app,event);
