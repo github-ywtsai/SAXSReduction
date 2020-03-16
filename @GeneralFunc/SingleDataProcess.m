@@ -1,16 +1,16 @@
 function SingleDataProcess(app,event)
 
-RawData = app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime;
+NormRawData = app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime;
 
 % 2D image part
 if isempty(app.CurrentData.MaskInfo.EffectiveMask)
-    app.CurrentData.ImageForDrawing = RawData;
+    app.CurrentData.ImageForDrawing = NormRawData;
 else
-    app.CurrentData.ImageForDrawing = RawData.* ~app.CurrentData.MaskInfo.EffectiveMask;
+    app.CurrentData.ImageForDrawing = NormRawData.* ~app.CurrentData.MaskInfo.EffectiveMask;
 end
 
 % 1D profile part
-RawDataVector = RawData(:);
+RawDataVector = NormRawData(:);
 GuidingIdxVector = app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxVector;
 XAxis = app.CurrentData.ImageProfileConvertor.qSpace.Axis;
 NumPixelInqSection = app.CurrentData.ImageProfileConvertor.qSpace.NumPixelInqSection;

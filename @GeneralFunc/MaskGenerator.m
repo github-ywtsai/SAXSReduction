@@ -26,37 +26,37 @@ SweepAng = app.RadiusMaskGenUITable.Data{4,2};
 
 
 [ColIdx,RowIdx] = meshgrid(1:ImgXSize,1:ImgYSize);
+% [ColIdx,RowIdx] = ndgrid(1:size(DsitributionMatrix,1),1:size(DsitributionMatrix,2));
+
 YXPixelRatio = YPixelSize/XPixelSize; % using XPixelSize as reference when calculating pixel distance
 PixelXDisMatrix = ColIdx-CenX;
 PixelYDisMatrix = -(RowIdx-CenY)*YXPixelRatio; % RowIdx direction is -y, so add a - at the head.
 [AngleDisMatrix,~] = cart2pol(PixelXDisMatrix,PixelYDisMatrix);
 AngleDisMatrix = AngleDisMatrix*180/pi; % in degress, from 0 to 180 and -0 to -180.
-DistanceMask = false(size(DsitributionMatrix));
 
 % q or th part
-DistanceMask(and(DsitributionMatrix<=MaxValue, DsitributionMatrix>=MinValue)) = true;
+DistanceMask= and(DsitributionMatrix<=MaxValue, DsitributionMatrix>=MinValue);
 % angular part
 AngularMask = AngularMaskGen(CenAng,SweepAng,AngleDisMatrix);
-CenSymAngularMask = AngularMaskGen(CenAng + 180,SweepAng,AngleDisMatrix);
-XMirrorAngularMask = AngularMaskGen(180 - CenAng,SweepAng,AngleDisMatrix);
-YMirrorAngularMask = AngularMaskGen(-CenAng,SweepAng,AngleDisMatrix);
 
 if app.MaskGenSymmetryButtonGroup.SelectedObject == app.MaskGenNoneSymButton
-    SymCase = 'None';
+    % SymCase = 'None';
     Mask = and(DistanceMask, AngularMask);
 elseif app.MaskGenSymmetryButtonGroup.SelectedObject == app.MaskGenCenSymButton
-    SymCase = 'Central';
-    Mask = and(DistanceMask, AngularMask + CenSymAngularMask);
+    % SymCase = 'Central';
+    CenSymAngularMask = AngularMaskGen(CenAng + 180,SweepAng,AngleDisMatrix);
+    Mask = and(DistanceMask, or(AngularMask, CenSymAngularMask));
 elseif app.MaskGenSymmetryButtonGroup.SelectedObject == app.MaskGenXMirrorButton
-    SymCase = 'XMirror';
-    Mask = and(DistanceMask, AngularMask + XMirrorAngularMask);
+    % SymCase = 'XMirror';
+    XMirrorAngularMask = AngularMaskGen(180 - CenAng,SweepAng,AngleDisMatrix);
+    Mask = and(DistanceMask, or(AngularMask, XMirrorAngularMask));
 elseif app.MaskGenSymmetryButtonGroup.SelectedObject == app.MaskGenYMirrorButton
-    SymCase = 'YMirror';
-    Mask = and(DistanceMask, AngularMask + YMirrorAngularMask);
+    % SymCase = 'YMirror';
+    YMirrorAngularMask = AngularMaskGen(-CenAng,SweepAng,AngleDisMatrix);
+    Mask = and(DistanceMask, or(AngularMask, YMirrorAngularMask));
 end
 
 function AngularMask = AngularMaskGen(CenAng,SweepAng,AngleDisMatrix)
-AngularMask = false(size(AngleDisMatrix));
 HAng = CenAng + SweepAng/2;
 LAng = CenAng - SweepAng/2;
 
@@ -70,13 +70,13 @@ end
 
 switch AngleCase
     case 'AllPostive'
-        PosAngleDisMatrix = AngleDisMatrix;
-        PosAngleDisMatrix(AngleDisMatrix<0) = PosAngleDisMatrix(AngleDisMatrix<0) + 360; % 0 to 360 degrees
-        AngularMask(and(PosAngleDisMatrix<=HAng, PosAngleDisMatrix>=LAng)) = true;
+        TargetIdx = AngleDisMatrix < 0;
+        PosAngleDisMatrix = AngleDisMatrix.*~TargetIdx + (AngleDisMatrix+360).*TargetIdx; % 0 to 360 degrees
+        AngularMask = and(PosAngleDisMatrix<=HAng, PosAngleDisMatrix>=LAng);
     case 'AllNegtive'
-        NegAngleDisMatrix = AngleDisMatrix;
-        NegAngleDisMatrix(AngleDisMatrix>0) = NegAngleDisMatrix(AngleDisMatrix>0) -360; % -0 to -360 degrees
-        AngularMask(and(NegAngleDisMatrix<=HAng, NegAngleDisMatrix>=LAng)) = true;
+        TargetIdx = AngleDisMatrix > 0;
+        NegAngleDisMatrix = AngleDisMatrix.*~TargetIdx + (AngleDisMatrix-360).*TargetIdx; % -0 to -360 degrees
+        AngularMask = and(NegAngleDisMatrix<=HAng, NegAngleDisMatrix>=LAng);
     case 'Both'
-        AngularMask(and(AngleDisMatrix<=HAng, AngleDisMatrix>=LAng)) = true;
+        AngularMask = and(AngleDisMatrix<=HAng, AngleDisMatrix>=LAng);
 end
