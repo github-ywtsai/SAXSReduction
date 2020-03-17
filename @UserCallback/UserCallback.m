@@ -4,6 +4,8 @@ classdef UserCallback
         CSVMaskControl(app, event);
         ExportCSVMask(app, event);
         
-        DataSheetSelect(app,event)
+        DataSheetSelect(app,event);
+        
+        BackgroundControl(app,event);
     end
 end

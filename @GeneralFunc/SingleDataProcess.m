@@ -1,6 +1,10 @@
 function SingleDataProcess(app,event)
 
-NormRawData = app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime;
+if isempty(app.BGInfo.Background)
+    NormRawData = app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime;
+else
+    NormRawData = (app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime)/app.BGInfo.Background.SampleTrans - (app.BGInfo.Background.RawData/app.BGInfo.Background.MasterInfo.CountTime)/app.BGInfo.Background.BufferTrans;
+end
 
 % 2D image part
 if isempty(app.CurrentData.MaskInfo.EffectiveMask)

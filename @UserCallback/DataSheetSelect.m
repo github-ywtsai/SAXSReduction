@@ -18,6 +18,9 @@ switch SourceItem
 end
 
 app.CurrentData.RawData = double(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData.MasterInfo,app.CurrentData.RequestSN,[],[]));
+[~,Title,~] = fileparts(app.CurrentData.MasterInfo.MasterFP); Title = strrep(Title,'_master','');
+app.CurrentData.Title = sprintf('%s#%d',Title,app.CurrentData.RequestSN);
+
 
 GeneralFunc.SingleDataProcess(app,event);
 GeneralFunc.PlotCurrentImage(app,event);
