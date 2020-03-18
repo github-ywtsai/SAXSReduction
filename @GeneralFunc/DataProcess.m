@@ -1,4 +1,4 @@
-function SingleDataProcess(app,event)
+function DataProcess(app,event)
 
 if isempty(app.BGInfo.Background)
     NormRawData = app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime;
