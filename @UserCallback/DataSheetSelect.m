@@ -22,6 +22,6 @@ app.CurrentData.RawData = double(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData
 app.CurrentData.Title = sprintf('%s#%d',Title,app.CurrentData.RequestSN);
 
 
-GeneralFunc.SingleDataProcess(app,event);
+GeneralFunc.DataProcess(app,event);
 GeneralFunc.PlotCurrentImage(app,event);
 GeneralFunc.PlotCurrentProfile(app,event);
