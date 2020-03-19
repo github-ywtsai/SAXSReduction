@@ -1,12 +1,13 @@
 classdef GeneralFunc
     methods (Static = true)
+        EnvSettingCheck = EnvSetting();
         PresetVariables(app);
         
         UpdateCSVMaskTable(app,event);
         EffectiveMaskPreview(app, event);
         UpdateEffectiveMask(app, event);
         MaskGenerator(app,event);
-        MaskGenPreview(app, event);
+        MaskGenPreview(app,event);
         
         ImageProfileConfig(app,event);
         
