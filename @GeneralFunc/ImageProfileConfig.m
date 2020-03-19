@@ -33,7 +33,7 @@ MaskNaNMatrix(Mask == 1) = nan;
 
 
 
-qAxisPts = 1500;
+qAxisPts = round(app.XAxisPoints.Value);
 %% q axis
 MaskedqMatrix = qMatrix .* MaskNaNMatrix;
 qMin = min(MaskedqMatrix,[],'all');
