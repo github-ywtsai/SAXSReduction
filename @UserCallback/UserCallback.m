@@ -5,6 +5,7 @@ classdef UserCallback
         ExportCSVMask(app, event);
         
         DataSheetSelect(app,event);
+        AverageData(app,event);
         
         BackgroundControl(app,event);
     end
