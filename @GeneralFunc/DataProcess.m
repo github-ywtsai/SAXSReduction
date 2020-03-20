@@ -21,12 +21,15 @@ XAxis = app.CurrentData.ImageProfileConvertor.qSpace.Axis;
 NumPixelInqSection = app.CurrentData.ImageProfileConvertor.qSpace.NumPixelInqSection;
 IgnoreIdx = app.CurrentData.ImageProfileConvertor.qSpace.IgnoreIdx;
 IntensityTemp = zeros(NumData,length(XAxis));
+ErrorTemp = zeros(NumData,length(XAxis));
 for DataSN = 1:NumData
     NormRawDataTemp = NormRawData(:,:,DataSN);
     RawDataVector = NormRawDataTemp(:);
     RawDataVector(IgnoreIdx) = [];
 
     IntensityTemp(DataSN,:) = transpose(accumarray(GuidingIdxVector,RawDataVector))./NumPixelInqSection;
+    ErrorTemp(DataSN,:) = transpose(accumarray(GuidingIdxVector,sqrt(abs(RawDataVector))))./NumPixelInqSection;
 end
 Intensity = sum(IntensityTemp,1)/NumData;
-app.CurrentData.ProfileForDrawing = [XAxis;Intensity];
+Error = sum(IntensityTemp,1)/NumData;
+app.CurrentData.ProfileForDrawing = [XAxis;Intensity;Error];
