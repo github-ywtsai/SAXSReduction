@@ -8,5 +8,7 @@ classdef UserCallback
         AverageData(app,event);
         
         BackgroundControl(app,event);
+        
+        ExportCurrentProfile(app,event);
     end
 end
