@@ -25,51 +25,60 @@ YXPixelRatio = YPixelSize/XPixelSize; % using XPixelSize as reference when calcu
 MaskNaNMatrix = ones(size(Mask));
 MaskNaNMatrix(Mask == 1) = nan;
 
-
-%% q axis
-if app.XAxisResolutionButtonGroup.SelectedObject == app.XAxisOnePixelResButton
-    % sqrt() is very slow.
-    PixelDisMatrix =round(sqrt(((RowIdx-CenY)*YXPixelRatio).^2+(ColIdx-CenX).^2));
-    TwoThetaMatrix = atan(PixelDisMatrix*XPixelSize/SDDistance);
-    qMatrix = 4*pi/(WL*1E10)*sin(1/2 *TwoThetaMatrix); % [1/A]
-    MaskedPixelDisMatrix = PixelDisMatrix.* MaskNaNMatrix;
-    MaskedqMatrix = qMatrix .* MaskNaNMatrix;
-    PixelDisMin = min(MaskedPixelDisMatrix,[],'all');
-    PixelDisMax = max(MaskedPixelDisMatrix,[],'all');
-    PixelAxis = PixelDisMin:PixelDisMax;
-    PixelSortingEdge = (PixelAxis(1):PixelAxis(end)+1)  - 0.5;
-    TwoThetaAxis = atan(PixelAxis*XPixelSize/SDDistance);
-    TwoThetaSortingEdge = atan(PixelSortingEdge*XPixelSize/SDDistance);
-    qAxis = 4*pi/(WL*1E10)*sin(1/2 *TwoThetaAxis); % [1/A]
-    qSortingEdge =  4*pi/(WL*1E10)*sin(1/2 *TwoThetaSortingEdge); % [1/A]
-elseif app.XAxisResolutionButtonGroup.SelectedObject == app.XAxisPointsResButton
-    % sqrt() is very slow.
-    PixelDisMatrix = sqrt(((RowIdx-CenY)*YXPixelRatio).^2+(ColIdx-CenX).^2);
-    % q = 4pi/sin(th)/lambda, atan also takes a lot of time.
-    TwoThetaMatrix = atan(PixelDisMatrix*XPixelSize/SDDistance);
-    qMatrix = 4*pi/(WL*1E10)*sin(1/2 *TwoThetaMatrix); % [1/A]
-    qAxisPts = round(app.XAxisPoints.Value);
-    MaskedqMatrix = qMatrix .* MaskNaNMatrix;
-    qMin = min(MaskedqMatrix,[],'all');
-    qMax = max(MaskedqMatrix,[],'all');
-    qAxis = linspace(qMin,qMax,qAxisPts);
-    qAxisRightShift = [-Inf qAxis];
-    qAxisLeftShift = [qAxis Inf];
-    qSortingEdge = (qAxisRightShift + qAxisLeftShift)/2;
+%% Plotting Unit
+if app.XAxisUnitButtonGroup.SelectedObject == app.qXAxisUnitButton
+    AxisUnit = 'q';
+elseif app.XAxisUnitButtonGroup.SelectedObject == app.tthXAxisUnitButton
+    AxisUnit = 'tth';
 end
 
-[NumPixelInqSection,~,GuidingIdxMatrix] = histcounts(MaskedqMatrix,qSortingEdge);
-IgnoreIdx = (GuidingIdxMatrix(:) == 0);
-GuidingIdxVector = GuidingIdxMatrix(:);
-GuidingIdxVector(IgnoreIdx) = [];
+switch AxisUnit
+    case 'q'
+        if app.XAxisResolutionButtonGroup.SelectedObject == app.XAxisOnePixelResButton
+            % sqrt() is very slow.
+            PixelDisMatrix =round(sqrt(((RowIdx-CenY)*YXPixelRatio).^2+(ColIdx-CenX).^2));
+            TwoThetaMatrix = atan(PixelDisMatrix*XPixelSize/SDDistance);
+            qMatrix = 4*pi/(WL*1E10)*sin(1/2 *TwoThetaMatrix); % [1/A]
+            MaskedPixelDisMatrix = PixelDisMatrix.* MaskNaNMatrix;
+            MaskedqMatrix = qMatrix .* MaskNaNMatrix;
+            PixelDisMin = min(MaskedPixelDisMatrix,[],'all');
+            PixelDisMax = max(MaskedPixelDisMatrix,[],'all');
+            PixelAxis = PixelDisMin:PixelDisMax;
+            PixelSortingEdge = (PixelAxis(1):PixelAxis(end)+1)  - 0.5;
+            TwoThetaAxis = atan(PixelAxis*XPixelSize/SDDistance);
+            TwoThetaSortingEdge = atan(PixelSortingEdge*XPixelSize/SDDistance);
+            qAxis = 4*pi/(WL*1E10)*sin(1/2 *TwoThetaAxis); % [1/A]
+            qSortingEdge =  4*pi/(WL*1E10)*sin(1/2 *TwoThetaSortingEdge); % [1/A]
+        elseif app.XAxisResolutionButtonGroup.SelectedObject == app.XAxisPointsResButton
+            % sqrt() is very slow.
+            PixelDisMatrix = sqrt(((RowIdx-CenY)*YXPixelRatio).^2+(ColIdx-CenX).^2);
+            % q = 4pi/sin(th)/lambda, atan also takes a lot of time.
+            TwoThetaMatrix = atan(PixelDisMatrix*XPixelSize/SDDistance);
+            qMatrix = 4*pi/(WL*1E10)*sin(1/2 *TwoThetaMatrix); % [1/A]
+            qAxisPts = round(app.XAxisPoints.Value);
+            MaskedqMatrix = qMatrix .* MaskNaNMatrix;
+            qMin = min(MaskedqMatrix,[],'all');
+            qMax = max(MaskedqMatrix,[],'all');
+            qAxis = linspace(qMin,qMax,qAxisPts);
+            qAxisRightShift = [-Inf qAxis];
+            qAxisLeftShift = [qAxis Inf];
+            qSortingEdge = (qAxisRightShift + qAxisLeftShift)/2;
+        end
 
-app.CurrentData.ImageProfileConvertor.qSpace.DsitributionMatrix = qMatrix; % record q or th distribution
-app.CurrentData.ImageProfileConvertor.qSpace.PixelDisMatrix = PixelDisMatrix; % record pixel distance
-app.CurrentData.ImageProfileConvertor.qSpace.NumPixelInqSection = NumPixelInqSection;
-app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxMatrix = GuidingIdxMatrix;
-app.CurrentData.ImageProfileConvertor.qSpace.IgnoreIdx = IgnoreIdx;
-app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxVector = GuidingIdxVector;
-app.CurrentData.ImageProfileConvertor.qSpace.Axis = qAxis;
+        [NumPixelInqSection,~,GuidingIdxMatrix] = histcounts(MaskedqMatrix,qSortingEdge);
+        IgnoreIdx = (GuidingIdxMatrix(:) == 0);
+        GuidingIdxVector = GuidingIdxMatrix(:);
+        GuidingIdxVector(IgnoreIdx) = [];
+
+        app.CurrentData.ImageProfileConvertor.qSpace.DsitributionMatrix = qMatrix; % record q or th distribution
+        app.CurrentData.ImageProfileConvertor.qSpace.PixelDisMatrix = PixelDisMatrix; % record pixel distance
+        app.CurrentData.ImageProfileConvertor.qSpace.NumPixelInqSection = NumPixelInqSection;
+        app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxMatrix = GuidingIdxMatrix;
+        app.CurrentData.ImageProfileConvertor.qSpace.IgnoreIdx = IgnoreIdx;
+        app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxVector = GuidingIdxVector;
+        app.CurrentData.ImageProfileConvertor.qSpace.Axis = qAxis;
+    case 'tth'
+end
 
 %{
 %% Two Theta axis
