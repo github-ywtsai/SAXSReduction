@@ -16,10 +16,10 @@ else
 end
 
 % 1D profile part
-GuidingIdxVector = app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxVector;
-XAxis = app.CurrentData.ImageProfileConvertor.qSpace.Axis;
-NumPixelInqSection = app.CurrentData.ImageProfileConvertor.qSpace.NumPixelInqSection;
-IgnoreIdx = app.CurrentData.ImageProfileConvertor.qSpace.IgnoreIdx;
+GuidingIdxVector = app.CurrentData.ImageProfileConvertor.GuidingIdxVector;
+XAxis = app.CurrentData.ImageProfileConvertor.XAxis;
+NumPixelInqSection = app.CurrentData.ImageProfileConvertor.NumPixelInqSection;
+IgnoreIdx = app.CurrentData.ImageProfileConvertor.IgnoreIdx;
 IntensityTemp = zeros(NumData,length(XAxis));
 ErrorTemp = zeros(NumData,length(XAxis));
 for DataSN = 1:NumData
