@@ -1,18 +1,34 @@
 function DataProcess(app,event)
+if isempty(app.CurrentData.MaskInfo.EffectiveMask)
+    app.CurrentData.EffectiveMask = [];
+else
+    app.CurrentData.EffectiveMask = app.CurrentData.MaskInfo.EffectiveMask;
+end
+if isempty(app.BGInfo.Background)
+    app.CurrentData.Background = [];
+    app.CurrentData.BackgroundCT = [];
+    app.CurrentData.SampleTrans = [];
+    app.CurrentData.BufferTrans = [];
+else
+    app.CurrentData.BackgroundRawData = app.BGInfo.Background.RawData;
+    app.CurrentData.BackgroundCT = app.BGInfo.Background.MasterInfo.CountTime;
+    app.CurrentData.SampleTrans = app.BGInfo.Background.SampleTrans;
+    app.CurrentData.BufferTrans = app.BGInfo.Background.BufferTrans;
+end
 
 NumData = size(app.CurrentData.RawData,3);
 
-if isempty(app.BGInfo.Background)
+if isempty(app.CurrentData.Background)
     NormRawData = app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime;
 else
-    NormRawData = (app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime)/app.BGInfo.Background.SampleTrans - (app.BGInfo.Background.RawData/app.BGInfo.Background.MasterInfo.CountTime)/app.BGInfo.Background.BufferTrans;
+    NormRawData = (app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime)/app.CurrentData.SampleTrans - (app.CurrentData.BackgroundRawData/app.CurrentData.BackgroundCT)/app.CurrentData.BufferTrans;
 end
 
 % 2D image part
-if isempty(app.CurrentData.MaskInfo.EffectiveMask)
+if isempty(app.CurrentData.EffectiveMask)
     app.CurrentData.ImageForDrawing = sum(NormRawData,3)/NumData;
 else
-    app.CurrentData.ImageForDrawing = sum(NormRawData.* ~app.CurrentData.MaskInfo.EffectiveMask,3)/NumData;
+    app.CurrentData.ImageForDrawing = sum(NormRawData.* ~app.CurrentData.EffectiveMask,3)/NumData;
 end
 
 % 1D profile part
