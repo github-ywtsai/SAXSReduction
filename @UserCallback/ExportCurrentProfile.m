@@ -10,7 +10,7 @@ end
 FP = fullfile(FF,FN);
 
 fid = fopen(FP,'w');
-fprintf(fid,'%e\t%e\t%e\n',transpose(app.CurrentData.ProfileForDrawing));
+fprintf(fid,'%e\t%e\t%e\n',(app.CurrentData.ProfileForDrawing));
 fclose(fid);
 %{
 DataArray = array2table(transpose(app.CurrentData.ProfileForDrawing));

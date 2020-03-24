@@ -31,5 +31,5 @@ for DataSN = 1:NumData
     ErrorTemp(DataSN,:) = transpose(accumarray(GuidingIdxVector,sqrt(abs(RawDataVector))))./NumPixelInqSection;
 end
 Intensity = sum(IntensityTemp,1)/NumData;
-Error = sum(IntensityTemp,1)/NumData;
+Error = sum(ErrorTemp,1)/NumData;
 app.CurrentData.ProfileForDrawing = [XAxis;Intensity;Error];

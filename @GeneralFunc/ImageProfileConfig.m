@@ -16,7 +16,6 @@ else
 end
 
 %% Calculating
-
 YXPixelRatio = YPixelSize/XPixelSize; % using XPixelSize as reference when calculating pixel distance
 
 [ColIdx,RowIdx] = meshgrid(1:ImgXSize,1:ImgYSize);
@@ -40,7 +39,7 @@ end
 
 
 %% Mapping
-PixelDisMatrix =round(sqrt(((RowIdx-CenY)*YXPixelRatio).^2+(ColIdx-CenX).^2)); % sqrt() is very slow.
+PixelDisMatrix =sqrt(((RowIdx-CenY)*YXPixelRatio).^2+(ColIdx-CenX).^2); % sqrt() is very slow.
 TwoThetaMatrix = atan(PixelDisMatrix*XPixelSize/SDDistance); % q = 4pi/sin(th)/lambda, atan also takes a lot of time.
 qMatrix = 4*pi/(WL*1E10)*sin(1/2 *TwoThetaMatrix); % [1/A]
 MaskedPixelDisMatrix = PixelDisMatrix .* MaskNaNMatrix;
