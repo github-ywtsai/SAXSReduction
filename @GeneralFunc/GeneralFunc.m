@@ -15,6 +15,8 @@ classdef GeneralFunc
         UpdateMasterInfoFromTable(app, event);
         UpdateDataSheetSelectionItems(app, event);
         
+        UpdateKeepedDataTable(app,event);
+        
         DataProcess(app,event);
         
         PlotCurrentImage(app,event);

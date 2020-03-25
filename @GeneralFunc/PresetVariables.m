@@ -17,6 +17,9 @@ app.MaskGen = [];
 app.MaskGen.MaskPreview = [];
 BuildingMaskGenTable(app);
 
+app.KeepedData = cell(20,1);
+
+
 function BuildingMaskGenTable(app)
 Parameters = {'Min.';'Max.';'Center angle (deg.)';'Sweeping angle (deg.)'};
 Values = {0;1;90;20};
