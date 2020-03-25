@@ -9,10 +9,10 @@ WL = app.CurrentData.MasterInfo.Wavelength; % [m]
 XPixelSize = app.CurrentData.MasterInfo.XPixelSize; % [m]
 YPixelSize = app.CurrentData.MasterInfo.YPixelSize; % [m]
 SDDistance = app.CurrentData.MasterInfo.DetectorDistance; % [m]
-if isempty(app.CurrentData.MaskInfo.EffectiveMask)
+if isempty(app.CurrentData.EffectiveMask)
     Mask = app.CurrentData.MasterInfo.PixelMask;
 else
-    Mask = app.CurrentData.MaskInfo.EffectiveMask;
+    Mask = app.CurrentData.EffectiveMask;
 end
 
 %% Calculating
@@ -108,35 +108,4 @@ Convertor.XAxis = XAxis;
 Convertor.XAxisLabel = XAxisLabel;
 
 app.CurrentData.ImageProfileConvertor = Convertor;
-
-% app.CurrentData.ImageProfileConvertor.qSpace.DsitributionMatrix = qMatrix; % record q or th distribution
-% app.CurrentData.ImageProfileConvertor.qSpace.PixelDisMatrix = PixelDisMatrix; % record pixel distance
-% app.CurrentData.ImageProfileConvertor.qSpace.NumPixelInqSection = NumPixelInqSection;
-% app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxMatrix = GuidingIdxMatrix;
-% app.CurrentData.ImageProfileConvertor.qSpace.IgnoreIdx = IgnoreIdx;
-% app.CurrentData.ImageProfileConvertor.qSpace.GuidingIdxVector = GuidingIdxVector;
-% app.CurrentData.ImageProfileConvertor.qSpace.Axis = qAxis;
-
-%{
-%% Two Theta axis
-MaskedTwoThetaMatrix = TwoThetaMatrix .* MaskNaNMatrix;
-TwoThetaMin = min(MaskedTwoThetaMatrix,[],'all');
-TwoThetaMax = max(MaskedTwoThetaMatrix,[],'all');
-TwoThetaAxis = linspace(TwoThetaMin,TwoThetaMax,XAxisPts);
-TwoThetaAxisRightShift = [-Inf TwoThetaAxis];
-TwoThetaAxisLeftShift = [TwoThetaAxis Inf];
-TwoThetaSortingEdge = (TwoThetaAxisRightShift + TwoThetaAxisLeftShift)/2;
-[NumPixelInTwoThetaSection,~,TwoThetaGuidingIdxMatrix] = histcounts(MaskedTwoThetaMatrix,TwoThetaSortingEdge);
-IgnoreIdx = (GuidingIdxMatrix(:) == 0);
-GuidingIdxVector = GuidingIdxMatrix(:);
-GuidingIdxVector(IgnoreIdx) = [];
-
-app.CurrentData.ImageProfileConvertor.TwoThetaSpace.DsitributionMatrix = TwoThetaMatrix;
-app.CurrentData.ImageProfileConvertor.TwoThetaSpace.PixelDisMatrix = PixelDisMatrix;
-app.CurrentData.ImageProfileConvertor.TwoThetaSpace.NumPixelInqSection = NumPixelInqSection;
-app.CurrentData.ImageProfileConvertor.TwoThetaSpace.GuidingIdxMatrix = GuidingIdxMatrix;
-app.CurrentData.ImageProfileConvertor.TwoThetaSpace.IgnoreIdx = IgnoreIdx;
-app.CurrentData.ImageProfileConvertor.TwoThetaSpace.GuidingIdxVector = GuidingIdxVector;
-app.CurrentData.ImageProfileConvertor.TwoThetaSpace.Axis = TwoThetaAxis;
-%}
 

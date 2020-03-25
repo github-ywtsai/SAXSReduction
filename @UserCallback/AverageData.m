@@ -17,6 +17,7 @@ for RequestSN = RequestSNList
     ContainerIdx = ContainerIdx + 1;
 end
 
+app.CurrentData.RawData = DataContainer;
 [~,Title,~] = fileparts(app.CurrentData.MasterInfo.MasterFP); Title = strrep(Title,'_master','');
 app.CurrentData.Title = sprintf('%s#%d:%d:%d',Title,StartSN,Increment,EndSN);
 

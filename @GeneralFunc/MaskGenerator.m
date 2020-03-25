@@ -18,7 +18,7 @@ CenY = app.CurrentData.MasterInfo.BeamCenterY;
 XPixelSize = app.CurrentData.MasterInfo.XPixelSize; % [m]
 YPixelSize = app.CurrentData.MasterInfo.YPixelSize; % [m]
 
-DsitributionMatrix = app.CurrentData.ImageProfileConvertor.qSpace.DsitributionMatrix; % q or th matrix
+DsitributionMatrix = app.CurrentData.ImageProfileConvertor.DsitributionMatrix; % q or th matrix
 MinValue = app.RadiusMaskGenUITable.Data{1,2};
 MaxValue = app.RadiusMaskGenUITable.Data{2,2};
 CenAng = app.RadiusMaskGenUITable.Data{3,2};

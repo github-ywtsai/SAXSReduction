@@ -1,16 +1,23 @@
 function PresetVariables(app)
 
 app.CurrentData = [];
-app.CurrentData.MasterInfo = [];
-app.CurrentData.DefaultMasterInfo = [];
-app.CurrentData.UserDefineMasterInfo = [];
+app.CurrentData.Background = []; % current background
+app.CurrentData.BackgroundCT = [];
+app.CurrentData.SampleTrans = [];
+app.CurrentData.BufferTrans = [];
 
-app.CurrentData.MaskInfo = [];
-app.CurrentData.MaskInfo.EffectiveMask = [];
-app.CurrentData.MaskInfo.MaskPool = cell(10,1);
+app.MasterInfo = [];
+app.MasterInfo.Default = [];
+app.MasterInfo.UserDefine = [];
 
-app.BGInfo.Background = [];
-app.BGInfo.ActiveSN = [];
+app.MaskInfo = [];
+app.MaskInfo.EffectiveMask = []; % current effective mask
+app.MaskInfo.MaskPool = cell(10,1);
+
+app.BGInfo.Background = []; % current background
+app.BGInfo.BackgroundCT = [];
+app.BGInfo.SampleTrans = [];
+app.BGInfo.BufferTrans = [];
 app.BGInfo.BackgroundPool = cell(10,1);
 
 app.MaskGen = [];

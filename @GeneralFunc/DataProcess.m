@@ -1,19 +1,12 @@
 function DataProcess(app,event)
-if isempty(app.CurrentData.MaskInfo.EffectiveMask)
-    app.CurrentData.EffectiveMask = [];
-else
-    app.CurrentData.EffectiveMask = app.CurrentData.MaskInfo.EffectiveMask;
-end
-if isempty(app.BGInfo.Background)
-    app.CurrentData.Background = [];
+
+if isempty(app.CurrentData.Background)
     app.CurrentData.BackgroundCT = [];
     app.CurrentData.SampleTrans = [];
     app.CurrentData.BufferTrans = [];
 else
-    app.CurrentData.BackgroundRawData = app.BGInfo.Background.RawData;
-    app.CurrentData.BackgroundCT = app.BGInfo.Background.MasterInfo.CountTime;
-    app.CurrentData.SampleTrans = app.BGInfo.Background.SampleTrans;
-    app.CurrentData.BufferTrans = app.BGInfo.Background.BufferTrans;
+    app.CurrentData.SampleTrans = app.SampleTransEditField.Value;
+    app.CurrentData.BufferTrans = app.BufferTransEditField.Value;
 end
 
 NumData = size(app.CurrentData.RawData,3);
@@ -21,7 +14,7 @@ NumData = size(app.CurrentData.RawData,3);
 if isempty(app.CurrentData.Background)
     NormRawData = app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime;
 else
-    NormRawData = (app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime)/app.CurrentData.SampleTrans - (app.CurrentData.BackgroundRawData/app.CurrentData.BackgroundCT)/app.CurrentData.BufferTrans;
+    NormRawData = (app.CurrentData.RawData/app.CurrentData.MasterInfo.CountTime)/app.CurrentData.SampleTrans - (app.CurrentData.Background/app.CurrentData.BackgroundCT)/app.CurrentData.BufferTrans;
 end
 
 % 2D image part

@@ -14,38 +14,6 @@ GeneralFunc.UpdateCSVMaskTable(app,event);
 GeneralFunc.UpdateEffectiveMask(app, event);
 GeneralFunc.EffectiveMaskPreview(app, event);
 
-function ActiveCSVMask(app,event)
-CSVID = str2double(app.CSVMaskIDDropDown.Value);
-if isempty(app.CurrentData.MaskInfo.MaskPool{CSVID})
-    return
-else
-    app.CurrentData.MaskInfo.MaskPool{CSVID}.Active = ~app.CurrentData.MaskInfo.MaskPool{CSVID}.Active;
-end
-
-function InvertCSVMask(app,event)
-CSVID = str2double(app.CSVMaskIDDropDown.Value);
-if isempty(app.CurrentData.MaskInfo.MaskPool{CSVID})
-    return
-else
-    app.CurrentData.MaskInfo.MaskPool{CSVID}.Inverse = ~app.CurrentData.MaskInfo.MaskPool{CSVID}.Inverse;
-end
-    
-
-function UpdateDropListItems(app, event)
-Items = cell(1,10);
-for CSVID = 1:10
-    if isempty(app.CurrentData.MaskInfo.MaskPool{CSVID})
-        Items{CSVID} = sprintf('%d.',CSVID);
-    else
-    Items{CSVID} = sprintf('%d. %s',CSVID,app.CurrentData.MaskInfo.MaskPool{CSVID}.CSVFN);
-    end
-end
-app.CSVMaskIDDropDown.Items = Items;
-
-function RemoveCSVMask(app,event)
-CSVID = str2double(app.CSVMaskIDDropDown.Value);
-app.CurrentData.MaskInfo.MaskPool{CSVID} = [];
-
 function AddCSVMask(app,event)
 CSVID = str2double(app.CSVMaskIDDropDown.Value);
 [CSVFN,CSVFF] = uigetfile('*.csv');
@@ -56,12 +24,45 @@ else
 end
 CSVData = LoadDataFromCSV(CSVFP);
 Mask = CSVData2Matrix(CSVData,app.CurrentData.MasterInfo.YPixelsInDetector,app.CurrentData.MasterInfo.XPixelsInDetector);
-app.CurrentData.MaskInfo.MaskPool{CSVID}.Mask = Mask;
-app.CurrentData.MaskInfo.MaskPool{CSVID}.CSVFN = CSVFN;
-app.CurrentData.MaskInfo.MaskPool{CSVID}.CSVFF = CSVFF;
-app.CurrentData.MaskInfo.MaskPool{CSVID}.CSVFP = CSVFP;
-app.CurrentData.MaskInfo.MaskPool{CSVID}.Active = true;
-app.CurrentData.MaskInfo.MaskPool{CSVID}.Inverse = false;
+app.MaskInfo.MaskPool{CSVID}.Mask = Mask;
+app.MaskInfo.MaskPool{CSVID}.CSVFN = CSVFN;
+app.MaskInfo.MaskPool{CSVID}.CSVFF = CSVFF;
+app.MaskInfo.MaskPool{CSVID}.CSVFP = CSVFP;
+app.MaskInfo.MaskPool{CSVID}.Active = true;
+app.MaskInfo.MaskPool{CSVID}.Inverse = false;
+
+function RemoveCSVMask(app,event)
+CSVID = str2double(app.CSVMaskIDDropDown.Value);
+app.MaskInfo.MaskPool{CSVID} = [];
+
+function ActiveCSVMask(app,event)
+CSVID = str2double(app.CSVMaskIDDropDown.Value);
+if isempty(app.MaskInfo.MaskPool{CSVID})
+    return
+else
+    app.MaskInfo.MaskPool{CSVID}.Active = ~app.MaskInfo.MaskPool{CSVID}.Active;
+end
+
+function InvertCSVMask(app,event)
+CSVID = str2double(app.CSVMaskIDDropDown.Value);
+if isempty(app.MaskInfo.MaskPool{CSVID})
+    return
+else
+    app.MaskInfo.MaskPool{CSVID}.Inverse = ~app.MaskInfo.MaskPool{CSVID}.Inverse;
+end
+    
+
+function UpdateDropListItems(app, event)
+Items = cell(1,10);
+for CSVID = 1:10
+    if isempty(app.MaskInfo.MaskPool{CSVID})
+        Items{CSVID} = sprintf('%d.',CSVID);
+    else
+    Items{CSVID} = sprintf('%d. %s',CSVID,app.MaskInfo.MaskPool{CSVID}.CSVFN);
+    end
+end
+app.CSVMaskIDDropDown.Items = Items;
+
 
 function Mask = CSVData2Matrix(CSVData,RawSize,ColSize)
 Mask = logical(accumarray(CSVData,1,[RawSize,ColSize]));

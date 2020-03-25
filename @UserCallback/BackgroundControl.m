@@ -9,7 +9,7 @@ elseif event.Source == app.BGSetButton
     SetBackground(app,event);
 end
 
-ActiveBackground(app,event);
+TransportBGtoCurrentData(app,event);
 
 if isempty(app.BGInfo.Background)
 else
@@ -19,34 +19,26 @@ end
 
 UpdataDroplistItems(app,event);
 
-function ActiveBackground(app,event)
-if isempty(app.BGInfo.ActiveSN)
-else
-    app.BGInfo.Background = app.BGInfo.BackgroundPool{app.BGInfo.ActiveSN};
-end
-
 function AddBackground(app,event)
 BGID = str2double(app.BackgroundIDDropDown.Value);
-app.BGInfo.BackgroundPool{BGID} = app.CurrentData;
+app.BGInfo.BackgroundPool{BGID}.Background = app.CurrentData.RawData;
+app.BGInfo.BackgroundPool{BGID}.BackgroundCT = app.CurrentData.MasterInfo.CountTime;
+app.BGInfo.BackgroundPool{BGID}.Active = false;
+app.BGInfo.BackgroundPool{BGID}.Title = app.CurrentData.Title;
+
 
 function DrawBackground(app,event)
 
 function RemoveBackground(app,event)
 BGID = str2double(app.BackgroundIDDropDown.Value);
 app.BGInfo.BackgroundPool{BGID} = [];
-if app.BGInfo.ActiveSN == BGID
-    app.BGInfo.ActiveSN = [];
-    app.BGInfo.Background = [];
-end
 
 function SetBackground(app,event)
 BGID = str2double(app.BackgroundIDDropDown.Value);
-if app.BGInfo.ActiveSN == BGID
-    app.BGInfo.Background = [];
-    app.BGInfo.ActiveSN = [];
+if isempty(app.BGInfo.BackgroundPool{BGID})
+    return
 else
-    app.BGInfo.Background = app.BGInfo.BackgroundPool{BGID};
-    app.BGInfo.ActiveSN = BGID; 
+    app.BGInfo.BackgroundPool{BGID}.Active = ~app.BGInfo.BackgroundPool{BGID}.Active;
 end
 
 function UpdataDroplistItems(app,event)
@@ -55,7 +47,7 @@ for BGID = 1:10
     if isempty(app.BGInfo.BackgroundPool{BGID})
         Items{BGID} = sprintf('%d.',BGID);
     else
-        if BGID == app.BGInfo.ActiveSN
+        if app.BGInfo.BackgroundPool{BGID}.Active
             Items{BGID} = sprintf('SET %d. %s',BGID,app.BGInfo.BackgroundPool{BGID}.Title);
         else
             Items{BGID} = sprintf('%d. %s',BGID,app.BGInfo.BackgroundPool{BGID}.Title);
@@ -63,3 +55,16 @@ for BGID = 1:10
     end
 end
 app.BackgroundIDDropDown.Items = Items;
+
+function TransportBGtoCurrentData(app,event)
+app.CurrentData.Background = [];
+app.CurrentData.BackgroundCT = [];
+for BGID = 1:10
+    if isempty(app.BGInfo.BackgroundPool{BGID})
+    else
+        if app.BGInfo.BackgroundPool{BGID}.Active
+            app.CurrentData.Background = app.BGInfo.BackgroundPool{BGID}.Background;
+            app.CurrentData.BackgroundCT = app.BGInfo.BackgroundPool{BGID}.BackgroundCT;
+        end
+    end
+end

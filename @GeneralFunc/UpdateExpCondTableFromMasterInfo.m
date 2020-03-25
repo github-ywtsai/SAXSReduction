@@ -2,8 +2,8 @@ function UpdateExpCondTableFromMasterInfo(app, event)
 
 Items = {'X Pixels in Detector';'Y Pixels in Detector';'Count Time';'Sample/Detector Distance';'X Pixel Size';'Y Pixel Size';'Wavelength';'Beam Center X';'Beam Center Y'};
 CurrentSettingData = GenParaListFromMasterInfo(app.CurrentData.MasterInfo);
-DefaultData = GenParaListFromMasterInfo(app.CurrentData.DefaultMasterInfo);
-UserDefineData = GenParaListFromMasterInfo(app.CurrentData.UserDefineMasterInfo);
+DefaultData = GenParaListFromMasterInfo(app.MasterInfo.Default);
+UserDefineData = GenParaListFromMasterInfo(app.MasterInfo.UserDefine);
 
 OverallData = [Items,CurrentSettingData,DefaultData,UserDefineData];
 

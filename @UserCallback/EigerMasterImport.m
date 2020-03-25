@@ -9,12 +9,14 @@ end
 
 %% create MasterInfo, RawMasterInfo, ForceMasterInfo
 MasterFP = fullfile(MasterFF,MasterFN);
-app.CurrentData.MasterInfo = EigerDataFunc.ReadEigerHDF5Master(MasterFP);
-app.CurrentData.DefaultMasterInfo = app.CurrentData.MasterInfo;
+app.MasterInfo.Default = EigerDataFunc.ReadEigerHDF5Master(MasterFP);
 
-if isempty(app.CurrentData.UserDefineMasterInfo)
-    app.CurrentData.UserDefineMasterInfo = app.CurrentData.DefaultMasterInfo;
+if isempty(app.MasterInfo.UserDefine)
+    app.MasterInfo.UserDefine = app.MasterInfo.Default;
 end
+
+%% transport to current data
+app.CurrentData.MasterInfo = app.MasterInfo.Default;
 
 %% Update data sheet selection items
 GeneralFunc.UpdateDataSheetSelectionItems(app,event);
@@ -24,9 +26,8 @@ GeneralFunc.UpdateExpCondTableFromMasterInfo(app, event);
 
 %% Create image to profile convertor
 %% Update the effective pixel mask and effective mask
-
 GeneralFunc.UpdateEffectiveMask(app, event);
- % GeneralFunc.ImageProfileConfig(app,event) included within GeneralFunc.UpdateEffectiveMask(app, event);
+% GeneralFunc.ImageProfileConfig(app,event) included within GeneralFunc.UpdateEffectiveMask(app, event);
 
 %% Plot The First Data
 UserCallback.DataSheetSelect(app,event);

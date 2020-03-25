@@ -1,16 +1,16 @@
 function UpdateEffectiveMask(app, event)
 
-EffectiveMask = false(app.CurrentData.MasterInfo.YPixelsInDetector,app.CurrentData.MasterInfo.XPixelsInDetector);
+EffectiveMask = false(app.MasterInfo.Default.YPixelsInDetector,app.MasterInfo.Default.XPixelsInDetector);
 
 for MaskID = 1:10
-    if isempty(app.CurrentData.MaskInfo.MaskPool{MaskID})
+    if isempty(app.MaskInfo.MaskPool{MaskID})
         continue
     else
-        if app.CurrentData.MaskInfo.MaskPool{MaskID}.Active
-            if app.CurrentData.MaskInfo.MaskPool{MaskID}.Inverse
-                EffectiveMask = or(EffectiveMask,~app.CurrentData.MaskInfo.MaskPool{MaskID}.Mask);
+        if app.MaskInfo.MaskPool{MaskID}.Active
+            if app.MaskInfo.MaskPool{MaskID}.Inverse
+                EffectiveMask = or(EffectiveMask,~app.MaskInfo.MaskPool{MaskID}.Mask);
             else
-                EffectiveMask = or(EffectiveMask,app.CurrentData.MaskInfo.MaskPool{MaskID}.Mask);
+                EffectiveMask = or(EffectiveMask,app.MaskInfo.MaskPool{MaskID}.Mask);
             end
         else
             continue
@@ -18,7 +18,8 @@ for MaskID = 1:10
     end
 end
 
-app.CurrentData.MaskInfo.EffectiveMask = or(EffectiveMask,app.CurrentData.MasterInfo.PixelMask);
+app.MaskInfo.EffectiveMask = or(EffectiveMask,app.MasterInfo.Default.PixelMask);
+app.CurrentData.EffectiveMask = app.MaskInfo.EffectiveMask;
 
 % Update image to profile configuration
 GeneralFunc.ImageProfileConfig(app,event);
