@@ -1,0 +1,46 @@
+function PlotKeepedProfile(app,event)
+
+EmptyList = false(20,1);
+
+for KID = 1:20
+    EmptyList(KID) = isempty(app.KeepedData{KID});
+end
+% Modeifiy the selected items to unselect when the slots are empty. 
+SelectedList = cell2mat(app.DataKeepedListUITable.Data(:,1));
+SelectedList(EmptyList) = false;
+% app.DataKeepedListUITable.Data(:,1) = num2cell(SelectedList);
+
+SelectedIdx = find(SelectedList);
+if isempty(SelectedIdx)
+    return
+end
+SelectedNum = length(SelectedIdx);
+LegendList = cell(1,SelectedNum);
+
+LegendList{1} = sprintf('%d. %s',SelectedIdx(1) , app.KeepedData{SelectedIdx(1)}.Title);
+Profile = app.KeepedData{SelectedIdx(1)}.ProfileForDrawing;
+app.PlotHandles.MultiProfile = plot(app.MultiProfileUIAxes,Profile(1,:),Profile(2,:));
+if SelectedNum > 1
+    hold(app.MultiProfileUIAxes,'on')
+    for Idx = 2:SelectedNum
+        LegendList{Idx} = sprintf('%d. %s',SelectedIdx(Idx) , app.KeepedData{SelectedIdx(Idx)}.Title);
+        Profile = app.KeepedData{SelectedIdx(Idx)}.ProfileForDrawing;
+        app.PlotHandles.MultiProfile = plot(app.MultiProfileUIAxes,Profile(1,:),Profile(2,:));
+    end
+    hold(app.MultiProfileUIAxes,'off')
+end
+legend(app.MultiProfileUIAxes, LegendList,'interpreter', 'none')
+
+if app.MultiProfileXAxisScaleButtonGroup.SelectedObject == app.MultiProfileXAxisLogButton
+    app.MultiProfileUIAxes.XScale = 'log';
+else
+    app.MultiProfileUIAxes.XScale = 'linear';
+end
+
+if app.MultiProfileYAxisScaleButtonGroup.SelectedObject == app.MultiProfileYAxisLogButton
+    app.MultiProfileUIAxes.YScale = 'log';
+else
+    app.MultiProfileUIAxes.YScale = 'linear';
+end
+
+app.TabGroup.SelectedTab = app.MultiProfileTab;

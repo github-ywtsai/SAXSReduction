@@ -7,7 +7,7 @@ function EnvSettingCheck = EnvSetting()
         HDF5PLUGINPATH = fullfile(HDF5PLUGINPATH);
         if ~strcmpi(HDF5PLUGINPATH,DLLPATH)
             system(cmd);
-            disp('Enviroment variables arranged.')
+            disp('Environment variables are arranged.')
             disp('Please restart Matlab.')
             EnvSettingCheck = false;
         else
@@ -15,7 +15,7 @@ function EnvSettingCheck = EnvSetting()
         end 
     else
         system(cmd);
-        disp('Enviroment variables arranged.')
+        disp('Environment variables are arranged.')
         disp('Please restart Matlab.')
         EnvSettingCheck = false;
     end

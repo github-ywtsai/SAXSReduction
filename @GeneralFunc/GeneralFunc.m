@@ -21,5 +21,6 @@ classdef GeneralFunc
         
         PlotCurrentImage(app,event);
         PlotCurrentProfile(app,event);
+        PlotKeepedProfile(app,event);
     end
 end

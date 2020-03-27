@@ -1,6 +1,7 @@
 function PresetVariables(app)
 
 app.CurrentData = [];
+app.CurrentData.RawData = [];
 app.CurrentData.Background = []; % current background
 app.CurrentData.BackgroundCT = [];
 app.CurrentData.SampleTrans = [];
