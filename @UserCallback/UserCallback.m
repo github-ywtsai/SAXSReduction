@@ -9,7 +9,9 @@ classdef UserCallback
         
         BackgroundControl(app,event);
         
+        KeepedDataSelection(app,event);
         KeepedDataControl(app,event);
+        KeepedDataOffsetMagChanged(app,event);
         
         ExportCurrentProfile(app,event);
     end

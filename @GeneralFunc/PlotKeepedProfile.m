@@ -25,6 +25,9 @@ if SelectedNum > 1
     for Idx = 2:SelectedNum
         LegendList{Idx} = sprintf('%d. %s',SelectedIdx(Idx) , app.KeepedData{SelectedIdx(Idx)}.Title);
         Profile = app.KeepedData{SelectedIdx(Idx)}.ProfileForDrawing;
+        Offset = app.KeepedData{SelectedIdx(Idx)}.Offset;
+        Magnification = app.KeepedData{SelectedIdx(Idx)}.Magnification;
+        Profile(2,:) = Profile(2,:)*Magnification + Offset;
         app.PlotHandles.MultiProfile = plot(app.MultiProfileUIAxes,Profile(1,:),Profile(2,:));
     end
     hold(app.MultiProfileUIAxes,'off')

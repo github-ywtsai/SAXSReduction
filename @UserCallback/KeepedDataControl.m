@@ -16,6 +16,8 @@ GeneralFunc.UpdateKeepedDataTable(app,event);
 function KeepData(app,event)
 KID = str2double(app.KeepedDataIDDropDown.Value);
 app.KeepedData{KID} = app.CurrentData;
+app.KeepedData{KID}.Offset = 0;
+app.KeepedData{KID}.Magnification = 1;
 
 
 function RemoveKeepedData(app,event)
