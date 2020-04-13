@@ -14,5 +14,6 @@ classdef UserCallback
         KeepedDataOffsetMagChanged(app,event);
         
         ExportCurrentProfile(app,event);
+        ExportAll2mat(app,event);
     end
 end
