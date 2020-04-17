@@ -1,4 +1,6 @@
 function EnvSettingCheck = EnvSetting()
+EnvSettingCheck = true;
+return
 
 if ispc
     OS = 'PC';

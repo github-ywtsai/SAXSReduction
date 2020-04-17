@@ -9,9 +9,9 @@ classdef UserCallback
         
         BackgroundControl(app,event);
         
-        KeepedDataSelection(app,event);
-        KeepedDataControl(app,event);
-        KeepedDataOffsetMagChanged(app,event);
+        StoredDataSelection(app,event);
+        DataStorageControl(app,event);
+        StoredDataOffsetMagChanged(app,event);
         
         ExportCurrentProfile(app,event);
         ExportAll2mat(app,event);

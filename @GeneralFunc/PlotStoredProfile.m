@@ -1,14 +1,14 @@
-function PlotKeepedProfile(app,event)
+function PlotStoredProfile(app,event)
 
 EmptyList = false(20,1);
 
 for KID = 1:20
-    EmptyList(KID) = isempty(app.KeepedData{KID});
+    EmptyList(KID) = isempty(app.DataStorage{KID});
 end
 % Modeifiy the selected items to unselect when the slots are empty. 
-SelectedList = cell2mat(app.DataKeepedListUITable.Data(:,1));
+SelectedList = cell2mat(app.DataStorageUITable.Data(:,1));
 SelectedList(EmptyList) = false;
-% app.DataKeepedListUITable.Data(:,1) = num2cell(SelectedList);
+% app.DataStorageUITable.Data(:,1) = num2cell(SelectedList);
 
 SelectedIdx = find(SelectedList);
 if isempty(SelectedIdx)
@@ -17,19 +17,19 @@ end
 SelectedNum = length(SelectedIdx);
 LegendList = cell(1,SelectedNum);
 
-LegendList{1} = sprintf('%d. %s',SelectedIdx(1) , app.KeepedData{SelectedIdx(1)}.Title);
-Profile = app.KeepedData{SelectedIdx(1)}.ProfileForDrawing;
-Offset = app.KeepedData{SelectedIdx(1)}.Offset;
-Magnification = app.KeepedData{SelectedIdx(1)}.Magnification;
+LegendList{1} = sprintf('%d. %s',SelectedIdx(1) , app.DataStorage{SelectedIdx(1)}.Title);
+Profile = app.DataStorage{SelectedIdx(1)}.ProfileForDrawing;
+Offset = app.DataStorage{SelectedIdx(1)}.Offset;
+Magnification = app.DataStorage{SelectedIdx(1)}.Magnification;
 Profile(2,:) = Profile(2,:)*Magnification + Offset;
 app.PlotHandles.MultiProfile = plot(app.MultiProfileUIAxes,Profile(1,:),Profile(2,:));
 if SelectedNum > 1
     hold(app.MultiProfileUIAxes,'on')
     for Idx = 2:SelectedNum
-        LegendList{Idx} = sprintf('%d. %s',SelectedIdx(Idx) , app.KeepedData{SelectedIdx(Idx)}.Title);
-        Profile = app.KeepedData{SelectedIdx(Idx)}.ProfileForDrawing;
-        Offset = app.KeepedData{SelectedIdx(Idx)}.Offset;
-        Magnification = app.KeepedData{SelectedIdx(Idx)}.Magnification;
+        LegendList{Idx} = sprintf('%d. %s',SelectedIdx(Idx) , app.DataStorage{SelectedIdx(Idx)}.Title);
+        Profile = app.DataStorage{SelectedIdx(Idx)}.ProfileForDrawing;
+        Offset = app.DataStorage{SelectedIdx(Idx)}.Offset;
+        Magnification = app.DataStorage{SelectedIdx(Idx)}.Magnification;
         Profile(2,:) = Profile(2,:)*Magnification + Offset;
         app.PlotHandles.MultiProfile = plot(app.MultiProfileUIAxes,Profile(1,:),Profile(2,:));
     end

@@ -25,7 +25,7 @@ app.MaskGen = [];
 app.MaskGen.MaskPreview = [];
 BuildingMaskGenTable(app);
 
-app.KeepedData = cell(20,1);
+app.DataStorage = cell(20,1);
 
 
 function BuildingMaskGenTable(app)

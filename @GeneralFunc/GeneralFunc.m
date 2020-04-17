@@ -15,12 +15,12 @@ classdef GeneralFunc
         UpdateMasterInfoFromTable(app, event);
         UpdateDataSheetSelectionItems(app, event);
         
-        UpdateKeepedDataTable(app,event);
+        UpdateDataStorageTable(app,event);
         
         DataProcess(app,event);
         
         PlotCurrentImage(app,event);
         PlotCurrentProfile(app,event);
-        PlotKeepedProfile(app,event);
+        PlotStoredProfile(app,event);
     end
 end
