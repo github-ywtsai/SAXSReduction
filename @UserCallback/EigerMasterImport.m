@@ -9,7 +9,9 @@ end
 
 %% create MasterInfo, RawMasterInfo, ForceMasterInfo
 MasterFP = fullfile(MasterFF,MasterFN);
+                        GeneralFunc.MessageControl(app,event,sprintf('Improting %s...',MasterFN),'add');
 app.MasterInfo.Default = EigerDataFunc.ReadEigerHDF5Master(MasterFP);
+                        GeneralFunc.MessageControl(app,event,sprintf('Improting %s...Done.',MasterFN),'replace');
 
 if isempty(app.MasterInfo.UserDefine)
     app.MasterInfo.UserDefine = app.MasterInfo.Default;
