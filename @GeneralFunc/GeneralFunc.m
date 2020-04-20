@@ -22,5 +22,7 @@ classdef GeneralFunc
         PlotCurrentImage(app,event);
         PlotCurrentProfile(app,event);
         PlotStoredProfile(app,event);
+        
+        MessageControl(app,event,Message,Mode);
     end
 end
