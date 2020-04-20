@@ -28,17 +28,19 @@ end
 GuidingIdxVector = app.CurrentData.ImageProfileConvertor.GuidingIdxVector;
 XAxis = app.CurrentData.ImageProfileConvertor.XAxis;
 NumPixelInqSection = app.CurrentData.ImageProfileConvertor.NumPixelInqSection;
-IgnoreIdx = app.CurrentData.ImageProfileConvertor.IgnoreIdx;
+AllowIdx = app.CurrentData.ImageProfileConvertor.AllowIdx;
 IntensityTemp = zeros(NumData,length(XAxis));
 ErrorTemp = zeros(NumData,length(XAxis));
+
 for DataSN = 1:NumData
     NormRawDataTemp = NormRawData(:,:,DataSN);
-    RawDataVector = NormRawDataTemp(:);
-    RawDataVector(IgnoreIdx) = [];
-
+    RawDataVectorTemp = NormRawDataTemp(:);
+    RawDataVector = RawDataVectorTemp(AllowIdx);
+    
     IntensityTemp(DataSN,:) = transpose(accumarray(GuidingIdxVector,RawDataVector))./NumPixelInqSection;
     ErrorTemp(DataSN,:) = transpose(accumarray(GuidingIdxVector,sqrt(abs(RawDataVector))))./NumPixelInqSection;
 end
+
 Intensity = sum(IntensityTemp,1)/NumData;
 Error = sum(ErrorTemp,1)/NumData;
 app.CurrentData.ProfileForDrawing = [XAxis;Intensity;Error];

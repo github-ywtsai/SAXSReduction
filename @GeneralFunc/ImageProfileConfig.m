@@ -94,15 +94,16 @@ end
 
 
 [NumPixelInqSection,~,GuidingIdxMatrix] = histcounts(MaskedMatrix,SortingEdge);
-IgnoreIdx = (GuidingIdxMatrix(:) == 0);
-GuidingIdxVector = GuidingIdxMatrix(:);
-GuidingIdxVector(IgnoreIdx) = [];
+
+AllowIdx = (GuidingIdxMatrix(:) ~= 0);
+GuidingIdxVectorTemp = GuidingIdxMatrix(:);
+GuidingIdxVector = GuidingIdxVectorTemp(AllowIdx);
 
 Convertor.DsitributionMatrix = DsitributionMatrix; % record q or th distribution
 Convertor.PixelDisMatrix = PixelDisMatrix; % record pixel distance
 Convertor.NumPixelInqSection = NumPixelInqSection;
 Convertor.GuidingIdxMatrix = GuidingIdxMatrix;
-Convertor.IgnoreIdx = IgnoreIdx;
+Convertor.AllowIdx = AllowIdx;
 Convertor.GuidingIdxVector = GuidingIdxVector;
 Convertor.XAxis = XAxis;
 Convertor.XAxisLabel = XAxisLabel;
