@@ -23,5 +23,5 @@ app.CurrentData.Title = sprintf('%s#%d',Title,app.CurrentData.RequestSN);
 
 
 GeneralFunc.DataProcess(app,event);
-GeneralFunc.PlotCurrentImage(app,event);
 GeneralFunc.PlotCurrentProfile(app,event);
+GeneralFunc.PlotCurrentImage(app,event);
