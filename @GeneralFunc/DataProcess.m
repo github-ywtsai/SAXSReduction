@@ -32,6 +32,9 @@ AllowIdx = app.CurrentData.ImageProfileConvertor.AllowIdx;
 IntensityTemp = zeros(NumData,length(XAxis));
 ErrorTemp = zeros(NumData,length(XAxis));
 
+GuidingIdxVector = int32(GuidingIdxVector);
+NormRawData = single(NormRawData);
+
 for DataSN = 1:NumData
     NormRawDataTemp = NormRawData(:,:,DataSN);
     RawDataVectorTemp = NormRawDataTemp(:);
