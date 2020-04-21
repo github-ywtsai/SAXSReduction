@@ -1,6 +1,14 @@
 function PlotCurrentImage(app,event)
 
-app.PlotHandles.Image = imagesc(app.ImageUIAxes,app.CurrentData.ImageForDrawing);
+ImageForDrawimg = app.CurrentData.ImageForDrawing;
+[RowSize,ColSize] = size(ImageForDrawimg);
+
+app.PlotHandles.Image = imagesc(app.ImageUIAxes,ImageForDrawimg);
+
+app.ImageUIAxes.DataAspectRatio = [1 1 1];
+app.ImageUIAxes.PlotBoxAspectRatio = [ColSize RowSize 1];
+% DataAspectRatio & PlotBoxAspectRatio configuration affect the same with
+% axis image but faster.
 % axis(app.ImageUIAxes,'image')
 % "axis image" takes almost 0.2 sec, control the data and plotbox aspect
 % ratio in uiaxes.DataAspectRation when uiaxes is creating.
