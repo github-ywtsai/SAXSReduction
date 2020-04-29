@@ -4,7 +4,7 @@ CurrentTime = clock;
 Hour = CurrentTime(4);
 Min = CurrentTime(5);
 Sec = round(CurrentTime(6));
-Message  = [sprintf('%d:%d:%d\t',Hour,Min,Sec) Message];
+Message  = [sprintf('%02d:%02d:%02d\t',Hour,Min,Sec) Message];
 switch Mode
     case 'add' % add
         AddMessage(app,Message);

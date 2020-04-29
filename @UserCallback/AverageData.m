@@ -14,7 +14,7 @@ DataContainer = zeros(app.CurrentData.MasterInfo.YPixelsInDetector,app.CurrentDa
 ContainerIdx = 1;
 for RequestSN = RequestSNList
     GeneralFunc.MessageControl(app,event,sprintf('Loading data %d ...',RequestSN),'replace');
-    DataContainer(:,:,ContainerIdx) = double(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData.MasterInfo,RequestSN,[],[]));
+    DataContainer(:,:,ContainerIdx) = single(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData.MasterInfo,RequestSN,[],[]));
     ContainerIdx = ContainerIdx + 1;
 end
 
