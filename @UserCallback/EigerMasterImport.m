@@ -1,6 +1,7 @@
 function EigerMasterImport(app,event)
 
-[MasterFN,MasterFF] = uigetfile('*_master.h5');
+SearchFile = fullfile(app.AdditionalInfo.Lasth5Folder,'*_master.h5');
+[MasterFN,MasterFF] = uigetfile(SearchFile);
 
 %% Master file selection canceled
 if MasterFN == 0
@@ -8,6 +9,7 @@ if MasterFN == 0
 end
 
 %% create MasterInfo, RawMasterInfo, ForceMasterInfo
+app.AdditionalInfo.Lasth5Folder = MasterFF;
 MasterFP = fullfile(MasterFF,MasterFN);
                         GeneralFunc.MessageControl(app,event,sprintf('Improting %s...',MasterFN),'add');
 app.MasterInfo.Default = EigerDataFunc.ReadEigerHDF5Master(MasterFP);

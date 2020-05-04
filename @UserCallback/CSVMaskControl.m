@@ -16,10 +16,12 @@ GeneralFunc.EffectiveMaskPreview(app, event);
 
 function AddCSVMask(app,event)
 CSVID = str2double(app.CSVMaskIDDropDown.Value);
-[CSVFN,CSVFF] = uigetfile('*.csv');
+SearchFile = fullfile(app.AdditionalInfo.LastMaskImportFolder,'*.csv');
+[CSVFN,CSVFF] = uigetfile(SearchFile);
 if CSVFN == 0
     return
 else
+    app.AdditionalInfo.LastMaskImportFolder = CSVFF;
     CSVFP = fullfile(CSVFF,CSVFN);
 end
 CSVData = LoadDataFromCSV(CSVFP);

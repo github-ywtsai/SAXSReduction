@@ -3,11 +3,13 @@ function ExportCSVMask(app, event)
 if isempty(app.MaskGen.MaskPreview)
     return
 end
-
-[FN,FF] = uiputfile('*.csv');
+SearchFile = fullfile(app.AdditionalInfo.LastMaskExportFolder,'*.csv');
+[FN,FF] = uiputfile(SearchFile);
 if FN == 0
     return
 end
+
+app.AdditionalInfo.LastMaskExportFolder = FF;
 FP = fullfile(FF,FN);
 
 [RowIdx,ColIdx] = ndgrid(1:size(app.MaskGen.MaskPreview,1),1:size(app.MaskGen.MaskPreview,2));
