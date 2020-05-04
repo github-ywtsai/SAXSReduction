@@ -20,7 +20,11 @@ if isempty(app.MasterInfo.UserDefine)
 end
 
 %% transport to current data
-app.CurrentData.MasterInfo = app.MasterInfo.Default;
+if app.ParametersinProcessButtonGroup.SelectedObject == app.UserDefineButton
+    app.CurrentData.MasterInfo = app.MasterInfo.UserDefine;
+elseif app.ParametersinProcessButtonGroup.SelectedObject == app.DefaultButton
+    app.CurrentData.MasterInfo = app.MasterInfo.Default;
+end
 
 %% Update data sheet selection items
 GeneralFunc.UpdateDataSheetSelectionItems(app,event);
