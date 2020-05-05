@@ -38,7 +38,13 @@ BGID = str2double(app.BackgroundIDDropDown.Value);
 if isempty(app.BGInfo.BackgroundPool{BGID})
     return
 else
-    app.BGInfo.BackgroundPool{BGID}.Active = ~app.BGInfo.BackgroundPool{BGID}.Active;
+    CurrentBGIDStatus = app.BGInfo.BackgroundPool{BGID}.Active;
+    for BGIdx = 1:10
+        if ~isempty(app.BGInfo.BackgroundPool{BGIdx})
+            app.BGInfo.BackgroundPool{BGIdx}.Active = false;
+        end
+    end
+    app.BGInfo.BackgroundPool{BGID}.Active = ~CurrentBGIDStatus;
 end
 
 function UpdataDroplistItems(app,event)
