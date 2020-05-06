@@ -21,11 +21,13 @@ UpdataDroplistItems(app,event);
 
 function AddBackground(app,event)
 BGID = str2double(app.BackgroundIDDropDown.Value);
-app.BGInfo.BackgroundPool{BGID}.Background = app.CurrentData.RawData;
+% app.BGInfo.BackgroundPool{BGID}.BackgroundRawData = app.CurrentData.RawData;
+% Raw data ocuppied huge memoery
 app.BGInfo.BackgroundPool{BGID}.BackgroundCT = app.CurrentData.MasterInfo.CountTime;
 app.BGInfo.BackgroundPool{BGID}.Active = false;
 app.BGInfo.BackgroundPool{BGID}.Title = app.CurrentData.Title;
-
+NumBG = size(app.CurrentData.RawData,3);
+app.BGInfo.BackgroundPool{BGID}.Background = sum(app.CurrentData.RawData,3)/NumBG;
 
 function DrawBackground(app,event)
 
