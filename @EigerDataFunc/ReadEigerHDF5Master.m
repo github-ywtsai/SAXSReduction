@@ -18,6 +18,7 @@ MasterInfo.Wavelength = double(h5read(MasterFP,'/entry/instrument/beam/incident_
 MasterInfo.BeamCenterX= round(double(h5read(MasterFP,'/entry/instrument/detector/beam_center_x')));
 MasterInfo.BeamCenterY= round(double(h5read(MasterFP,'/entry/instrument/detector/beam_center_y')));
 MasterInfo.PixelMask = logical(transpose(h5read(MasterFP,'/entry/instrument/detector/detectorSpecific/pixel_mask')));
+MasterInfo.AveragedDataSheetNum = 1; % Record the averaged data sheets 
 
 temp = h5info(MasterFP,'/entry/data');
 Links = temp.Links;

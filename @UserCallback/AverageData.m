@@ -7,16 +7,14 @@ app.CurrentData.RequestSN = RequestSNList;
 
 NumRequest = length(RequestSNList);
 
-DataContainer = zeros(app.CurrentData.MasterInfo.YPixelsInDetector,app.CurrentData.MasterInfo.XPixelsInDetector,NumRequest);
-
-ContainerIdx = 1;
+DataContainer = zeros(app.CurrentData.MasterInfo.YPixelsInDetector,app.CurrentData.MasterInfo.XPixelsInDetector);
 for RequestSN = RequestSNList
     GeneralFunc.MessageControl(app,event,sprintf('Loading data %d ...',RequestSN),'replace');
-    DataContainer(:,:,ContainerIdx) = single(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData.MasterInfo,RequestSN,[],[]));
-    ContainerIdx = ContainerIdx + 1;
+    DataContainer = DataContainer + single(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData.MasterInfo,RequestSN,[],[]));
 end
-
 app.CurrentData.RawData = DataContainer;
+app.MasterInfo.AveragedDataSheetNum = NumRequest;
+
 [~,Title,~] = fileparts(app.CurrentData.MasterInfo.MasterFP); Title = strrep(Title,'_master','');
 app.CurrentData.Title = sprintf('%s#%d:%d:%d',Title,app.AvgDataStartSNEditField.Value,app.AvgDataIncrementEditField.Value,app.AvgDataEndSNEditField.Value);
 
@@ -33,8 +31,8 @@ EndSN = app.AvgDataEndSNEditField.Value;
 RequestSNList = StartSN:Increment:EndSN;
 
 SkipSNString = app.AvgDataSkipSNEditField.Value;
-SkipSNString = strrep(SkipSNString,';',',');
-SkipSN = str2num(SkipSNString);
+SkipSNString = strsplit(SkipSNString,{';',',',' '});
+SkipSN = str2double(SkipSNString);
 NSkip = length(SkipSN);
 for idx = 1:NSkip
     RequestSNList(RequestSNList == SkipSN(idx)) = [];
