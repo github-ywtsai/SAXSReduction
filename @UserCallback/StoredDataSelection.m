@@ -1,4 +1,4 @@
-function KeepedDataSelection(app,event)
+function StoredDataSelection(app,event)
 
 ID = str2double(app.StoredDataIDDropDown.Value);
 
