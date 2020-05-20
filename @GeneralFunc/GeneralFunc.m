@@ -24,5 +24,7 @@ classdef GeneralFunc
         PlotStoredProfile(app,event);
         
         MessageControl(app,event,Message,Mode);
+        
+        BusyControl(app,event,Status);
     end
 end

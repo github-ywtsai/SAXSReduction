@@ -1,4 +1,5 @@
 function DataSheetSelect(app,event)
+GeneralFunc.BusyControl(app,event,true)
 
 if event.Source == app.CurrentDataSheetSpinner
     SourceItem = 'Spinner';
@@ -22,7 +23,8 @@ app.CurrentData.RawData = single(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData
 app.CurrentData.Title = sprintf('%s#%d',Title,app.CurrentData.RequestSN);
 app.MasterInfo.AveragedDataSheetNum = 1;
 
-
 GeneralFunc.DataProcess(app,event);
 GeneralFunc.PlotCurrentProfile(app,event);
 GeneralFunc.PlotCurrentImage(app,event);
+
+GeneralFunc.BusyControl(app,event,false)
