@@ -7,6 +7,21 @@ elseif event.Source == app.ActiveCSVMaskButton
     ActiveCSVMask(app,event);
 elseif event.Source == app.InvertCSVMaskButton
     InvertCSVMask(app,event);
+elseif event.Source == app.CSVMaskUITable
+    CSVID = event.Indices(1);
+    app.CSVMaskIDDropDown.Value = num2str(CSVID);
+    if isempty(app.MaskInfo.MaskPool{CSVID})
+        app.CSVMaskUITable.Data{event.Indices(1),event.Indices(2)} = false;
+        return
+    end
+    if strcmpi(event.EventName,'CellEdit')
+        switch event.Indices(2)
+            case 2 % for Active control
+                app.MaskInfo.MaskPool{CSVID}.Active = ~app.MaskInfo.MaskPool{CSVID}.Active;
+            case 3 % for Inverse control
+                app.MaskInfo.MaskPool{CSVID}.Inverse = ~app.MaskInfo.MaskPool{CSVID}.Inverse;
+        end
+    end
 end
 
 UpdateDropListItems(app, event);
