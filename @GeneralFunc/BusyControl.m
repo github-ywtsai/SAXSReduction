@@ -6,9 +6,11 @@ if Status % Busy
     app.EigerMasterMenu.Enable = 'Off';
     app.ExportMenu.Enable = 'Off';
     app.CurrentallinfotomatfileMenu.Enable = 'Off';
+    drawnow
     
     % Data select
     app.CurrentDataSheetSpinner.Enable = 'Off';
+    drawnow
     
     % Mask control
     app.AddCSVMaskButton.Enable = 'Off';
@@ -16,6 +18,8 @@ if Status % Busy
     app.ActiveCSVMaskButton.Enable = 'Off';
     app.InvertCSVMaskButton.Enable = 'Off';
     app.CSVMaskUITable.Enable = 'Off';
+    app.CSVMaskIDDropDown.Enable = 'Off';
+    drawnow
     
     % Background control
     app.BGSetButton.Enable = 'Off';
@@ -25,6 +29,7 @@ if Status % Busy
     app.BackgroundIDDropDown.Enable = 'Off';
     app.SampleTransEditField.Enable = 'Off';
     app.BufferTransEditField.Enable = 'Off';
+    drawnow
     
     % Data storage
     app.DataStorageUITable.Enable  = 'Off';
@@ -33,15 +38,40 @@ if Status % Busy
     app.RemoveStoredDataButton.Enable = 'Off';
     app.PlotSelectStoredDataButton.Enable = 'Off';
     app.LoadDataButton.Enable = 'Off';
+    drawnow
+    
+    % Mask generator
+    app.RadiusMaskGenUITable.Enable = 'Off';
+    app.MaskGenRefreshButton.Enable = 'Off';
+    app.ExportMaskButton.Enable = 'Off';
+    drawnow
+    
+    % Experimental condtions
+    app.ExpCondUITable.Enable = 'Off';
+    app.DefaultButton.Enable = 'Off';
+    app.UserDefineButton.Enable = 'Off';
+    drawnow
+    
+    % Average data
+    app.AvgDataButton.Enable = 'Off';
+    app.AvgDataStartSNEditField.Enable = 'Off';
+    app.AvgDataIncrementEditField.Enable = 'Off';
+    app.AvgDataEndSNEditField.Enable = 'Off';
+    app.AvgDataSkipSNEditField.Enable = 'Off';
+    drawnow
+    
 else % Release
-        % Menu
+    % Menu
     app.ImportMenu.Enable = 'On';
     app.EigerMasterMenu.Enable = 'On';
     app.ExportMenu.Enable = 'On';
     app.CurrentallinfotomatfileMenu.Enable = 'On';
     
+    drawnow
+    
     % Data select
     app.CurrentDataSheetSpinner.Enable = 'On';
+    drawnow
     
     % Mask control
     app.AddCSVMaskButton.Enable = 'On';
@@ -49,6 +79,8 @@ else % Release
     app.ActiveCSVMaskButton.Enable = 'On';
     app.InvertCSVMaskButton.Enable = 'On';
     app.CSVMaskUITable.Enable = 'On';
+    app.CSVMaskIDDropDown.Enable = 'On';
+    drawnow
     
     % Background control
     app.BGSetButton.Enable = 'On';
@@ -58,6 +90,7 @@ else % Release
     app.BackgroundIDDropDown.Enable = 'On';
     app.SampleTransEditField.Enable = 'On';
     app.BufferTransEditField.Enable = 'On';
+    drawnow
     
     % Data storage
     app.DataStorageUITable.Enable  = 'On';
@@ -66,7 +99,25 @@ else % Release
     app.RemoveStoredDataButton.Enable = 'On';
     app.PlotSelectStoredDataButton.Enable = 'On';
     app.LoadDataButton.Enable = 'On';
+    drawnow
     
+    % Mask generator
+    app.RadiusMaskGenUITable.Enable = 'On';
+    app.MaskGenRefreshButton.Enable = 'On';
+    app.ExportMaskButton.Enable = 'On';
+    drawnow
+    
+    % Experimental condtions
+    app.ExpCondUITable.Enable = 'On';
+    app.DefaultButton.Enable = 'On';
+    app.UserDefineButton.Enable = 'On';
+    drawnow
+    
+    % Average data
+    app.AvgDataButton.Enable = 'On';
+    app.AvgDataStartSNEditField.Enable = 'On';
+    app.AvgDataIncrementEditField.Enable = 'On';
+    app.AvgDataEndSNEditField.Enable = 'On';
+    app.AvgDataSkipSNEditField.Enable = 'On';
+    drawnow
 end
-
-drawnow

@@ -1,4 +1,6 @@
 function AverageData(app,event)
+GeneralFunc.BusyControl(app,event,true)
+
 GeneralFunc.MessageControl(app,event,'Start to average data...','add');
 
 RequestSNList = GenRequestSNList(app);
@@ -23,6 +25,7 @@ GeneralFunc.DataProcess(app,event);
 GeneralFunc.MessageControl(app,event,sprintf('Processing %d data ... Done',NumRequest),'replace');
 GeneralFunc.PlotCurrentImage(app,event);
 GeneralFunc.PlotCurrentProfile(app,event);
+GeneralFunc.BusyControl(app,event,false)
 
 function RequestSNList = GenRequestSNList(app)
 StartSN = app.AvgDataStartSNEditField.Value;
