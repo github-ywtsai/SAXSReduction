@@ -28,9 +28,21 @@ GeneralFunc.PlotCurrentProfile(app,event);
 GeneralFunc.BusyControl(app,event,false)
 
 function RequestSNList = GenRequestSNList(app)
+% check data sheet number and the start and the end SN
+if app.AvgDataEndSNEditField.Value > app.CurrentData.MasterInfo.DataSheetNum
+    app.AvgDataEndSNEditField.Value = double(app.CurrentData.MasterInfo.DataSheetNum);
+end
+if app.AvgDataStartSNEditField.Value < 1
+    app.AvgDataStartSNEditField.Value = 1;
+end
+if app.AvgDataIncrementEditField.Value < 1
+    app.AvgDataIncrementEditField.Value = 1;
+end
+
 StartSN = app.AvgDataStartSNEditField.Value;
 Increment = app.AvgDataIncrementEditField.Value;
 EndSN = app.AvgDataEndSNEditField.Value;
+
 RequestSNList = StartSN:Increment:EndSN;
 
 SkipSNString = app.AvgDataSkipSNEditField.Value;
