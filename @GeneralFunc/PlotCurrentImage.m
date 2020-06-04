@@ -4,7 +4,7 @@ ImageForDrawimg = app.CurrentData.ImageForDrawing;
 [RowSize,ColSize] = size(ImageForDrawimg);
 
 app.PlotHandles.Image = imagesc(app.ImageUIAxes,ImageForDrawimg);
-axtoolbar(app.ImageUIAxes,{'datacursor','zoomin','zoomout','restoreview'})
+axtoolbar(app.ImageUIAxes,{'datacursor','zoomin','zoomout','restoreview'});
 app.ImageUIAxes.DataAspectRatio = [1 1 1];
 app.ImageUIAxes.PlotBoxAspectRatio = [ColSize RowSize 1];
 % DataAspectRatio & PlotBoxAspectRatio configuration affect the same with

@@ -1,7 +1,7 @@
 function PlotCurrentProfile(app,event)
 
 app.PlotHandles.Profile = plot(app.ProfileUIAxes,app.CurrentData.ProfileForDrawing(1,:),app.CurrentData.ProfileForDrawing(2,:));
-axtoolbar(app.ProfileUIAxes,{'datacursor','zoomin','zoomout','restoreview'})
+axtoolbar(app.ProfileUIAxes,{'datacursor','zoomin','zoomout','restoreview'});
 legend(app.ProfileUIAxes,app.CurrentData.Title,'interpreter', 'none');
 title(app.ProfileUIAxes,'');
 xlabel(app.ProfileUIAxes,app.CurrentData.ImageProfileConvertor.XAxisLabel,'interpreter', 'latex')
