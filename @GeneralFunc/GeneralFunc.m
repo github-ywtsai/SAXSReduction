@@ -4,7 +4,7 @@ classdef GeneralFunc
         PresetVariables(app);
         
         UpdateCSVMaskTable(app,event);
-        EffectiveMaskPreview(app, event);
+        DrawEffectiveMaskPreview(app, event);
         UpdateEffectiveMask(app, event);
         MaskGenerator(app,event);
         MaskGenPreview(app,event);

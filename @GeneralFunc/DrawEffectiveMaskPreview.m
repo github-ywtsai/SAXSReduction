@@ -1,4 +1,4 @@
-function EffectiveMaskPreview(app, event)
+function DrawEffectiveMaskPreview(app, event)
 
 app.PlotHandles.EffectiveMaskPreview = imagesc(app.EffectiveMaskPreviewUIAxes,app.CurrentData.EffectiveMask);
 axis(app.EffectiveMaskPreviewUIAxes,'image')
