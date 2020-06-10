@@ -29,7 +29,7 @@ end
 
 UpdateDropListItems(app, event);
 GeneralFunc.UpdateCSVMaskTable(app,event);
-GeneralFunc.UpdateEffectiveMask(app, event);
+%GeneralFunc.UpdateEffectiveMaskPreview(app, event);
 GeneralFunc.DrawEffectiveMaskPreview(app, event);
 
 GeneralFunc.BusyControl(app,event,false)
