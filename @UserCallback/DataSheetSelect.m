@@ -3,7 +3,7 @@ GeneralFunc.BusyControl(app,event,true)
 
 if event.Source == app.CurrentDataSheetSpinner
     SourceItem = 'Spinner';
-elseif event.Source == app.EigerMasterMenu
+elseif event.Source == app.RawDataFileMenu
     SourceItem = 'DataImport';
 elseif event.Source == app.CurrentDataSheetReDrawButton
     SourceItem = 'CurrentDataSheetReDraw';

@@ -4,7 +4,7 @@ function BusyControl(app,event,Status)
     % menu
 MenuPart = [
         app.ImportMenu
-        app.EigerMasterMenu
+        app.RawDataFileMenu
         app.ExportMenu
         app.CurrentallinfotomatfileMenu
         ];
@@ -91,22 +91,22 @@ EditFieldPart = [
 ];
 
 if Status % Busy
-[MenuPart(:).Enable] = deal('off');
-[ButtonPart(:).Enable] = deal('off');
-[RadioButtonPart(:).Enable] = deal('off');
-[SpinnerPart(:).Enable] = deal('off');
-[TablePart(:).Enable] = deal('off');
-[DropDownPart(:).Enable] = deal('off');
-[NumEditFieldPart(:).Enable] = deal('off');
-[EditFieldPart(:).Enable] = deal('off');
+    [MenuPart(:).Enable] = deal('off');
+    [ButtonPart(:).Enable] = deal('off');
+    [RadioButtonPart(:).Enable] = deal('off');
+    [SpinnerPart(:).Enable] = deal('off');
+    [DropDownPart(:).Enable] = deal('off');
+    [NumEditFieldPart(:).Enable] = deal('off');
+    [EditFieldPart(:).Enable] = deal('off');
+    [TablePart(:).Enable] = deal('off');
 else % Release
-[MenuPart(:).Enable] = deal('on');
-[ButtonPart(:).Enable] = deal('on');
-[RadioButtonPart(:).Enable] = deal('on');
-[SpinnerPart(:).Enable] = deal('on');
-[TablePart(:).Enable] = deal('on');
-[DropDownPart(:).Enable] = deal('on');
-[NumEditFieldPart(:).Enable] = deal('on');
-[EditFieldPart(:).Enable] = deal('on');
+    [MenuPart(:).Enable] = deal('on');
+    [ButtonPart(:).Enable] = deal('on');
+    [RadioButtonPart(:).Enable] = deal('on');
+    [SpinnerPart(:).Enable] = deal('on');
+    [DropDownPart(:).Enable] = deal('on');
+    [NumEditFieldPart(:).Enable] = deal('on');
+    [EditFieldPart(:).Enable] = deal('on');
+    [TablePart(:).Enable] = deal('on');
 end
 drawnow nocallbacks
