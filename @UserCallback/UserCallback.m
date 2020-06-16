@@ -1,5 +1,7 @@
 classdef UserCallback
     methods (Static = true)
+        MainTabSelection(app,event);
+        
         EigerMasterImport(app,event);
         CSVMaskControl(app, event);
         EffectiveMaskControl(app,event);
