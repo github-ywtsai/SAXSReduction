@@ -1,41 +1,29 @@
 function CSVMaskControl(app, event)
-% GeneralFunc.BusyControl(app,event,true)
-
-if event.Source == app.AddCSVMaskButton
-    AddCSVMask(app,event);
-elseif event.Source == app.RemoveCSVMaskButton
-    RemoveCSVMask(app,event);
-elseif event.Source == app.ActiveCSVMaskButton
-    ActiveCSVMask(app,event);
-elseif event.Source == app.InvertCSVMaskButton
-    InvertCSVMask(app,event);
-elseif event.Source == app.CSVMaskUITable
-    CSVID = event.Indices(1);
-    app.CSVMaskIDDropDown.Value = num2str(CSVID);
-    if isempty(app.MaskInfo.MaskPool{CSVID})
-        app.CSVMaskUITable.Data{event.Indices(1),event.Indices(2)} = false;
-        % GeneralFunc.BusyControl(app,event,false)
-        return
-    end
-    if strcmpi(event.EventName,'CellEdit')
-        switch event.Indices(2)
-            case 2 % for Active control
-                app.MaskInfo.MaskPool{CSVID}.Active = ~app.MaskInfo.MaskPool{CSVID}.Active;
-            case 3 % for Inverse control
-                app.MaskInfo.MaskPool{CSVID}.Inverse = ~app.MaskInfo.MaskPool{CSVID}.Inverse;
-        end
+CSVID = event.Indices(1);
+if isempty(app.MaskInfo.MaskPool{CSVID})
+    app.CSVMaskUITable.Data{event.Indices(1),event.Indices(2)} = false;
+end
+if strcmpi(event.EventName,'CellEdit')
+    switch event.Indices(2)
+        case 1 % for add or remove
+            switch event.EditData
+                case 'Cancel'
+                case 'Add'
+                    AddCSVMask(app,event,CSVID);
+                case 'Remove'
+                    RemoveCSVMask(app,event,CSVID);
+            end
+        case 2 % for Active control
+            ActiveCSVMask(app,event,CSVID);
+        case 3 % for Inverse control
+            InvertCSVMask(app,event,CSVID);
     end
 end
 
-UpdateDropListItems(app, event);
 GeneralFunc.UpdateCSVMaskTable(app,event);
-%GeneralFunc.UpdateEffectiveMaskPreview(app, event);
 GeneralFunc.DrawEffectiveMaskPreview(app, event);
 
-% GeneralFunc.BusyControl(app,event,false)
-
-function AddCSVMask(app,event)
-CSVID = str2double(app.CSVMaskIDDropDown.Value);
+function AddCSVMask(app,event,CSVID)
 SearchFile = fullfile(app.AdditionalInfo.LastMaskImportFolder,'*.csv');
 [CSVFN,CSVFF] = uigetfile(SearchFile);
 if CSVFN == 0
@@ -54,12 +42,10 @@ app.MaskInfo.MaskPool{CSVID}.CSVFP = CSVFP;
 app.MaskInfo.MaskPool{CSVID}.Active = true;
 app.MaskInfo.MaskPool{CSVID}.Inverse = false;
 
-function RemoveCSVMask(app,event)
-CSVID = str2double(app.CSVMaskIDDropDown.Value);
+function RemoveCSVMask(app,event,CSVID)
 app.MaskInfo.MaskPool{CSVID} = [];
 
-function ActiveCSVMask(app,event)
-CSVID = str2double(app.CSVMaskIDDropDown.Value);
+function ActiveCSVMask(app,event,CSVID)
 if isempty(app.MaskInfo.MaskPool{CSVID})
     % GeneralFunc.BusyControl(app,event,false)
     return
@@ -67,27 +53,13 @@ else
     app.MaskInfo.MaskPool{CSVID}.Active = ~app.MaskInfo.MaskPool{CSVID}.Active;
 end
 
-function InvertCSVMask(app,event)
-CSVID = str2double(app.CSVMaskIDDropDown.Value);
+function InvertCSVMask(app,event,CSVID)
 if isempty(app.MaskInfo.MaskPool{CSVID})
     % GeneralFunc.BusyControl(app,event,false)
     return
 else
     app.MaskInfo.MaskPool{CSVID}.Inverse = ~app.MaskInfo.MaskPool{CSVID}.Inverse;
 end
-    
-
-function UpdateDropListItems(app, event)
-Items = cell(1,10);
-for CSVID = 1:10
-    if isempty(app.MaskInfo.MaskPool{CSVID})
-        Items{CSVID} = sprintf('%d.',CSVID);
-    else
-    Items{CSVID} = sprintf('%d. %s',CSVID,app.MaskInfo.MaskPool{CSVID}.CSVFN);
-    end
-end
-app.CSVMaskIDDropDown.Items = Items;
-
 
 function Mask = CSVData2Matrix(CSVData,RawSize,ColSize)
 Mask = logical(accumarray(CSVData,1,[RawSize,ColSize]));

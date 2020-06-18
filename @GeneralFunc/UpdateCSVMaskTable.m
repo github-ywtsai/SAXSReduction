@@ -16,4 +16,7 @@ for MaskID =  1:10
     end
 end
 
+ColumnFormat = {{'Cancel','Add','Remove'},'logical','logical'};
+
+app.CSVMaskUITable.ColumnFormat = ColumnFormat;
 app.CSVMaskUITable.Data = [Name,Active,Inverse];

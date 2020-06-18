@@ -10,11 +10,6 @@ MenuPart = [
         ];
 % Buttons
 ButtonPart = [
-    % Mask control
-        app.AddCSVMaskButton
-        app.RemoveCSVMaskButton
-        app.ActiveCSVMaskButton
-        app.InvertCSVMaskButton
     % Background control
         app.BGSetButton
         app.BGDrawButton
@@ -58,8 +53,6 @@ TablePart = [
 ];
 % Dropdown
 DropDownPart = [
-    % Mask control
-        app.CSVMaskIDDropDown
     % Background control
         app.BackgroundIDDropDown
     % Data storage
