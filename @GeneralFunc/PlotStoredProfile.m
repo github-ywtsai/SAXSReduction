@@ -49,4 +49,4 @@ else
     app.MultiProfileUIAxes.YScale = 'linear';
 end
 
-app.TabGroup.SelectedTab = app.MultiProfileTab;
+app.MainTabGroup.SelectedTab = app.MultiProfileTab;

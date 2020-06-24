@@ -1,4 +1,4 @@
-function UpdateKeepedDataTable(app,event)
+function UpdateDataStorageTable(app,event)
 
 Name = cell(20,1);
 if isempty(app.DataStorageUITable.Data)

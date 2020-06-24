@@ -16,10 +16,7 @@ ButtonPart = [
         app.BGRemoveButton
         app.SaveCurrentDataAsBackgroundButton
     % Data storage
-        app.StoreCurrentDataButton
-        app.RemoveStoredDataButton
         app.PlotSelectStoredDataButton
-        app.LoadDataButton
     % Mask generator
         app.MaskGenRefreshButton
         app.ExportMaskButton
@@ -55,8 +52,6 @@ TablePart = [
 DropDownPart = [
     % Background control
         app.BackgroundIDDropDown
-    % Data storage
-        app.StoredDataIDDropDown
     % Effective mask selection
         app.EffectiveMaskSelectionDropDown
     % Effective mask control

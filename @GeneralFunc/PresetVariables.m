@@ -27,9 +27,11 @@ app.MaskGen.MaskPreview = [];
 BuildingMaskGenTable(app);
 
 app.DataStorage = cell(20,1);
-
+app.DataStorageUITable.ColumnFormat = {'logical',{'Cancel','Store Current Data','Remove','Restore Stored Data'}};
 
 function BuildingMaskGenTable(app)
 Parameters = {'Min.';'Max.';'Center angle (deg.)';'Sweeping angle (deg.)'};
 Values = {0;1;90;20};
 app.RadiusMaskGenUITable.Data = [Parameters,Values];
+
+
