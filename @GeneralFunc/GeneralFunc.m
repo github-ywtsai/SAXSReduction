@@ -22,6 +22,7 @@ classdef GeneralFunc
         PlotCurrentImage(app,event);
         PlotCurrentProfile(app,event);
         PlotStoredProfile(app,event);
+        RealValue = ImgThresholdSliderValueConverter(SliderValue);
         
         MessageControl(app,event,Message,Mode);
         

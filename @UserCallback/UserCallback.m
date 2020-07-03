@@ -19,5 +19,7 @@ classdef UserCallback
         
         ExportCurrentProfile(app,event);
         ExportAll2mat(app,event);
+        
+        ImgAppearanceControl(app,event);
     end
 end

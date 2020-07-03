@@ -15,9 +15,4 @@ app.ImageUIAxes.PlotBoxAspectRatio = [ColSize RowSize 1];
 title(app.ImageUIAxes,app.CurrentData.Title,'interpreter', 'none');
 colorbar(app.ImageUIAxes)
 
-
-if app.ImageIntensityScaleButtonGroup.SelectedObject == app.ImageIntensityLogButton
-    app.ImageUIAxes.ColorScale = 'log';
-else
-    app.ImageUIAxes.ColorScale = 'linear';
-end
+UserCallback.ImgAppearanceControl(app,event);
