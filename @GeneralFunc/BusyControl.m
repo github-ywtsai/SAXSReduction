@@ -66,9 +66,6 @@ NumEditFieldPart = [
         app.AvgDataStartSNEditField
         app.AvgDataIncrementEditField
         app.AvgDataEndSNEditField
-    % Data storage offset/magnitude
-        app.StoredDataOffsetEditField
-        app.StoredDataMagnificationEditField
 ];
 % EditField
 EditFieldPart = [

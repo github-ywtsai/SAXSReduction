@@ -27,7 +27,7 @@ elseif event.Source == app.LoadDataButton
 end
 %}
 
-GeneralFunc.UpdateDataStorageTable(app,event);
+GeneralFunc.UpdateDataStorageTable(app,event); % including update target stored data dropdown
 
 
 function StoreData(app,event,KID)
