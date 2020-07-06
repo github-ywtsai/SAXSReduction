@@ -18,6 +18,8 @@ else
     % Operation = 'Plot New Image';
 end
 
+colormap(app.ImageUIAxes,app.ColormapDropDown.Value)
+
 % IntnesityScaleControl
 if app.ImageIntensityScaleButtonGroup.SelectedObject == app.ImageIntensityLogButton
     app.ImageUIAxes.ColorScale = 'log';
