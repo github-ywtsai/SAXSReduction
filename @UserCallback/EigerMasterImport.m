@@ -26,8 +26,8 @@ elseif app.ParametersinProcessButtonGroup.SelectedObject == app.DefaultButton
     app.CurrentData.MasterInfo = app.MasterInfo.Default;
 end
 
-%% Update data sheet selection items
-GeneralFunc.UpdateDataSheetSelectionItems(app,event);
+%% Update data sheet selection and average page items High-Low limit
+GeneralFunc.UpdateDataSheetSelectionItemsHLLimit(app,event);
 
 %% Update Exp. Cond. Table
 GeneralFunc.UpdateExpCondTableFromMasterInfo(app, event);

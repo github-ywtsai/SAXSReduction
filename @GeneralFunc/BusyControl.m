@@ -63,14 +63,14 @@ NumEditFieldPart = [
         app.SampleTransEditField
         app.BufferTransEditField
     % Average data
-        app.AvgDataStartSNEditField
-        app.AvgDataIncrementEditField
-        app.AvgDataEndSNEditField
+        %app.AvgDataStartSNEditField
+        %app.AvgDataIncrementEditField
+        %app.AvgDataEndSNEditField
 ];
 % EditField
 EditFieldPart = [
     % Average data
-        app.AvgDataSkipSNEditField
+        %app.AvgDataSkipSNEditField
     % Effective mask control
         app.EffectiveMaskNameEditField
 ];
@@ -93,5 +93,9 @@ else % Release
     [NumEditFieldPart(:).Enable] = deal('on');
     [EditFieldPart(:).Enable] = deal('on');
     [TablePart(:).Enable] = deal('on');
+end
+
+if app.CurrentData.MasterInfo.DataSheetNum == 1
+    app.CurrentDataSheetSpinner.Enable = 'off';
 end
 drawnow nocallbacks

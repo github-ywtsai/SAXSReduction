@@ -13,7 +13,7 @@ classdef GeneralFunc
         
         UpdateExpCondTableFromMasterInfo(app, event);
         UpdateMasterInfoFromTable(app, event);
-        UpdateDataSheetSelectionItems(app, event);
+        UpdateDataSheetSelectionItemsHLLimit(app, event);
         
         UpdateDataStorageTable(app,event);
         
