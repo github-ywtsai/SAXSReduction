@@ -6,6 +6,7 @@ MenuPart = [
         app.ImportMenu
         app.RawDataFileMenu
         app.ExportMenu
+        app.SelectedprofilesindatastorageMenu
         app.CurrentallinfotomatfileMenu
         ];
 % Buttons
@@ -16,7 +17,7 @@ ButtonPart = [
         app.BGRemoveButton
         app.SaveCurrentDataAsBackgroundButton
     % Data storage
-        app.PlotSelectStoredDataButton
+        app.PlotSelectedStoredDataButton
     % Mask generator
         app.MaskGenRefreshButton
         app.ExportMaskButton
