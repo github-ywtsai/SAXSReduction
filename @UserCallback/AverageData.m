@@ -21,7 +21,7 @@ app.MasterInfo.AveragedDataSheetNum = NumRequest;
 app.CurrentData.Title = sprintf('%s#%d:%d:%d',Title,app.AvgDataStartSNEditField.Value,app.AvgDataIncrementEditField.Value,app.AvgDataEndSNEditField.Value);
 
 GeneralFunc.MessageControl(app,event,sprintf('Processing %d data ...',NumRequest),'replace');
-GeneralFunc.DataProcess(app,event);
+GeneralFunc.SingleDataProcess(app,event);
 GeneralFunc.MessageControl(app,event,sprintf('Processing %d data ... Done',NumRequest),'replace');
 GeneralFunc.PlotCurrentImage(app,event);
 GeneralFunc.PlotCurrentProfile(app,event);

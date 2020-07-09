@@ -17,7 +17,8 @@ classdef GeneralFunc
         
         UpdateDataStorageTable(app,event);
         
-        DataProcess(app,event);
+        SingleDataProcess(app,event);
+        [ImageForDrawing,ProfileForDrawing] = DataProcessCore(DataPackage);
         
         PlotCurrentImage(app,event);
         PlotCurrentProfile(app,event);

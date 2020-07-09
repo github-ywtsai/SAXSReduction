@@ -1,5 +1,5 @@
 function BusyControl(app,event,Status)
-
+return
 % Menu
     % menu
 MenuPart = [

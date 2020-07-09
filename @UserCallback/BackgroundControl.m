@@ -19,6 +19,12 @@ end
 
 UpdataDroplistItems(app,event);
 
+if event.Source == app.BGSetButton || event.Source == app.SampleTransEditField || event.Source == app.BufferTransEditField
+    GeneralFunc.SingleDataProcess(app,event);
+    GeneralFunc.PlotCurrentProfile(app,event);
+    GeneralFunc.PlotCurrentImage(app,event);
+end
+
 function AddBackground(app,event)
 BGID = str2double(app.BackgroundIDDropDown.Value);
 app.BGInfo.BackgroundPool{BGID}.Background = app.CurrentData.RawData;
