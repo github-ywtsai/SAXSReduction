@@ -11,6 +11,8 @@ classdef UserCallback
         DataSheetSelect(app,event);
         AverageData(app,event);
         PlotMultiDataSheet(app,event);
+        ProfileAxesControl(app,event);
+
         
         BackgroundControl(app,event);
         
