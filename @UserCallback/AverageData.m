@@ -18,7 +18,7 @@ app.CurrentData.RawData = DataContainer;
 app.MasterInfo.AveragedDataSheetNum = NumRequest;
 
 [~,Title,~] = fileparts(app.CurrentData.MasterInfo.MasterFP); Title = strrep(Title,'_master','');
-app.CurrentData.Title = sprintf('%s#%d:%d:%d',Title,app.AvgDataStartSNEditField.Value,app.AvgDataIncrementEditField.Value,app.AvgDataEndSNEditField.Value);
+app.CurrentData.Title = sprintf('%s#%d:%d:%d',Title,app.MultiDataStartSNEditField.Value,app.MultiDataIncrementEditField.Value,app.MultiDataEndSNEditField.Value);
 
 GeneralFunc.MessageControl(app,event,sprintf('Processing %d data ...',NumRequest),'replace');
 GeneralFunc.SingleDataProcess(app,event);
@@ -29,23 +29,23 @@ GeneralFunc.BusyControl(app,event,false)
 
 function RequestSNList = GenRequestSNList(app)
 % check data sheet number and the start and the end SN
-if app.AvgDataEndSNEditField.Value > app.CurrentData.MasterInfo.DataSheetNum
-    app.AvgDataEndSNEditField.Value = double(app.CurrentData.MasterInfo.DataSheetNum);
+if app.MultiDataEndSNEditField.Value > app.CurrentData.MasterInfo.DataSheetNum
+    app.MultiDataEndSNEditField.Value = double(app.CurrentData.MasterInfo.DataSheetNum);
 end
-if app.AvgDataStartSNEditField.Value < 1
-    app.AvgDataStartSNEditField.Value = 1;
+if app.MultiDataStartSNEditField.Value < 1
+    app.MultiDataStartSNEditField.Value = 1;
 end
-if app.AvgDataIncrementEditField.Value < 1
-    app.AvgDataIncrementEditField.Value = 1;
+if app.MultiDataIncrementEditField.Value < 1
+    app.MultiDataIncrementEditField.Value = 1;
 end
 
-StartSN = app.AvgDataStartSNEditField.Value;
-Increment = app.AvgDataIncrementEditField.Value;
-EndSN = app.AvgDataEndSNEditField.Value;
+StartSN = app.MultiDataStartSNEditField.Value;
+Increment = app.MultiDataIncrementEditField.Value;
+EndSN = app.MultiDataEndSNEditField.Value;
 
 RequestSNList = StartSN:Increment:EndSN;
 
-SkipSNString = app.AvgDataSkipSNEditField.Value;
+SkipSNString = app.MultiDataSkipSNEditField.Value;
 SkipSNString = strsplit(SkipSNString,{';',',',' '});
 SkipSN = str2double(SkipSNString);
 NSkip = length(SkipSN);

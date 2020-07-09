@@ -12,15 +12,15 @@ end
 
 % Average part
 if app.CurrentData.MasterInfo.DataSheetNum == 1
-    app.AvgDataStartSNEditField.Enable = 'off';
-    app.AvgDataIncrementEditField.Enable = 'off';
-    app.AvgDataEndSNEditField.Enable = 'off';
-    app.AvgDataSkipSNEditField.Enable = 'off';
+    app.MultiDataStartSNEditField.Enable = 'off';
+    app.MultiDataIncrementEditField.Enable = 'off';
+    app.MultiDataEndSNEditField.Enable = 'off';
+    app.MultiDataSkipSNEditField.Enable = 'off';
 else
-    app.AvgDataStartSNEditField.Enable = 'on';
-    app.AvgDataIncrementEditField.Enable = 'on';
-    app.AvgDataEndSNEditField.Enable = 'on';
-    app.AvgDataSkipSNEditField.Enable = 'on';
-    app.AvgDataStartSNEditField.Limits = double([1 app.CurrentData.MasterInfo.DataSheetNum]);
-    app.AvgDataEndSNEditField.Limits = double([1 app.CurrentData.MasterInfo.DataSheetNum]);
+    app.MultiDataStartSNEditField.Enable = 'on';
+    app.MultiDataIncrementEditField.Enable = 'on';
+    app.MultiDataEndSNEditField.Enable = 'on';
+    app.MultiDataSkipSNEditField.Enable = 'on';
+    app.MultiDataStartSNEditField.Limits = double([1 app.CurrentData.MasterInfo.DataSheetNum]);
+    app.MultiDataEndSNEditField.Limits = double([1 app.CurrentData.MasterInfo.DataSheetNum]);
 end

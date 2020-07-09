@@ -10,6 +10,7 @@ classdef UserCallback
         
         DataSheetSelect(app,event);
         AverageData(app,event);
+        PlotMultiDataSheet(app,event);
         
         BackgroundControl(app,event);
         

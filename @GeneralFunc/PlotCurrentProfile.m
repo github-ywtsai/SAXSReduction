@@ -6,6 +6,7 @@ legend(app.ProfileUIAxes,app.CurrentData.Title,'interpreter', 'none');
 title(app.ProfileUIAxes,'');
 xlabel(app.ProfileUIAxes,app.CurrentData.ImageProfileConvertor.XAxisLabel,'interpreter', 'latex')
 ylabel(app.ProfileUIAxes,'Normalized Intensity','interpreter', 'latex')
+
 if app.ProfileXAxisScaleButtonGroup.SelectedObject == app.ProfileXAxisLogButton
     app.ProfileUIAxes.XScale = 'log';
 else
