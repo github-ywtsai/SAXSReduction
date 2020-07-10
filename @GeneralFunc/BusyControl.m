@@ -1,5 +1,5 @@
 function BusyControl(app,event,Status)
-return
+
 % Menu
     % menu
 MenuPart = [
@@ -21,8 +21,9 @@ ButtonPart = [
     % Mask generator
         app.MaskGenRefreshButton
         app.ExportMaskButton
-    % Average data
-        app.AvgDataButton
+    % multi-data-sheet data
+        app.AvgMultiDataSheetButton
+        app.PlotMultiDataSheetButton
     % Effective mask control
         app.SaveMaskPreviewButton
         app.RemoveMaskPreviewButton

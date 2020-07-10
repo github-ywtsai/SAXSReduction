@@ -20,3 +20,4 @@ ColumnFormat = {{'Cancel','Add','Remove'},'logical','logical'};
 
 app.CSVMaskUITable.ColumnFormat = ColumnFormat;
 app.CSVMaskUITable.Data = [Name,Active,Inverse];
+app.CSVMaskUITable.RowName = [];
