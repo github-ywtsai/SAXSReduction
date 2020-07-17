@@ -26,6 +26,7 @@ GeneralFunc.MessageControl(app,event,sprintf('Processing %d data ... Done',NumRe
 GeneralFunc.PlotCurrentImage(app,event);
 GeneralFunc.PlotCurrentProfile(app,event);
 GeneralFunc.BusyControl(app,event,false)
+app.MainTabGroup.SelectedTab = app.ProfileTab;
 
 function RequestSNList = GenRequestSNList(app)
 % check data sheet number and the start and the end SN
