@@ -16,18 +16,11 @@ if isempty(SelectedIdx)
 end
 
 SelectedNum = length(SelectedIdx);
-Profile = cell(1,SelectedNum);
-DataLength = zeros(1,SelectedNum);
 for SN = 1:SelectedNum
-    Profile{SN} = app.DataStorage{SelectedIdx(SN)}.ProfileForDrawing;
-    DataLength(SN) =size(Profile{SN},2);
+    ProfileForDrawing = app.DataStorage{SelectedIdx(SN)}.ProfileForDrawing;
+    Title = app.DataStorage{SelectedIdx(SN)}.Title;
+    FN = sprintf('%s.txt',Title);
+    fid = fopen(FN,'w');
+    fprintf(fid,'%e\t%e\t%e\n',(ProfileForDrawing));
+    fclose(fid);
 end
-DataLengthMax = max(DataLength);
-CellProfile = cell(DataLengthMax,SelectedNum*3);
-
-for SN = 1:SelectedNum
-    CellBuff = num2cell(transpose(Profile{SN}));
-    CellProfile(1:DataLength(SN),(1:3)+3*(SN-1)) = CellBuff;
-end
-
-writecell(CellProfile,'multi-profile-test.txt','FileType','text','Delimiter','\t')
