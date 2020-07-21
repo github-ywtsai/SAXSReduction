@@ -28,5 +28,7 @@ classdef GeneralFunc
         MessageControl(app,event,Message,Mode);
         
         BusyControl(app,event,Status);
+        
+        LoadI0Normalizataion(app,event);
     end
 end

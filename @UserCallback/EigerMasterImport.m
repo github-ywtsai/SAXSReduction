@@ -8,6 +8,7 @@ if MasterFN == 0
     return
 end
 
+
 %% create MasterInfo, RawMasterInfo, ForceMasterInfo
 app.AdditionalInfo.Lasth5Folder = MasterFF;
 MasterFP = fullfile(MasterFF,MasterFN);
@@ -18,6 +19,9 @@ app.MasterInfo.Default = EigerDataFunc.ReadEigerHDF5Master(MasterFP);
 if isempty(app.MasterInfo.UserDefine)
     app.MasterInfo.UserDefine = app.MasterInfo.Default;
 end
+
+%% Load I0 normalization data
+GeneralFunc.LoadI0Normalizataion(app,event);
 
 %% transport to current data
 if app.ParametersinProcessButtonGroup.SelectedObject == app.UserDefineButton
