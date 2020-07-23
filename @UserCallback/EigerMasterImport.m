@@ -14,12 +14,13 @@ app.AdditionalInfo.Lasth5Folder = MasterFF;
 MasterFP = fullfile(MasterFF,MasterFN);
                         GeneralFunc.MessageControl(app,event,sprintf('Improting %s...',MasterFN),'add');
 app.MasterInfo.Default = EigerDataFunc.ReadEigerHDF5Master(MasterFP);
+% additionanl info.
 % Load I0 normalization data
-I0List = GeneralFunc.LoadI0Normalizataion(app,event);
-app.MasterInfo.Default.I0List = I0List;
+app.MasterInfo.Default.I0List = GeneralFunc.LoadI0Normalizataion(app,event);
+app.MasterInfo.Default.AveragedDataSheetNum = 1;
+
                         GeneralFunc.MessageControl(app,event,sprintf('Improting %s...Done.',MasterFN),'replace');
 
-app.MasterInfo.Default
 if isempty(app.MasterInfo.UserDefine)
     UserDefine = app.MasterInfo.Default;
 else

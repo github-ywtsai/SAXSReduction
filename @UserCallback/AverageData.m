@@ -15,7 +15,7 @@ for RequestSN = RequestSNList
     DataContainer = DataContainer + single(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData.MasterInfo,RequestSN,[],[]));
 end
 app.CurrentData.RawData = DataContainer;
-app.MasterInfo.AveragedDataSheetNum = NumRequest;
+app.CurrentData.MasterInfo.AveragedDataSheetNum = NumRequest;
 
 [~,Title,~] = fileparts(app.CurrentData.MasterInfo.MasterFP); Title = strrep(Title,'_master','');
 app.CurrentData.Title = sprintf('%s#%d:%d:%d',Title,app.MultiDataStartSNEditField.Value,app.MultiDataIncrementEditField.Value,app.MultiDataEndSNEditField.Value);

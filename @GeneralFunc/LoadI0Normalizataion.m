@@ -17,5 +17,4 @@ else
     I0List = TEMP(DataSheetNum+1:DataSheetNum+DataSheetNum);
     fclose(FID);
 end
-I0List = I0List/I0List(1);
 
