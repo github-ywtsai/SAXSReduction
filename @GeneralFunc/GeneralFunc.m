@@ -29,6 +29,6 @@ classdef GeneralFunc
         
         BusyControl(app,event,Status);
         
-        LoadI0Normalizataion(app,event);
+        I0List = LoadI0Normalizataion(app,event);
     end
 end

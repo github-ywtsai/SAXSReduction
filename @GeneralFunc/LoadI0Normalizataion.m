@@ -1,4 +1,4 @@
-function LoadI0Normalizataion(app,event)
+function I0List = LoadI0Normalizataion(app,event)
 
 MasterFN = app.MasterInfo.Default.MasterFN;
 MasterFF = app.MasterInfo.Default.MasterFF;
@@ -18,5 +18,4 @@ else
     fclose(FID);
 end
 I0List = I0List/I0List(1);
-app.MasterInfo.I0List = I0List; 
 

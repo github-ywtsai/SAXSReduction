@@ -9,19 +9,29 @@ if MasterFN == 0
 end
 
 
-%% create MasterInfo, RawMasterInfo, ForceMasterInfo
+%% create MasterInfo, RawMasterInfo, UserdefineMasterInfo
 app.AdditionalInfo.Lasth5Folder = MasterFF;
 MasterFP = fullfile(MasterFF,MasterFN);
                         GeneralFunc.MessageControl(app,event,sprintf('Improting %s...',MasterFN),'add');
 app.MasterInfo.Default = EigerDataFunc.ReadEigerHDF5Master(MasterFP);
+% Load I0 normalization data
+I0List = GeneralFunc.LoadI0Normalizataion(app,event);
+app.MasterInfo.Default.I0List = I0List;
                         GeneralFunc.MessageControl(app,event,sprintf('Improting %s...Done.',MasterFN),'replace');
 
+app.MasterInfo.Default
 if isempty(app.MasterInfo.UserDefine)
-    app.MasterInfo.UserDefine = app.MasterInfo.Default;
+    UserDefine = app.MasterInfo.Default;
+else
+    UserDefineTemp = app.MasterInfo.UserDefine;
+    UserDefine = app.MasterInfo.Default;
+    % only keep below terms
+    UserDefine.DetectorDistance = UserDefineTemp.DetectorDistance;
+    UserDefine.Wavelength = UserDefineTemp.Wavelength;
+    UserDefine.BeamCenterX = UserDefineTemp.BeamCenterX;
+    UserDefine.BeamCenterY = UserDefineTemp.BeamCenterY;
 end
-
-%% Load I0 normalization data
-GeneralFunc.LoadI0Normalizataion(app,event);
+app.MasterInfo.UserDefine = UserDefine;
 
 %% transport to current data
 if app.ParametersinProcessButtonGroup.SelectedObject == app.UserDefineButton
