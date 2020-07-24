@@ -9,7 +9,7 @@ if strcmpi(event.EventName,'CellEdit')
             switch event.EditData
                 case 'Cancel'
                 case 'Add'
-                    AddCSVMask(app,event,CSVID);
+                    AddMask(app,event,CSVID);
                 case 'Remove'
                     RemoveCSVMask(app,event,CSVID);
             end
@@ -23,8 +23,8 @@ end
 GeneralFunc.UpdateCSVMaskTable(app,event);
 GeneralFunc.DrawEffectiveMaskPreview(app, event);
 
-function AddCSVMask(app,event,CSVID)
-SearchFile = fullfile(app.AdditionalInfo.LastMaskImportFolder,'*.csv');
+function AddMask(app,event,CSVID)
+SearchFile = fullfile(app.AdditionalInfo.LastMaskImportFolder,'*.csv;*.dat');
 [CSVFN,CSVFF] = uigetfile(SearchFile);
 if CSVFN == 0
     % GeneralFunc.BusyControl(app,event,false)
@@ -33,8 +33,26 @@ else
     app.AdditionalInfo.LastMaskImportFolder = CSVFF;
     CSVFP = fullfile(CSVFF,CSVFN);
 end
-CSVData = LoadDataFromCSV(CSVFP);
-Mask = CSVData2Matrix(CSVData,app.CurrentData.MasterInfo.YPixelsInDetector,app.CurrentData.MasterInfo.XPixelsInDetector);
+
+[~,~,FileExt] = fileparts(CSVFN);
+
+if strcmpi(FileExt,'.dat')
+    FileType = 'DAT';
+elseif strcmpi(FileExt,'.csv')
+    FileType = 'CSV';
+end
+
+switch FileType
+    case 'DAT'
+        DATData = load(CSVFP);
+        DATData = fliplr(DATData(:,1:2));
+        Mask = CSVData2Matrix(DATData,app.CurrentData.MasterInfo.YPixelsInDetector,app.CurrentData.MasterInfo.XPixelsInDetector);
+        
+    case 'CSV'
+        CSVData = LoadDataFromCSV(CSVFP);
+        Mask = CSVData2Matrix(CSVData,app.CurrentData.MasterInfo.YPixelsInDetector,app.CurrentData.MasterInfo.XPixelsInDetector);
+end
+
 app.MaskInfo.MaskPool{CSVID}.Mask = Mask;
 app.MaskInfo.MaskPool{CSVID}.CSVFN = CSVFN;
 app.MaskInfo.MaskPool{CSVID}.CSVFF = CSVFF;
