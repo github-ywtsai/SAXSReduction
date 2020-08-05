@@ -21,6 +21,6 @@ for SN = 1:SelectedNum
     Title = app.DataStorage{SelectedIdx(SN)}.Title;
     FN = sprintf('%s.txt',Title);
     fid = fopen(FN,'w');
-    fprintf(fid,'%e\t%e\t%e\n',(ProfileForDrawing));
+    fprintf(fid,'    % .5f             % .5E             % .5E\n',(ProfileForDrawing));
     fclose(fid);
 end
