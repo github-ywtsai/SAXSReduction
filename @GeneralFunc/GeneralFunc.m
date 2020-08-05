@@ -18,6 +18,7 @@ classdef GeneralFunc
         UpdateDataStorageTable(app,event);
         
         SingleDataProcess(app,event);
+        ModifiedData = SaturatedPointElimination(RawData,BadPointMask);
         [ImageForDrawing,ProfileForDrawing] = DataProcessCore(DataPackage);
         
         PlotCurrentImage(app,event);
