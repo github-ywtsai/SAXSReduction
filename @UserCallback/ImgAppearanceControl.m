@@ -18,7 +18,13 @@ else
     % Operation = 'Plot New Image';
 end
 
-colormap(app.ImageUIAxes,app.ColormapDropDown.Value)
+% Colormap control
+SelectedColorMap = app.ColormapDropDown.Value;
+if strcmpi(SelectedColorMap,'albula')
+    colormap(app.ImageUIAxes,app.Albula)
+else
+    colormap(app.ImageUIAxes,app.ColormapDropDown.Value)
+end
 
 % IntnesityScaleControl
 if app.ImageIntensityScaleButtonGroup.SelectedObject == app.ImageIntensityLogButton
