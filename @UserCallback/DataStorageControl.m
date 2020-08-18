@@ -12,6 +12,8 @@ switch ColIdx
                 RemoveStoredData(app,event,KID);
             case 'Restore Stored Data'
                 RestoreData(app,event,KID);
+            case 'Clear All Storages'
+                ClearAll(app,event);
         end
 end
 
@@ -29,6 +31,11 @@ end
 
 GeneralFunc.UpdateDataStorageTable(app,event); % including update target stored data dropdown
 
+function ClearAll(app,event)
+NDataStorage = size(app.DataStorage);
+for SN = 1:NDataStorage
+    app.DataStorage{SN} = [];
+end
 
 function StoreData(app,event,KID)
 app.DataStorage{KID} = app.CurrentData;
