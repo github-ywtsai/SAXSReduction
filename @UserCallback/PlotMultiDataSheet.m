@@ -41,6 +41,9 @@ for SN = 1:NumRequest
     RequestSN = RequestSNList(SN);
     
     DataPackage.RawData = single(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData.MasterInfo,RequestSN,[],[]));
+    I0 = DataPackage.MasterInfo.I0List(1);
+    Icurrent = DataPackage.MasterInfo.I0List(RequestSN);
+    DataPackage.INormalization = Icurrent/I0;
     DataPackage.SampleTrans = app.SampleTransEditField.Value;
     DataPackage.BufferTrans = app.BufferTransEditField.Value;
     [ImageForDrawing,ProfileForDrawing] = GeneralFunc.DataProcessCore(DataPackage);

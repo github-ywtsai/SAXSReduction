@@ -20,7 +20,11 @@ NumRequest = length(RequestSNList);
 DataContainer = zeros(app.CurrentData.MasterInfo.YPixelsInDetector,app.CurrentData.MasterInfo.XPixelsInDetector);
 for RequestSN = RequestSNList
     GeneralFunc.MessageControl(app,event,sprintf('Loading data %d ...',RequestSN),'replace');
-    DataContainer = DataContainer + single(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData.MasterInfo,RequestSN,[],[]));
+    Data = single(EigerDataFunc.ReadEigerHDF5Data(app.CurrentData.MasterInfo,RequestSN,[],[]));
+    I0 = app.CurrentData.MasterInfo.I0List(1);
+    Icurrent = app.CurrentData.MasterInfo.I0List(RequestSN);
+    INormalization = Icurrent/I0;
+    DataContainer = DataContainer + Data/INormalization;
 end
 app.CurrentData.RawData = DataContainer;
 app.CurrentData.MasterInfo.AveragedDataSheetNum = NumRequest;

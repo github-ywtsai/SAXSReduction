@@ -11,7 +11,7 @@ else
 end
 %}
 
-NormRawData = DataPackage.RawData/DataPackage.MasterInfo.CountTime/DataPackage.MasterInfo.AveragedDataSheetNum;
+NormRawData = DataPackage.RawData/DataPackage.MasterInfo.CountTime/DataPackage.MasterInfo.AveragedDataSheetNum/DataPackage.INormalization;
 if ~isempty(DataPackage.Background)
     NormRawBackground =  DataPackage.Background/DataPackage.BackgroundCT/DataPackage.BackgroundAveragedDataSheetNum;
     NormRawData = NormRawData/DataPackage.SampleTrans - NormRawBackground/DataPackage.BufferTrans;
