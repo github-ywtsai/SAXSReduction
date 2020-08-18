@@ -1,4 +1,12 @@
 function AverageData(app,event)
+
+if event.Source == app.ExportAvgMultiDataSheetButton
+    FF = uigetdir();
+    if FF == 0
+        return
+    end
+end
+
 GeneralFunc.BusyControl(app,event,true)
 
 GeneralFunc.MessageControl(app,event,'Start to average data...','add');
@@ -18,7 +26,7 @@ app.CurrentData.RawData = DataContainer;
 app.CurrentData.MasterInfo.AveragedDataSheetNum = NumRequest;
 
 [~,Title,~] = fileparts(app.CurrentData.MasterInfo.MasterFP); Title = strrep(Title,'_master','');
-app.CurrentData.Title = sprintf('%s#%d:%d:%d',Title,app.MultiDataStartSNEditField.Value,app.MultiDataIncrementEditField.Value,app.MultiDataEndSNEditField.Value);
+app.CurrentData.Title = sprintf('%s_Avg#%d_%d_%d',Title,app.MultiDataStartSNEditField.Value,app.MultiDataIncrementEditField.Value,app.MultiDataEndSNEditField.Value);
 
 GeneralFunc.MessageControl(app,event,sprintf('Processing %d data ...',NumRequest),'replace');
 GeneralFunc.SingleDataProcess(app,event);
@@ -27,6 +35,13 @@ GeneralFunc.PlotCurrentImage(app,event);
 GeneralFunc.PlotCurrentProfile(app,event);
 GeneralFunc.BusyControl(app,event,false)
 app.MainTabGroup.SelectedTab = app.ProfileTab;
+
+if event.Source == app.ExportAvgMultiDataSheetButton
+    FN = [app.CurrentData.Title '.txt'];
+    FP = fullfile(FF,FN);
+    GeneralFunc.Export3ColsDataCore(FP,app.CurrentData);
+    GeneralFunc.MessageControl(app,event,sprintf('Exported averaged-profile to %s.',FN),'add');
+end
 
 function RequestSNList = GenRequestSNList(app)
 % check data sheet number and the start and the end SN

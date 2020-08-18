@@ -31,5 +31,7 @@ classdef GeneralFunc
         BusyControl(app,event,Status);
         
         I0List = LoadI0Normalizataion(app,event);
+        
+        Export3ColsDataCore(FP,DataPackage);
     end
 end

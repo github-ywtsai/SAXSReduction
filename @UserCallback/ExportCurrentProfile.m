@@ -10,7 +10,7 @@ end
 app.AdditionalInfo.LastDataExportFolder = FF;
 FP = fullfile(FF,FN);
 
-fid = fopen(FP,'w');
-fprintf(fid,'    % .5f             % .5E             % .5E\n',(app.CurrentData.ProfileForDrawing));
-fclose(fid);
-GeneralFunc.MessageControl(app,event,sprintf('Export current profile to %s done.',FN),'add');
+DataPackage = app.CurrentData;
+GeneralFunc.Export3ColsDataCore(FP,DataPackage);
+
+GeneralFunc.MessageControl(app,event,sprintf('Exported current-profile to %s.',FN),'add');

@@ -18,12 +18,15 @@ ButtonPart = [
         app.SaveCurrentDataAsBackgroundButton
     % Data storage
         app.PlotSelectedStoredDataButton
+        app.ExportSelectedStoredDataButton
     % Mask generator
         app.MaskGenRefreshButton
         app.ExportMaskButton
     % multi-data-sheet data
         app.AvgMultiDataSheetButton
+        app.ExportAvgMultiDataSheetButton
         app.PlotMultiDataSheetButton
+        app.ExportMultiDataSheetButton
     % Effective mask control
         app.SaveMaskPreviewButton
         app.RemoveMaskPreviewButton

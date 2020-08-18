@@ -15,12 +15,19 @@ if isempty(SelectedIdx)
     return
 end
 
+FF = uigetdir();
+if FF == 0
+    return
+end
+
 SelectedNum = length(SelectedIdx);
 for SN = 1:SelectedNum
-    ProfileForDrawing = app.DataStorage{SelectedIdx(SN)}.ProfileForDrawing;
     Title = app.DataStorage{SelectedIdx(SN)}.Title;
     FN = sprintf('%s.txt',Title);
-    fid = fopen(FN,'w');
-    fprintf(fid,'    % .5f             % .5E             % .5E\n',(ProfileForDrawing));
-    fclose(fid);
+    FP = fullfile(FF,FN);
+    
+    DataPackage = app.DataStorage{SelectedIdx(SN)};
+    GeneralFunc.Export3ColsDataCore(FP,DataPackage);
+    
+    GeneralFunc.MessageControl(app,event,sprintf('Exported selected-profile to %s.',FN),'add');
 end
