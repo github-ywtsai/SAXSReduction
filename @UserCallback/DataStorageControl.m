@@ -32,7 +32,7 @@ end
 GeneralFunc.UpdateDataStorageTable(app,event); % including update target stored data dropdown
 
 function ClearAll(app,event)
-NDataStorage = size(app.DataStorage);
+NDataStorage = app.AdditionalInfo.DataStorageNum;
 for SN = 1:NDataStorage
     app.DataStorage{SN} = [];
 end

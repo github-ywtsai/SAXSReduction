@@ -1,15 +1,15 @@
 function UpdateDataStorageTable(app,event)
-
+DataStorageNum = app.AdditionalInfo.DataStorageNum;
 % Table part
 
-Name = cell(20,1);
+Name = cell(DataStorageNum,1);
 if isempty(app.DataStorageUITable.Data)
-    Selected = num2cell(false(20,1));
+    Selected = num2cell(false(DataStorageNum,1));
 else
     Selected = app.DataStorageUITable.Data(:,1);
 end
 
-for KeepedDataID =  1:20
+for KeepedDataID =  1:DataStorageNum
     if isempty(app.DataStorage{KeepedDataID})
         Name{KeepedDataID} = [];
     else

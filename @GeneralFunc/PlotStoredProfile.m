@@ -1,8 +1,8 @@
 function PlotStoredProfile(app,event)
+DataStorageNum = app.AdditionalInfo.DataStorageNum;
+EmptyList = false(DataStorageNum,1);
 
-EmptyList = false(20,1);
-
-for KID = 1:20
+for KID = 1:DataStorageNum
     EmptyList(KID) = isempty(app.DataStorage{KID});
 end
 % Modeifiy the selected items to unselect when the slots are empty. 

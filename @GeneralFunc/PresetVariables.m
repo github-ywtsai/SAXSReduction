@@ -26,7 +26,8 @@ app.MaskGen = [];
 app.MaskGen.MaskPreview = [];
 BuildingMaskGenTable(app);
 
-app.DataStorage = cell(20,1);
+app.AdditionalInfo.DataStorageNum = 30;
+app.DataStorage = cell(app.AdditionalInfo.DataStorageNum,1);
 app.DataStorageUITable.ColumnFormat = {'logical',{'Cancel','Store Current Data','Remove','Restore Stored Data','Clear All Storages'}};
 
 app.AdditionalInfo.ColormapAlbula = GenAlbulaColormap();
