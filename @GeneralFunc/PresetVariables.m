@@ -29,7 +29,7 @@ BuildingMaskGenTable(app);
 app.DataStorage = cell(20,1);
 app.DataStorageUITable.ColumnFormat = {'logical',{'Cancel','Store Current Data','Remove','Restore Stored Data','Clear All Storages'}};
 
-app.Albula = GenAlbulaColormap();
+app.AdditionalInfo.ColormapAlbula = GenAlbulaColormap();
 
 function BuildingMaskGenTable(app)
 Parameters = {'Min.';'Max.';'Center angle (deg.)';'Sweeping angle (deg.)'};
@@ -42,7 +42,7 @@ HotR = HotColormap(:,1);
 HotG = HotColormap(:,2);
 HotB = HotColormap(:,3);
 
-P1 = 100;
+P1 = 80;
 
 R1 = linspace(1,0,P1)';
 G1 = R1;

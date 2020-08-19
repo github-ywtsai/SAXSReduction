@@ -21,7 +21,7 @@ end
 % Colormap control
 SelectedColorMap = app.ColormapDropDown.Value;
 if strcmpi(SelectedColorMap,'albula')
-    colormap(app.ImageUIAxes,app.Albula)
+    colormap(app.ImageUIAxes,app.AdditionalInfo.ColormapAlbula)
 else
     colormap(app.ImageUIAxes,app.ColormapDropDown.Value)
 end
