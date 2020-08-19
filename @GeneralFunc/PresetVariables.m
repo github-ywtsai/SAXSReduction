@@ -13,8 +13,10 @@ app.MasterInfo.UserDefine = [];
 
 app.MaskInfo = [];
 app.MaskInfo.EffectiveMask = []; % current effective mask
-app.MaskInfo.MaskPool = cell(10,1);
-app.MaskInfo.EffectiveMaskPool = cell(10,1);
+app.AdditionalInfo.MaskPoolNum = 10;
+app.MaskInfo.MaskPool = cell(app.AdditionalInfo.MaskPoolNum,1);
+app.AdditionalInfo.EffectiveMaskPoolNum = 10;
+app.MaskInfo.EffectiveMaskPool = cell(app.AdditionalInfo.EffectiveMaskPoolNum,1);
 
 app.BGInfo.Background = []; % current background
 app.BGInfo.BackgroundCT = [];

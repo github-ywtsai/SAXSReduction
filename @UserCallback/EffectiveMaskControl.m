@@ -46,9 +46,10 @@ app.MaskInfo.EffectiveMaskPool{EffMaskID} = [];
 
 
 function UpdateEffectiveMaskPool(app,event)
+EffectiveMaskPoolNum = app.AdditionalInfo.EffectiveMaskPoolNum;
 % Effective Mask ID drowdown part
-Items = cell(1,10);
-for EffMaskSN = 1:10
+Items = cell(1,EffectiveMaskPoolNum);
+for EffMaskSN = 1:EffectiveMaskPoolNum
     if isempty(app.MaskInfo.EffectiveMaskPool{EffMaskSN})
         Items{EffMaskSN} = sprintf('%d.',EffMaskSN);
     else
@@ -78,7 +79,3 @@ Items = [{'None'} Items];
 ItemsData = [{'0'} ItemsData];
 app.EffectiveMaskSelectionDropDown.Items = Items;
 app.EffectiveMaskSelectionDropDown.ItemsData = ItemsData;
-
-
-
-

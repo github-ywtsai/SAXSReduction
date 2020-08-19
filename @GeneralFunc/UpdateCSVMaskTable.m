@@ -1,10 +1,10 @@
 function UpdateCSVMaskTable(app,event)
+MaskPoolNum = app.AdditionalInfo.MaskPoolNum;
+Name = cell(MaskPoolNum,1);
+Active = cell(MaskPoolNum,1);
+Inverse = cell(MaskPoolNum,1);
 
-Name = cell(10,1);
-Active = cell(10,1);
-Inverse = cell(10,1);
-
-for MaskID =  1:10
+for MaskID =  1:MaskPoolNum
     if isempty(app.MaskInfo.MaskPool{MaskID})
         Name{MaskID} = [];
         Active{MaskID} = false;

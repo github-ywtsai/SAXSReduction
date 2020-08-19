@@ -1,8 +1,8 @@
 function DrawEffectiveMaskPreview(app, event)
-
+EffectiveMaskPoolNum = app.AdditionalInfo.EffectiveMaskPoolNum;
 EffectiveMaskPreview = false(app.MasterInfo.Default.YPixelsInDetector,app.MasterInfo.Default.XPixelsInDetector);
 
-for MaskID = 1:10
+for MaskID = 1:EffectiveMaskPoolNum
     if isempty(app.MaskInfo.MaskPool{MaskID})
         continue
     else
