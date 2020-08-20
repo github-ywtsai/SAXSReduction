@@ -16,6 +16,7 @@ classdef GeneralFunc
         UpdateDataSheetSelectionItemsHLLimit(app, event);
         
         UpdateDataStorageTable(app,event);
+        StoredProfileOperation(app,event);
         
         SingleDataProcess(app,event);
         DataPackage = SaturatedPointElimination(app,event,DataPackage);

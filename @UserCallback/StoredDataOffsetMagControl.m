@@ -28,5 +28,5 @@ switch OPCase
     case 'OffsetMagChange'
         app.DataStorage{ID}.Offset = app.StoredDataOffsetEditField.Value;
         app.DataStorage{ID}.Magnification = app.StoredDataMagnificationEditField.Value;
-        GeneralFunc.PlotStoredProfile(app,event);
+        GeneralFunc.StoredProfileOperation(app,'Plot');
 end

@@ -12,6 +12,7 @@ end
 for KeepedDataID =  1:DataStorageNum
     if isempty(app.DataStorage{KeepedDataID})
         Name{KeepedDataID} = [];
+        Selected{KeepedDataID} = false;
     else
         Name{KeepedDataID} = app.DataStorage{KeepedDataID}.Title;
     end

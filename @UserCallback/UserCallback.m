@@ -18,6 +18,7 @@ classdef UserCallback
         
         StoredDataSelection(app,event);
         DataStorageControl(app,event);
+        StoredDataControl(app,event)
         StoredDataOffsetMagControl(app,event);
         
         ExportCurrentProfile(app,event);
