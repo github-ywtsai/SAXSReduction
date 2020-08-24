@@ -12,7 +12,6 @@ MenuPart = [
 % Buttons
 ButtonPart = [
     % Background control
-        app.BGSetButton
         app.BGDrawButton
         app.BGRemoveButton
         app.SaveCurrentDataAsBackgroundButton

@@ -22,7 +22,7 @@ app.BGInfo.Background = []; % current background
 app.BGInfo.BackgroundCT = [];
 app.BGInfo.SampleTrans = [];
 app.BGInfo.BufferTrans = [];
-app.BGInfo.BackgroundPool = cell(10,1);
+app.BGInfo.BackgroundPool = [];
 
 app.MaskGen = [];
 app.MaskGen.MaskPreview = [];

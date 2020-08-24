@@ -1,16 +1,5 @@
 function [ImageForDrawing,ProfileForDrawing] = DataProcessCore(DataPackage)
 
-%{
-if isempty(DataPackage.Background)
-    DataPackage.BackgroundCT = [];
-    DataPackage.SampleTrans = [];
-    DataPackage.BufferTrans = [];
-else
-    DataPackage.SampleTrans = app.SampleTransEditField.Value;
-    DataPackage.BufferTrans = app.BufferTransEditField.Value;
-end
-%}
-
 NormRawData = DataPackage.RawData/DataPackage.MasterInfo.CountTime/DataPackage.MasterInfo.AveragedDataSheetNum/DataPackage.INormalization;
 if ~isempty(DataPackage.Background)
     NormRawBackground =  DataPackage.Background/DataPackage.BackgroundCT/DataPackage.BackgroundAveragedDataSheetNum;
