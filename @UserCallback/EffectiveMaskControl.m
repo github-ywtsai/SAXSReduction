@@ -1,80 +1,68 @@
 function EffectiveMaskControl(app,event)
 
-if event.Source == app.EffectiveMaskIDDropDown
-    Item = 'IDDropDown';
-elseif event.Source == app.SaveMaskPreviewButton
-    Item = 'SaveButton';
-elseif event.Source == app.RemoveMaskPreviewButton
-    Item = 'RemoveButton';
-elseif event.Source == app.EffectiveMaskNameEditField
-    Item = 'EditField';
+if event.Source == app.SaveCurrentMaskPreviewtoEffectiveMaskPoolButton
+    OPMode = 'Add';
+elseif event.Source == app.EffectiveMaskListUITable
+    if strcmpi(event.EventName,'CellEdit')
+        if strcmpi(event.EditData,'Remove')
+            OPMode = 'Remove';
+        elseif strcmpi(event.EditData,'Cancel')
+            OPMode = 'Cancel';
+        end
+    end
 end
 
-switch Item
-    case 'IDDropDown'
-        DropDownSelect(app,event);
-    case 'SaveButton'
+switch OPMode
+    case 'Add'
         Save2EffectiveMaskPool(app,event);
-    case 'RemoveButton'
+    case 'Remove'
         RemoveEffectiveMaskPool(app,event);
-    case 'EditField'
 end
 
-UpdateEffectiveMaskPool(app,event);
-
-
-function DropDownSelect(app,event)
-EffMaskID = str2double(app.EffectiveMaskIDDropDown.Value);
-if isempty(app.MaskInfo.EffectiveMaskPool{EffMaskID})
-    app.EffectiveMaskNameEditField.Value = '';
-else
-    app.EffectiveMaskNameEditField.Value = app.MaskInfo.EffectiveMaskPool{EffMaskID}.MaskName;
-end
+UpdateEffectiveMaskPoolList(app,event);
+GeneralFunc.UpdateEffectiveMaskTable(app,event);
 
 function Save2EffectiveMaskPool(app,event)
-EffMaskID = str2double(app.EffectiveMaskIDDropDown.Value);
+EffMaskID = numel(app.MaskInfo.EffectiveMaskPool) + 1;
 app.MaskInfo.EffectiveMaskPool{EffMaskID}.Mask = app.MaskInfo.EffectiveMaskPreview;
 MaskName = app.EffectiveMaskNameEditField.Value;
 if isempty(MaskName)
     MaskName = sprintf('Mask_%d',EffMaskID);
 end
 app.MaskInfo.EffectiveMaskPool{EffMaskID}.MaskName = MaskName;
+app.EffectiveMaskNameEditField.Value = '';
 
 function RemoveEffectiveMaskPool(app,event)
-EffMaskID = str2double(app.EffectiveMaskIDDropDown.Value);
-app.MaskInfo.EffectiveMaskPool{EffMaskID} = [];
-
-
-function UpdateEffectiveMaskPool(app,event)
-EffectiveMaskPoolNum = app.AdditionalInfo.EffectiveMaskPoolNum;
-% Effective Mask ID drowdown part
-Items = cell(1,EffectiveMaskPoolNum);
-for EffMaskSN = 1:EffectiveMaskPoolNum
-    if isempty(app.MaskInfo.EffectiveMaskPool{EffMaskSN})
-        Items{EffMaskSN} = sprintf('%d.',EffMaskSN);
-    else
-        Items{EffMaskSN} = sprintf('%d. %s',EffMaskSN,app.MaskInfo.EffectiveMaskPool{EffMaskSN}.MaskName);
+TargetEffectiveMaskID = event.Indices(1);
+EffectiveMaskPoolNum = numel(app.MaskInfo.EffectiveMaskPool);
+SelectedEffectiveMaskID = str2double(app.EffectiveMaskSelectionDropDown.Value);
+if TargetEffectiveMaskID == SelectedEffectiveMaskID
+    % do nothing but send a message
+    Message = sprintf('Warning: The removement of the target effective mask %s is selected and locked. Unselect the target effective mask before removing.',app.MaskInfo.EffectiveMaskPool{TargetEffectiveMaskID}.MaskName);
+    GeneralFunc.MessageControl(app,event,Message,'add');
+elseif SelectedEffectiveMaskID > EffectiveMaskPoolNum
+    return
+elseif EffectiveMaskPoolNum == 0
+    return
+else
+	app.MaskInfo.EffectiveMaskPool(TargetEffectiveMaskID) = [];
+    if TargetEffectiveMaskID < SelectedEffectiveMaskID
+        app.EffectiveMaskSelectionDropDown.Value = num2str(SelectedEffectiveMaskID-1);
     end
 end
-app.EffectiveMaskIDDropDown.Items = Items;
 
-% update mask name to match the selected.
-EffMaskID = str2double(app.EffectiveMaskIDDropDown.Value);
-if isempty(app.MaskInfo.EffectiveMaskPool{EffMaskID})
-    app.EffectiveMaskNameEditField.Value = '';
-else
-    app.EffectiveMaskNameEditField.Value = app.MaskInfo.EffectiveMaskPool{EffMaskID}.MaskName;
+
+
+function UpdateEffectiveMaskPoolList(app,event)
+EffectiveMaskPoolNum = numel(app.MaskInfo.EffectiveMaskPool);
+% Effective Mask ID drowdown part
+Items = cell(1,EffectiveMaskPoolNum);
+ItemsData  = cell(1,EffectiveMaskPoolNum);
+for EffMaskSN = 1:EffectiveMaskPoolNum
+    Items{EffMaskSN} = sprintf('%d. %s',EffMaskSN,app.MaskInfo.EffectiveMaskPool{EffMaskSN}.MaskName);
+    ItemsData{EffMaskSN} = num2str(EffMaskSN);
 end
 
-% update effective mask selection part
-NonEmptyIdxInPool = find(cellfun(@(X)~isempty(X),app.MaskInfo.EffectiveMaskPool));
-NEffMask = sum(cellfun(@(X)~isempty(X),app.MaskInfo.EffectiveMaskPool));
-Items = cell(1,NEffMask);
-ItemsData = cell(1,NEffMask);
-for EffMaskSN = 1:NEffMask
-    Items{EffMaskSN} = app.MaskInfo.EffectiveMaskPool{NonEmptyIdxInPool(EffMaskSN)}.MaskName;
-    ItemsData{EffMaskSN} = num2str(NonEmptyIdxInPool(EffMaskSN));
-end
 Items = [{'None'} Items];
 ItemsData = [{'0'} ItemsData];
 app.EffectiveMaskSelectionDropDown.Items = Items;

@@ -6,6 +6,7 @@ classdef GeneralFunc
         UpdateCSVMaskTable(app,event);
         DrawEffectiveMaskPreview(app, event);
         UpdateEffectiveMask(app, event);
+        UpdateEffectiveMaskTable(app,event);
         MaskGenerator(app,event);
         MaskGenPreview(app,event);
         
