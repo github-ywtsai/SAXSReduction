@@ -1,5 +1,5 @@
 function BusyControl(app,event,Status)
-return
+
 % Menu
     % menu
 MenuPart = [
@@ -18,6 +18,8 @@ ButtonPart = [
     % Data storage
         app.PlotSelectedStoredDataButton
         app.ExportSelectedStoredDataButton
+        app.DeleteSelectedStoredDataButton
+        app.SelectUnselectAllButton
     % Mask generator
         app.MaskGenRefreshButton
         app.ExportMaskButton
@@ -27,8 +29,7 @@ ButtonPart = [
         app.PlotMultiDataSheetButton
         app.ExportMultiDataSheetButton
     % Effective mask control
-        app.SaveMaskPreviewButton
-        app.RemoveMaskPreviewButton
+        app.SaveCurrentMaskPreviewtoEffectiveMaskPoolButton
 ];
 % RadioButton
 RadioButtonPart = [
@@ -58,8 +59,6 @@ DropDownPart = [
         app.BackgroundIDDropDown
     % Effective mask selection
         app.EffectiveMaskSelectionDropDown
-    % Effective mask control
-        app.EffectiveMaskIDDropDown
 ];
 % NumEditField
 NumEditFieldPart = [
