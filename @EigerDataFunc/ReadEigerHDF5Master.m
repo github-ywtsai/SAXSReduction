@@ -1,5 +1,4 @@
 function MasterInfo =ReadEigerHDF5Master(MasterFP)
-setenv('HDF5_PLUGIN_PATH','/blsw/opt/areaDetector/root/usr/lib/h5plugin');
 
 [MasterFF,MasterFN] = AnalyzeMasterFP(MasterFP);
 
