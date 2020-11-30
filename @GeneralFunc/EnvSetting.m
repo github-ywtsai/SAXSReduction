@@ -1,6 +1,6 @@
 function EnvSettingCheck = EnvSetting()
-EnvSettingCheck = true;
-return
+% EnvSettingCheck = true;
+
 if ispc
     OS = 'PC';
 elseif isunix
@@ -14,7 +14,6 @@ switch OS
         DLLPATH = fullfile(pwd,'./@EigerDataFunc');
         cmd = sprintf('setx HDF5_PLUGIN_PATH "%s', DLLPATH);
         HDF5PLUGINPATH = getenv('HDF5_PLUGIN_PATH');
-        
         if ~isempty(HDF5PLUGINPATH)
             HDF5PLUGINPATH = fullfile(HDF5PLUGINPATH);
             if ~strcmpi(HDF5PLUGINPATH,DLLPATH)
@@ -33,7 +32,7 @@ switch OS
         end
     case 'UNIX'
         disp('Environment variables must be configured manually in UNIX.')
-        disp('The Environment checking is bypassed.')
+        disp('The Environment checking was bypassed.')
         EnvSettingCheck = true;
     case 'MAC'
         disp('Environment variables must be configured manually in MAC.')
