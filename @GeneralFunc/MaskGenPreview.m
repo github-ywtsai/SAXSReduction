@@ -6,16 +6,12 @@ app.PlotHandles.MaskPreview = imagesc(app.MaskPreviewUIAxes,app.CurrentData.Imag
 
 axis(app.MaskPreviewUIAxes,'image');
 
-% Colormap control
-SelectedColorMap = app.ColormapDropDown.Value;
-if strcmpi(SelectedColorMap,'albula')
-    colormap(app.MaskPreviewUIAxes,app.AdditionalInfo.ColormapAlbula)
-else
-    colormap(app.ImageUIAxes,app.ColormapDropDown.Value)
-end
 
-if app.ImageIntensityScaleButtonGroup.SelectedObject == app.ImageIntensityLogButton
-    app.MaskPreviewUIAxes.ColorScale = 'log';
-else
-    app.MaskPreviewUIAxes.ColorScale = 'linear';
-end
+% Colormap control
+app.MaskPreviewUIAxes.Colormap = app.ImageUIAxes.Colormap;
+
+% IntnesityScaleControl
+app.MaskPreviewUIAxes.ColorScale = app.ImageUIAxes.ColorScale;
+
+% IntensityRangeControl
+app.MaskPreviewUIAxes.CLim = app.ImageUIAxes.CLim;
