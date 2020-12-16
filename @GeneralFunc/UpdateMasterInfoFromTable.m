@@ -1,5 +1,7 @@
 function UpdateMasterInfoFromTable(app, event)
 
+app.ExpCondUITable.ColumnEditable = [false false false false];
+
 UserDefineData = app.ExpCondUITable.Data(:,4);
 app.MasterInfo.UserDefine.XPixelsInDetector = UserDefineData{1};
 app.MasterInfo.UserDefine.YPixelsInDetector = UserDefineData{2};
@@ -18,3 +20,12 @@ elseif app.ParametersinProcessButtonGroup.SelectedObject == app.DefaultButton
 end
 
 GeneralFunc.UpdateExpCondTableFromMasterInfo(app,event);
+
+if app.ParametersinProcessButtonGroup.SelectedObject == app.UserDefineButton
+    GeneralFunc.ImageProfileConfig(app,event);
+    GeneralFunc.SingleDataProcess(app,event);
+    GeneralFunc.PlotCurrentImage(app,event);
+    GeneralFunc.PlotCurrentProfile(app,event);
+end
+
+app.ExpCondUITable.ColumnEditable = [false false false true];
