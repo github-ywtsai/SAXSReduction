@@ -79,13 +79,13 @@ end
 
 switch AxisUnit
     case 'q'
-        DsitributionMatrix = qMatrix;
+        DistributionMatrix = qMatrix;
         MaskedMatrix = MaskedqMatrix;
         SortingEdge = qSortingEdge;
         XAxis = qAxis;
         XAxisLabel = 'q (1/A)';
     case 'TwoTheta'
-        DsitributionMatrix = TwoThetaMatrix;
+        DistributionMatrix = TwoThetaMatrix;
         MaskedMatrix = MaskedTwoThetaMatrix;
         SortingEdge = TwoThetaSortingEdge;
         XAxis = TwoThetaAxis*180/pi;
@@ -99,7 +99,7 @@ AllowIdx = (GuidingIdxMatrix(:) ~= 0);
 GuidingIdxVectorTemp = GuidingIdxMatrix(:);
 GuidingIdxVector = GuidingIdxVectorTemp(AllowIdx);
 
-Convertor.DsitributionMatrix = DsitributionMatrix; % record q or th distribution
+Convertor.DistributionMatrix = DistributionMatrix; % record q or th distribution
 Convertor.PixelDisMatrix = PixelDisMatrix; % record pixel distance
 Convertor.NumPixelInqSection = NumPixelInqSection;
 Convertor.GuidingIdxMatrix = GuidingIdxMatrix;

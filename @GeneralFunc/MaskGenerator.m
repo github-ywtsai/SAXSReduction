@@ -18,7 +18,7 @@ CenY = app.CurrentData.MasterInfo.BeamCenterY;
 XPixelSize = app.CurrentData.MasterInfo.XPixelSize; % [m]
 YPixelSize = app.CurrentData.MasterInfo.YPixelSize; % [m]
 
-DsitributionMatrix = app.CurrentData.ImageProfileConvertor.DsitributionMatrix; % q or th matrix
+DistributionMatrix = app.CurrentData.ImageProfileConvertor.DistributionMatrix; % q or th matrix
 MinValue = app.RadiusMaskGenUITable.Data{1,2};
 MaxValue = app.RadiusMaskGenUITable.Data{2,2};
 CenAng = app.RadiusMaskGenUITable.Data{3,2};
@@ -35,7 +35,7 @@ PixelYDisMatrix = -(RowIdx-CenY)*YXPixelRatio; % RowIdx direction is -y, so add 
 AngleDisMatrix = AngleDisMatrix*180/pi; % in degress, from 0 to 180 and -0 to -180.
 
 % q or th part
-DistanceMask= and(DsitributionMatrix<=MaxValue, DsitributionMatrix>=MinValue);
+DistanceMask= and(DistributionMatrix<=MaxValue, DistributionMatrix>=MinValue);
 % angular part
 AngularMask = AngularMaskGen(CenAng,SweepAng,AngleDisMatrix);
 
