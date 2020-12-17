@@ -53,6 +53,11 @@ TablePart = [
     % Experimental condtions
         app.ExpCondUITable
 ];
+CSVMaskUITableColumnEditableStatus = logical([1 1 1]);
+DataStorageUITableEditableStatus = logical([1 1]);
+RadiusMaskGenUITableEditableStatus = logical([0 1]);
+ExpCondUITableEditableStatus = logical([0 0 0 1]);
+
 % Dropdown
 DropDownPart = [
     % Background control
@@ -86,7 +91,11 @@ if Status % Busy
     [DropDownPart(:).Enable] = deal('off');
     [NumEditFieldPart(:).Enable] = deal('off');
     [EditFieldPart(:).Enable] = deal('off');
-    [TablePart(:).Enable] = deal('off');
+    % [TablePart(:).Enable] = deal('off');
+    app.CSVMaskUITable.ColumnEditable = false(size(app.CSVMaskUITable.ColumnEditable));
+    app.DataStorageUITable.ColumnEditable = false(size(app.DataStorageUITable.ColumnEditable));
+    app.RadiusMaskGenUITable.ColumnEditable = false(size(app.RadiusMaskGenUITable.ColumnEditable));
+    app.ExpCondUITable.ColumnEditable = false(size(app.ExpCondUITable.ColumnEditable));
 else % Release
     [MenuPart(:).Enable] = deal('on');
     [ButtonPart(:).Enable] = deal('on');
@@ -95,7 +104,11 @@ else % Release
     [DropDownPart(:).Enable] = deal('on');
     [NumEditFieldPart(:).Enable] = deal('on');
     [EditFieldPart(:).Enable] = deal('on');
-    [TablePart(:).Enable] = deal('on');
+    % [TablePart(:).Enable] = deal('on');
+    app.CSVMaskUITable.ColumnEditable = CSVMaskUITableColumnEditableStatus;
+    app.DataStorageUITable.ColumnEditable = DataStorageUITableEditableStatus;
+    app.RadiusMaskGenUITable.ColumnEditable = RadiusMaskGenUITableEditableStatus;
+    app.ExpCondUITable.ColumnEditable = ExpCondUITableEditableStatus;
 end
 
 if app.CurrentData.MasterInfo.DataSheetNum == 1
