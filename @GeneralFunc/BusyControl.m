@@ -6,7 +6,6 @@ MenuPart = [
         app.ImportMenu
         app.RawDataFileMenu
         app.ExportMenu
-        app.SelectedprofilesindatastorageMenu
         app.CurrentallinfotomatfileMenu
         ];
 % Buttons
