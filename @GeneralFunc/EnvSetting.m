@@ -31,11 +31,12 @@ switch OS
             EnvSettingCheck = false;
         end
     case 'UNIX'
+        disp('The Environment checking is ignored.')
         disp('Environment variables must be configured manually in UNIX.')
         disp('The Environment checking was bypassed.')
         EnvSettingCheck = true;
     case 'MAC'
+        disp('The Environment checking is ignored.')
         disp('Environment variables must be configured manually in MAC.')
-        disp('The Environment checking is bypassed.')
         EnvSettingCheck = true;
 end
