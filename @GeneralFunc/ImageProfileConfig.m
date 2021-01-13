@@ -40,6 +40,12 @@ end
 %% Prepare qz and qy axis for 2D plot
 VerticalPixelDisMatrix = RowIdx-CenY;
 HorizontalPixelDisMatrix = ColIdx-CenX;
+VerticalPixelDis = -VerticalPixelDisMatrix(:,1);
+HorizontalPixelDis = HorizontalPixelDisMatrix(1,:);
+TwoThetaAxis = atan(VerticalPixelDis*XPixelSize/SDDistance);
+BetaAxis = atan(HorizontalPixelDis*XPixelSize/SDDistance);
+qzAxis = 4*pi/(WL*1E10)*sin(1/2 *TwoThetaAxis);
+qyAxis = 4*pi/(WL*1E10)*sin(1/2 *BetaAxis);
 
 %% Mapping
 PixelDisMatrix =sqrt((VerticalPixelDisMatrix*YXPixelRatio).^2+HorizontalPixelDisMatrix.^2); % sqrt() is very slow.
@@ -110,6 +116,8 @@ Convertor.AllowIdx = AllowIdx;
 Convertor.GuidingIdxVector = GuidingIdxVector;
 Convertor.XAxis = XAxis;
 Convertor.XAxisLabel = XAxisLabel;
+Convertor.ImgqzAxis = qzAxis;
+Convertor.ImgqyAxis = qyAxis;
 
 app.CurrentData.ImageProfileConvertor = Convertor;
 
