@@ -37,9 +37,12 @@ elseif app.XAxisResolutionButtonGroup.SelectedObject == app.XAxisPointsResButton
     AxisRes = 'UserDefine';
 end
 
+%% Prepare qz and qy axis for 2D plot
+VerticalPixelDisMatrix = RowIdx-CenY;
+HorizontalPixelDisMatrix = ColIdx-CenX;
 
 %% Mapping
-PixelDisMatrix =sqrt(((RowIdx-CenY)*YXPixelRatio).^2+(ColIdx-CenX).^2); % sqrt() is very slow.
+PixelDisMatrix =sqrt((VerticalPixelDisMatrix*YXPixelRatio).^2+HorizontalPixelDisMatrix.^2); % sqrt() is very slow.
 TwoThetaMatrix = atan(PixelDisMatrix*XPixelSize/SDDistance); % q = 4pi/sin(th)/lambda, atan also takes a lot of time.
 qMatrix = 4*pi/(WL*1E10)*sin(1/2 *TwoThetaMatrix); % [1/A]
 MaskedPixelDisMatrix = PixelDisMatrix .* MaskNaNMatrix;
