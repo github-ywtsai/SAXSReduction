@@ -6,15 +6,18 @@ ImageForDrawimg = app.CurrentData.ImageForDrawing;
 % prepare xaxis and yaxis
 xAxis = app.CurrentData.ImageProfileConvertor.ImgqyAxis;
 yAxis = app.CurrentData.ImageProfileConvertor.ImgqzAxis;
-xAxisLabel = sprintf('q_y(1/%c)',char(197));
-yAxisLabel = sprintf('q_z(1/%c)',char(197));
-
+%xAxisLabel = '$q_y$(1/\AA)';
+%yAxisLabel = '$q_z$(1/\AA)';
+xAxisLabelString = 'q$_y$(1/\AA)';
+yAxisLabelString = 'q$_z$(1/\AA)';
 app.PlotHandles.Image = imagesc(app.ImageUIAxes,xAxis,yAxis,ImageForDrawimg);
 axtoolbar(app.ImageUIAxes,{'datacursor','zoomin','zoomout','restoreview'});
 app.ImageUIAxes.DataAspectRatio = [1 1 1];
 app.ImageUIAxes.PlotBoxAspectRatio = [ColSize RowSize 1];
-app.ImageUIAxes.XLabel.String = xAxisLabel;
-app.ImageUIAxes.YLabel.String = yAxisLabel;
+app.ImageUIAxes.XLabel.Interpreter = 'latex';
+app.ImageUIAxes.YLabel.Interpreter = 'latex';
+app.ImageUIAxes.XLabel.String = xAxisLabelString;
+app.ImageUIAxes.YLabel.String = yAxisLabelString;
 % DataAspectRatio & PlotBoxAspectRatio configuration affect the same with
 % axis image but faster.
 % axis(app.ImageUIAxes,'image')
