@@ -92,13 +92,13 @@ switch AxisUnit
         MaskedMatrix = MaskedqMatrix;
         SortingEdge = qSortingEdge;
         XAxis = qAxis;
-        XAxisLabel = 'q (1/A)';
+        XAxisLabel = 'q (1/\AA)';
     case 'TwoTheta'
         DistributionMatrix = TwoThetaMatrix;
         MaskedMatrix = MaskedTwoThetaMatrix;
         SortingEdge = TwoThetaSortingEdge;
         XAxis = TwoThetaAxis*180/pi;
-        XAxisLabel = 'tth (deg.)';
+        XAxisLabel = '2$\theta$ (deg.)';
 end
 
 
