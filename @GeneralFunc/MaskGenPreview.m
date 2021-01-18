@@ -10,7 +10,7 @@ app.PlotHandles.MaskPreview = imagesc(app.MaskPreviewUIAxes,app.CurrentData.Imag
 app.MaskPreviewUIAxes.YAxis.Direction = app.ImageUIAxes.YAxis.Direction;
 
 app.PlotHandles.MaskPreview.XData = app.PlotHandles.Image.XData; 
-app.PlotHandles.MaskPreview.YData = app.PlotHandles.Image.XData;
+app.PlotHandles.MaskPreview.YData = app.PlotHandles.Image.YData;
 
 app.MaskPreviewUIAxes.XLabel.Interpreter = app.ImageUIAxes.XLabel.Interpreter;
 app.MaskPreviewUIAxes.YLabel.Interpreter = app.ImageUIAxes.YLabel.Interpreter;
