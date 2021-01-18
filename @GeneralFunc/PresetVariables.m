@@ -35,7 +35,7 @@ app.AdditionalInfo.ColormapAlbula = GenAlbulaColormap();
 
 function BuildingMaskGenTable(app)
 Parameters = {'Min.';'Max.';'Start angle (deg.)';'End angle (deg.)'};
-Values = {0;1;90;20};
+Values = {0;1;40;80};
 app.RadiusMaskGenUITable.Data = [Parameters,Values];
 
 function Albula = GenAlbulaColormap()
