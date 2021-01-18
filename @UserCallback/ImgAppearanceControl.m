@@ -18,8 +18,31 @@ else
     % Operation = 'Plot New Image';
 end
 
-% Set the y axis direction
+% coonfigurate the x/y axis
+[RowSize,ColSize] = size(app.CurrentData.ImageForDrawing);
 app.ImageUIAxes.YAxis.Direction = 'normal';
+
+app.PlotHandles.Image.XData = app.CurrentData.ImageProfileConvertor.ImgqyAxis;
+app.PlotHandles.Image.YData = app.CurrentData.ImageProfileConvertor.ImgqzAxis;
+
+xAxisLabelString = 'q$_y$(1/\AA)';
+yAxisLabelString = 'q$_z$(1/\AA)';
+app.ImageUIAxes.XLabel.Interpreter = 'latex';
+app.ImageUIAxes.YLabel.Interpreter = 'latex';
+app.ImageUIAxes.XLabel.String = xAxisLabelString;
+app.ImageUIAxes.YLabel.String = yAxisLabelString;
+
+app.ImageUIAxes.DataAspectRatio = [1 1 1];
+app.ImageUIAxes.PlotBoxAspectRatio = [ColSize RowSize 1];
+
+app.ImageUIAxes.XLim = [-inf inf];
+app.ImageUIAxes.YLim = [-inf inf];
+
+% DataAspectRatio & PlotBoxAspectRatio configuration affect the same with
+% axis image but faster.
+% axis(app.ImageUIAxes,'image')
+% "axis image" takes almost 0.2 sec, control the data and plotbox aspect
+% ratio in uiaxes.DataAspectRation when uiaxes is creating.
 
 % Colormap control
 SelectedColorMap = app.ColormapDropDown.Value;
