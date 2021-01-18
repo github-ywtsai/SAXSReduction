@@ -34,7 +34,7 @@ app.DataStorageUITable.ColumnFormat = {'logical',{'Cancel','Store Current Data',
 app.AdditionalInfo.ColormapAlbula = GenAlbulaColormap();
 
 function BuildingMaskGenTable(app)
-Parameters = {'Min.';'Max.';'Center angle (deg.)';'Sweeping angle (deg.)'};
+Parameters = {'Min.';'Max.';'Start angle (deg.)';'End angle (deg.)'};
 Values = {0;1;90;20};
 app.RadiusMaskGenUITable.Data = [Parameters,Values];
 
