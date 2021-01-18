@@ -18,6 +18,9 @@ else
     % Operation = 'Plot New Image';
 end
 
+% Set the y axis direction
+app.ImageUIAxes.YAxis.Direction = 'normal';
+
 % Colormap control
 SelectedColorMap = app.ColormapDropDown.Value;
 if strcmpi(SelectedColorMap,'albula')
