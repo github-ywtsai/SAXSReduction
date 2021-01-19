@@ -34,9 +34,15 @@ app.DataStorageUITable.ColumnFormat = {'logical',{'Cancel','Store Current Data',
 app.AdditionalInfo.ColormapAlbula = GenAlbulaColormap();
 
 function BuildingMaskGenTable(app)
+% for radius
 Parameters = {'Min.';'Max.';'Start angle (deg.)';'End angle (deg.)'};
 Values = {0;1;40;80};
 app.RadiusMaskGenUITable.Data = [Parameters,Values];
+% for rectangle
+Parameters = {'qr Min. (1/A)';'qr Max. (1/A)';'qzMin (1/A)';'qzMax (1/A)'};
+Values = {-1.2;0.5;0.5;1};
+app.RectangleMaskGenUITable.Data = [Parameters,Values];
+
 
 function Albula = GenAlbulaColormap()
 HotColormap = hot;
