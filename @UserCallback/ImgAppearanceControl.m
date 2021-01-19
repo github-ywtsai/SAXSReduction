@@ -18,6 +18,17 @@ else
     % Operation = 'Plot New Image';
 end
 
+% Mark center
+%{
+if ~isempty(app.PlotHandles.CenterMarker)
+    delete(app.PlotHandles.CenterMarker);
+end
+qrCen = app.CurrentData.ImageProfileConvertor.ImgqyAxis(app.CurrentData.MasterInfo.BeamCenterX);
+qzCen = app.CurrentData.ImageProfileConvertor.ImgqzAxis(app.CurrentData.MasterInfo.BeamCenterY);
+hold(app.ImageUIAxes,'on')
+app.PlotHandles.CenterMarker = plot(app.ImageUIAxes,qrCen,qzCen,'ro','MarkerSize',5);
+hold(app.ImageUIAxes,'off')
+%}
 % coonfigurate the x/y axis
 [RowSize,ColSize] = size(app.CurrentData.ImageForDrawing);
 app.ImageUIAxes.YAxis.Direction = 'normal';

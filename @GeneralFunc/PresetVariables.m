@@ -27,6 +27,8 @@ app.MaskGen = [];
 app.MaskGen.MaskPreview = [];
 BuildingMaskGenTable(app);
 
+app.PlotHandles.Center = [];
+
 app.AdditionalInfo.DataStorageNum = 30;
 app.DataStorage = cell(app.AdditionalInfo.DataStorageNum,1);
 app.DataStorageUITable.ColumnFormat = {'logical',{'Cancel','Store Current Data','Remove','Restore Stored Data','Clear All Storages'}};
