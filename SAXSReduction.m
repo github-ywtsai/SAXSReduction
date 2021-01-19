@@ -22,13 +22,6 @@ classdef SAXSReduction < matlab.apps.AppBase
         HighThresholdSlider             matlab.ui.control.Slider
         LowThresholdSliderLabel         matlab.ui.control.Label
         LowThresholdSlider              matlab.ui.control.Slider
-        ExportImageButtonGroup          matlab.ui.container.ButtonGroup
-        TransmissionButton              matlab.ui.control.RadioButton
-        GrazingIncidentButton           matlab.ui.control.RadioButton
-        PreviewButton                   matlab.ui.control.Button
-        ExportButton                    matlab.ui.control.Button
-        AxisOptionDropDownLabel         matlab.ui.control.Label
-        AxisOptionDropDown              matlab.ui.control.DropDown
         ProfileTab                      matlab.ui.container.Tab
         ProfileUIAxes                   matlab.ui.control.UIAxes
         ProfileXAxisScaleButtonGroup    matlab.ui.container.ButtonGroup
@@ -58,6 +51,7 @@ classdef SAXSReduction < matlab.apps.AppBase
         RadiusMaskGenTab                matlab.ui.container.Tab
         RadiusMaskGenUITable            matlab.ui.control.Table
         RectangleMaskGenTab             matlab.ui.container.Tab
+        RectangleMaskGenUITable         matlab.ui.control.Table
         ExportMaskButton                matlab.ui.control.Button
         MaskGenSymmetryButtonGroup      matlab.ui.container.ButtonGroup
         MaskGenNoneSymButton            matlab.ui.control.RadioButton
@@ -78,6 +72,23 @@ classdef SAXSReduction < matlab.apps.AppBase
         MultiProfileYAxisScaleButtonGroup  matlab.ui.container.ButtonGroup
         MultiProfileYAxisLogButton      matlab.ui.control.RadioButton
         MultiProfileYAxisLinearButton   matlab.ui.control.RadioButton
+        PoleFigureTab                   matlab.ui.container.Tab
+        PoleFigureUIAxes                matlab.ui.control.UIAxes
+        PoleFigureGeometeryButtonGroup  matlab.ui.container.ButtonGroup
+        IncidentAngleButton             matlab.ui.control.RadioButton
+        ReflectionPointButton           matlab.ui.control.RadioButton
+        IncidentAngleEditField          matlab.ui.control.NumericEditField
+        ReflectionXEditField            matlab.ui.control.NumericEditField
+        ReflectionYEditField            matlab.ui.control.NumericEditField
+        PlotingConfigurationPanel       matlab.ui.container.Panel
+        qzminEditFieldLabel             matlab.ui.control.Label
+        qzminEditField                  matlab.ui.control.NumericEditField
+        qzmaxEditFieldLabel             matlab.ui.control.Label
+        qzmaxEditField                  matlab.ui.control.NumericEditField
+        qrminEditFieldLabel             matlab.ui.control.Label
+        qrminEditField                  matlab.ui.control.NumericEditField
+        qrmaxEditFieldLabel             matlab.ui.control.Label
+        qrmaxEditField                  matlab.ui.control.NumericEditField
         TabGroup2                       matlab.ui.container.TabGroup
         DataStorageTab                  matlab.ui.container.Tab
         TabGroup5                       matlab.ui.container.TabGroup
@@ -467,42 +478,6 @@ classdef SAXSReduction < matlab.apps.AppBase
             app.LowThresholdSlider.Position = [14 38 209 3];
             app.LowThresholdSlider.Value = -1;
 
-            % Create ExportImageButtonGroup
-            app.ExportImageButtonGroup = uibuttongroup(app.ImageTab);
-            app.ExportImageButtonGroup.Title = 'Export Image';
-            app.ExportImageButtonGroup.Position = [578 207 240 147];
-
-            % Create TransmissionButton
-            app.TransmissionButton = uiradiobutton(app.ExportImageButtonGroup);
-            app.TransmissionButton.Text = 'Transmission';
-            app.TransmissionButton.Position = [11 103 93 22];
-            app.TransmissionButton.Value = true;
-
-            % Create GrazingIncidentButton
-            app.GrazingIncidentButton = uiradiobutton(app.ExportImageButtonGroup);
-            app.GrazingIncidentButton.Text = 'Grazing Incident';
-            app.GrazingIncidentButton.Position = [116 103 109 22];
-
-            % Create PreviewButton
-            app.PreviewButton = uibutton(app.ExportImageButtonGroup, 'push');
-            app.PreviewButton.Position = [10 6 100 22];
-            app.PreviewButton.Text = 'Preview';
-
-            % Create ExportButton
-            app.ExportButton = uibutton(app.ExportImageButtonGroup, 'push');
-            app.ExportButton.Position = [123 6 100 22];
-            app.ExportButton.Text = 'Export';
-
-            % Create AxisOptionDropDownLabel
-            app.AxisOptionDropDownLabel = uilabel(app.ExportImageButtonGroup);
-            app.AxisOptionDropDownLabel.HorizontalAlignment = 'right';
-            app.AxisOptionDropDownLabel.Position = [8 34 67 22];
-            app.AxisOptionDropDownLabel.Text = 'Axis Option';
-
-            % Create AxisOptionDropDown
-            app.AxisOptionDropDown = uidropdown(app.ExportImageButtonGroup);
-            app.AxisOptionDropDown.Position = [79 34 153 22];
-
             % Create ProfileTab
             app.ProfileTab = uitab(app.MainTabGroup);
             app.ProfileTab.Title = 'Profile';
@@ -672,6 +647,13 @@ classdef SAXSReduction < matlab.apps.AppBase
             app.RectangleMaskGenTab = uitab(app.MaskGenTabGroup);
             app.RectangleMaskGenTab.Title = 'Rectangle';
 
+            % Create RectangleMaskGenUITable
+            app.RectangleMaskGenUITable = uitable(app.RectangleMaskGenTab);
+            app.RectangleMaskGenUITable.ColumnName = {'Parameter'; 'Value'};
+            app.RectangleMaskGenUITable.RowName = {};
+            app.RectangleMaskGenUITable.ColumnEditable = [false true];
+            app.RectangleMaskGenUITable.Position = [0 0 270 276];
+
             % Create ExportMaskButton
             app.ExportMaskButton = uibutton(app.RegionofInterestTab, 'push');
             app.ExportMaskButton.ButtonPushedFcn = createCallbackFcn(app, @ExportMaskButtonPushed, true);
@@ -784,6 +766,94 @@ classdef SAXSReduction < matlab.apps.AppBase
             app.MultiProfileYAxisLinearButton = uiradiobutton(app.MultiProfileYAxisScaleButtonGroup);
             app.MultiProfileYAxisLinearButton.Text = 'Linear';
             app.MultiProfileYAxisLinearButton.Position = [77 5 65 22];
+
+            % Create PoleFigureTab
+            app.PoleFigureTab = uitab(app.MainTabGroup);
+            app.PoleFigureTab.Title = 'Pole Figure';
+
+            % Create PoleFigureUIAxes
+            app.PoleFigureUIAxes = uiaxes(app.PoleFigureTab);
+            title(app.PoleFigureUIAxes, 'Title')
+            xlabel(app.PoleFigureUIAxes, 'X')
+            ylabel(app.PoleFigureUIAxes, 'Y')
+            app.PoleFigureUIAxes.DataAspectRatio = [1 1 1];
+            app.PoleFigureUIAxes.Position = [10 140 530 530];
+
+            % Create PoleFigureGeometeryButtonGroup
+            app.PoleFigureGeometeryButtonGroup = uibuttongroup(app.PoleFigureTab);
+            app.PoleFigureGeometeryButtonGroup.Title = 'Pole Figure Geometery';
+            app.PoleFigureGeometeryButtonGroup.Position = [558 596 251 74];
+
+            % Create IncidentAngleButton
+            app.IncidentAngleButton = uiradiobutton(app.PoleFigureGeometeryButtonGroup);
+            app.IncidentAngleButton.Text = 'Incident Angle';
+            app.IncidentAngleButton.Position = [4 29 98 22];
+            app.IncidentAngleButton.Value = true;
+
+            % Create ReflectionPointButton
+            app.ReflectionPointButton = uiradiobutton(app.PoleFigureGeometeryButtonGroup);
+            app.ReflectionPointButton.Text = 'Reflection Point';
+            app.ReflectionPointButton.Position = [114 28 106 22];
+
+            % Create IncidentAngleEditField
+            app.IncidentAngleEditField = uieditfield(app.PoleFigureGeometeryButtonGroup, 'numeric');
+            app.IncidentAngleEditField.ValueDisplayFormat = '%2.2g deg.';
+            app.IncidentAngleEditField.Position = [10 7 92 22];
+
+            % Create ReflectionXEditField
+            app.ReflectionXEditField = uieditfield(app.PoleFigureGeometeryButtonGroup, 'numeric');
+            app.ReflectionXEditField.ValueDisplayFormat = '%4.2g X';
+            app.ReflectionXEditField.Position = [121 8 58 22];
+
+            % Create ReflectionYEditField
+            app.ReflectionYEditField = uieditfield(app.PoleFigureGeometeryButtonGroup, 'numeric');
+            app.ReflectionYEditField.ValueDisplayFormat = '%4.2g Y';
+            app.ReflectionYEditField.Position = [185 7 58 22];
+
+            % Create PlotingConfigurationPanel
+            app.PlotingConfigurationPanel = uipanel(app.PoleFigureTab);
+            app.PlotingConfigurationPanel.Title = 'Ploting Configuration';
+            app.PlotingConfigurationPanel.Position = [558 366 251 221];
+
+            % Create qzminEditFieldLabel
+            app.qzminEditFieldLabel = uilabel(app.PlotingConfigurationPanel);
+            app.qzminEditFieldLabel.HorizontalAlignment = 'right';
+            app.qzminEditFieldLabel.Position = [10 169 44 22];
+            app.qzminEditFieldLabel.Text = 'qz min.';
+
+            % Create qzminEditField
+            app.qzminEditField = uieditfield(app.PlotingConfigurationPanel, 'numeric');
+            app.qzminEditField.Position = [69 169 174 22];
+
+            % Create qzmaxEditFieldLabel
+            app.qzmaxEditFieldLabel = uilabel(app.PlotingConfigurationPanel);
+            app.qzmaxEditFieldLabel.HorizontalAlignment = 'right';
+            app.qzmaxEditFieldLabel.Position = [8 142 48 22];
+            app.qzmaxEditFieldLabel.Text = 'qz max.';
+
+            % Create qzmaxEditField
+            app.qzmaxEditField = uieditfield(app.PlotingConfigurationPanel, 'numeric');
+            app.qzmaxEditField.Position = [69 142 174 22];
+
+            % Create qrminEditFieldLabel
+            app.qrminEditFieldLabel = uilabel(app.PlotingConfigurationPanel);
+            app.qrminEditFieldLabel.HorizontalAlignment = 'right';
+            app.qrminEditFieldLabel.Position = [12 113 42 22];
+            app.qrminEditFieldLabel.Text = 'qr min.';
+
+            % Create qrminEditField
+            app.qrminEditField = uieditfield(app.PlotingConfigurationPanel, 'numeric');
+            app.qrminEditField.Position = [69 113 174 22];
+
+            % Create qrmaxEditFieldLabel
+            app.qrmaxEditFieldLabel = uilabel(app.PlotingConfigurationPanel);
+            app.qrmaxEditFieldLabel.HorizontalAlignment = 'right';
+            app.qrmaxEditFieldLabel.Position = [10 86 46 22];
+            app.qrmaxEditFieldLabel.Text = 'qr max.';
+
+            % Create qrmaxEditField
+            app.qrmaxEditField = uieditfield(app.PlotingConfigurationPanel, 'numeric');
+            app.qrmaxEditField.Position = [69 86 174 22];
 
             % Create TabGroup2
             app.TabGroup2 = uitabgroup(app.SAXSReductionUIFigure);
