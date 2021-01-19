@@ -218,8 +218,8 @@ classdef SAXSReduction < matlab.apps.AppBase
             UserCallback.ExportCSVMask(app,event);
         end
 
-        % Callback function: RadiusMaskGenUITable, 
-        % RectangleMaskGenTab, RectangleMaskGenUITable
+        % Cell edit callback: RadiusMaskGenUITable, 
+        % RectangleMaskGenUITable
         function RadiusMaskGenUITableCellEdit(app, event)
             % indices = event.Indices;
             % newData = event.NewData;
@@ -646,7 +646,6 @@ classdef SAXSReduction < matlab.apps.AppBase
 
             % Create RectangleMaskGenTab
             app.RectangleMaskGenTab = uitab(app.MaskGenTabGroup);
-            app.RectangleMaskGenTab.SizeChangedFcn = createCallbackFcn(app, @RadiusMaskGenUITableCellEdit, true);
             app.RectangleMaskGenTab.Title = 'Rectangle';
 
             % Create RectangleMaskGenUITable
