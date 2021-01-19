@@ -45,7 +45,7 @@ app.RectangleMaskGenUITable.Data = [Parameters,Values];
 
 
 function Albula = GenAlbulaColormap()
-HotColormap = hot;
+HotColormap = hot(2^8);
 HotR = HotColormap(:,1);
 HotG = HotColormap(:,2);
 HotB = HotColormap(:,3);
