@@ -128,6 +128,8 @@ classdef SAXSReduction < matlab.apps.AppBase
         EffectiveMaskSelectionPanel     matlab.ui.container.Panel
         EffectiveMaskSelectionDropDown  matlab.ui.control.DropDown
         SaturationEliminationCheckBox   matlab.ui.control.CheckBox
+        ROISelectionPanel               matlab.ui.container.Panel
+        ROISelectionDropDown            matlab.ui.control.DropDown
         MultiDataSheetProcessingTab     matlab.ui.container.Tab
         StartEditFieldLabel             matlab.ui.control.Label
         MultiDataStartSNEditField       matlab.ui.control.NumericEditField
@@ -1062,20 +1064,32 @@ classdef SAXSReduction < matlab.apps.AppBase
             % Create EffectiveMaskSelectionPanel
             app.EffectiveMaskSelectionPanel = uipanel(app.DataSheetSelectionTab);
             app.EffectiveMaskSelectionPanel.Title = 'Effective Mask Selection';
-            app.EffectiveMaskSelectionPanel.Position = [145 0 240 95];
+            app.EffectiveMaskSelectionPanel.Position = [145 49 240 46];
 
             % Create EffectiveMaskSelectionDropDown
             app.EffectiveMaskSelectionDropDown = uidropdown(app.EffectiveMaskSelectionPanel);
             app.EffectiveMaskSelectionDropDown.Items = {'None'};
             app.EffectiveMaskSelectionDropDown.ItemsData = {'0'};
             app.EffectiveMaskSelectionDropDown.ValueChangedFcn = createCallbackFcn(app, @EffectiveMaskSelectionDropDownValueChanged, true);
-            app.EffectiveMaskSelectionDropDown.Position = [10 46 221 22];
+            app.EffectiveMaskSelectionDropDown.Position = [9 3 221 22];
             app.EffectiveMaskSelectionDropDown.Value = '0';
 
             % Create SaturationEliminationCheckBox
             app.SaturationEliminationCheckBox = uicheckbox(app.DataSheetSelectionTab);
             app.SaturationEliminationCheckBox.Text = 'Saturation-Elimination';
             app.SaturationEliminationCheckBox.Position = [6 7 139 22];
+
+            % Create ROISelectionPanel
+            app.ROISelectionPanel = uipanel(app.DataSheetSelectionTab);
+            app.ROISelectionPanel.Title = 'ROI Selection';
+            app.ROISelectionPanel.Position = [145 2 240 45];
+
+            % Create ROISelectionDropDown
+            app.ROISelectionDropDown = uidropdown(app.ROISelectionPanel);
+            app.ROISelectionDropDown.Items = {'None'};
+            app.ROISelectionDropDown.ItemsData = {'0'};
+            app.ROISelectionDropDown.Position = [9 2 221 22];
+            app.ROISelectionDropDown.Value = '0';
 
             % Create MultiDataSheetProcessingTab
             app.MultiDataSheetProcessingTab = uitab(app.UserControlTabGroup);
