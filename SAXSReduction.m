@@ -52,13 +52,16 @@ classdef SAXSReduction < matlab.apps.AppBase
         RadiusMaskGenUITable            matlab.ui.control.Table
         RectangleMaskGenTab             matlab.ui.container.Tab
         RectangleMaskGenUITable         matlab.ui.control.Table
-        ExportMaskButton                matlab.ui.control.Button
+        SaveROIButton                   matlab.ui.control.Button
         MaskGenSymmetryButtonGroup      matlab.ui.container.ButtonGroup
         MaskGenNoneSymButton            matlab.ui.control.RadioButton
         MaskGenCenSymButton             matlab.ui.control.RadioButton
         MaskGenXMirrorButton            matlab.ui.control.RadioButton
         MaskGenYMirrorButton            matlab.ui.control.RadioButton
         MaskGenRefreshButton            matlab.ui.control.Button
+        ROIListUITable                  matlab.ui.control.Table
+        ROINameEditFieldLabel           matlab.ui.control.Label
+        ROINameEditField                matlab.ui.control.EditField
         ExperimentalConditionsTab       matlab.ui.container.Tab
         ParametersinProcessButtonGroup  matlab.ui.container.ButtonGroup
         DefaultButton                   matlab.ui.control.RadioButton
@@ -213,8 +216,8 @@ classdef SAXSReduction < matlab.apps.AppBase
             UserCallback.ImgAppearanceControl(app,event);
         end
 
-        % Button pushed function: ExportMaskButton
-        function ExportMaskButtonPushed(app, event)
+        % Button pushed function: SaveROIButton
+        function SaveROIButtonPushed(app, event)
             UserCallback.ExportCSVMask(app,event);
         end
 
@@ -630,7 +633,7 @@ classdef SAXSReduction < matlab.apps.AppBase
 
             % Create MaskGenTabGroup
             app.MaskGenTabGroup = uitabgroup(app.RegionofInterestTab);
-            app.MaskGenTabGroup.Position = [550 350 270 300];
+            app.MaskGenTabGroup.Position = [550 510 270 140];
 
             % Create RadiusMaskGenTab
             app.RadiusMaskGenTab = uitab(app.MaskGenTabGroup);
@@ -642,7 +645,7 @@ classdef SAXSReduction < matlab.apps.AppBase
             app.RadiusMaskGenUITable.RowName = {};
             app.RadiusMaskGenUITable.ColumnEditable = [false true];
             app.RadiusMaskGenUITable.CellEditCallback = createCallbackFcn(app, @RadiusMaskGenUITableCellEdit, true);
-            app.RadiusMaskGenUITable.Position = [0 0 270 276];
+            app.RadiusMaskGenUITable.Position = [0 0 270 116];
 
             % Create RectangleMaskGenTab
             app.RectangleMaskGenTab = uitab(app.MaskGenTabGroup);
@@ -654,46 +657,63 @@ classdef SAXSReduction < matlab.apps.AppBase
             app.RectangleMaskGenUITable.RowName = {};
             app.RectangleMaskGenUITable.ColumnEditable = [false true];
             app.RectangleMaskGenUITable.CellEditCallback = createCallbackFcn(app, @RadiusMaskGenUITableCellEdit, true);
-            app.RectangleMaskGenUITable.Position = [0 0 270 276];
+            app.RectangleMaskGenUITable.Position = [0 0 270 116];
 
-            % Create ExportMaskButton
-            app.ExportMaskButton = uibutton(app.RegionofInterestTab, 'push');
-            app.ExportMaskButton.ButtonPushedFcn = createCallbackFcn(app, @ExportMaskButtonPushed, true);
-            app.ExportMaskButton.Position = [719 140 100 22];
-            app.ExportMaskButton.Text = 'Export Mask';
+            % Create SaveROIButton
+            app.SaveROIButton = uibutton(app.RegionofInterestTab, 'push');
+            app.SaveROIButton.ButtonPushedFcn = createCallbackFcn(app, @SaveROIButtonPushed, true);
+            app.SaveROIButton.Position = [719 140 100 22];
+            app.SaveROIButton.Text = 'Save ROI';
 
             % Create MaskGenSymmetryButtonGroup
             app.MaskGenSymmetryButtonGroup = uibuttongroup(app.RegionofInterestTab);
             app.MaskGenSymmetryButtonGroup.SelectionChangedFcn = createCallbackFcn(app, @MaskGenSymmetryButtonGroupSelectionChanged, true);
             app.MaskGenSymmetryButtonGroup.Title = 'Symmetry';
-            app.MaskGenSymmetryButtonGroup.Position = [550 215 270 130];
+            app.MaskGenSymmetryButtonGroup.Position = [550 420 270 80];
 
             % Create MaskGenNoneSymButton
             app.MaskGenNoneSymButton = uiradiobutton(app.MaskGenSymmetryButtonGroup);
             app.MaskGenNoneSymButton.Text = 'None';
-            app.MaskGenNoneSymButton.Position = [11 80 58 22];
+            app.MaskGenNoneSymButton.Position = [11 32 58 22];
             app.MaskGenNoneSymButton.Value = true;
 
             % Create MaskGenCenSymButton
             app.MaskGenCenSymButton = uiradiobutton(app.MaskGenSymmetryButtonGroup);
             app.MaskGenCenSymButton.Text = 'Central Symmetry';
-            app.MaskGenCenSymButton.Position = [11 58 118 22];
+            app.MaskGenCenSymButton.Position = [130 32 118 22];
 
             % Create MaskGenXMirrorButton
             app.MaskGenXMirrorButton = uiradiobutton(app.MaskGenSymmetryButtonGroup);
             app.MaskGenXMirrorButton.Text = 'X axis Mirror';
-            app.MaskGenXMirrorButton.Position = [11 36 89 22];
+            app.MaskGenXMirrorButton.Position = [11 6 89 22];
 
             % Create MaskGenYMirrorButton
             app.MaskGenYMirrorButton = uiradiobutton(app.MaskGenSymmetryButtonGroup);
             app.MaskGenYMirrorButton.Text = 'Y axis Mirror';
-            app.MaskGenYMirrorButton.Position = [11 15 89 22];
+            app.MaskGenYMirrorButton.Position = [130 6 89 22];
 
             % Create MaskGenRefreshButton
             app.MaskGenRefreshButton = uibutton(app.RegionofInterestTab, 'push');
             app.MaskGenRefreshButton.ButtonPushedFcn = createCallbackFcn(app, @MaskGenRefreshButtonPushed, true);
-            app.MaskGenRefreshButton.Position = [720 174 100 22];
+            app.MaskGenRefreshButton.Position = [615 141 100 22];
             app.MaskGenRefreshButton.Text = 'Refresh';
+
+            % Create ROIListUITable
+            app.ROIListUITable = uitable(app.RegionofInterestTab);
+            app.ROIListUITable.ColumnName = {'ROI Name'};
+            app.ROIListUITable.RowName = {};
+            app.ROIListUITable.ColumnEditable = true;
+            app.ROIListUITable.Position = [550 230 270 177];
+
+            % Create ROINameEditFieldLabel
+            app.ROINameEditFieldLabel = uilabel(app.RegionofInterestTab);
+            app.ROINameEditFieldLabel.HorizontalAlignment = 'right';
+            app.ROINameEditFieldLabel.Position = [554 200 62 22];
+            app.ROINameEditFieldLabel.Text = 'ROI Name';
+
+            % Create ROINameEditField
+            app.ROINameEditField = uieditfield(app.RegionofInterestTab, 'text');
+            app.ROINameEditField.Position = [551 179 268 22];
 
             % Create ExperimentalConditionsTab
             app.ExperimentalConditionsTab = uitab(app.MainTabGroup);
