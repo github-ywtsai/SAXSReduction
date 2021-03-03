@@ -93,8 +93,12 @@ TextData = temp.textdata;
 %       early imageJ
 %       Col_1:idx; Col_2:x; Col_3:y; Col_4: value
 % 2:    x(col) and y(row) indice start from 0 in imageJ but 1 from Matlab 
-if strcmpi(TextData{1},'X') && strcmpi(TextData{2},'Y') && strcmpi(TextData{3},'Value')
-    CSVData = fliplr(NumData(:,1:2)+1); % fliplr to change the sequency from x/y to y/x to match the matlab rule [rowidx, colidx]
-else
-    CSVData = fliplr(NumData(:,2:3)+1); % fliplr to change the sequency from x/y to y/x to match the matlab rule [rowidx, colidx]
-end
+
+% only for new imageJ
+%if strcmpi(TextData{1},'X') && strcmpi(TextData{2},'Y') && strcmpi(TextData{3},'Value')
+%    CSVData = fliplr(NumData(:,1:2)+1); % fliplr to change the sequency from x/y to y/x to match the matlab rule [rowidx, colidx]
+%else
+%    CSVData = fliplr(NumData(:,2:3)+1); % fliplr to change the sequency from x/y to y/x to match the matlab rule [rowidx, colidx]
+%end
+
+CSVData = fliplr(NumData(:,1:2)+1);
