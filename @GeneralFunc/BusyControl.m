@@ -21,7 +21,7 @@ ButtonPart = [
         app.SelectUnselectAllButton
     % Mask generator
         app.MaskGenRefreshButton
-        app.ExportMaskButton
+        % app.ExportMaskButton
     % multi-data-sheet data
         app.AvgMultiDataSheetButton
         app.ExportAvgMultiDataSheetButton
