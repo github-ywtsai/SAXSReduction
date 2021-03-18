@@ -22,6 +22,7 @@ classdef UserCallback
         StoredDataOffsetMagControl(app,event);
         
         ExportCurrentProfile(app,event);
+        ExportCurrentImage(app,event);
         ExportSelectedProfile(app,event);
         ExportAll2mat(app,event);
         

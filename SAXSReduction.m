@@ -22,6 +22,7 @@ classdef SAXSReduction < matlab.apps.AppBase
         HighThresholdSlider             matlab.ui.control.Slider
         LowThresholdSliderLabel         matlab.ui.control.Label
         LowThresholdSlider              matlab.ui.control.Slider
+        ExportCurrentImageButton        matlab.ui.control.Button
         ProfileTab                      matlab.ui.container.Tab
         ProfileUIAxes                   matlab.ui.control.UIAxes
         ProfileXAxisScaleButtonGroup    matlab.ui.container.ButtonGroup
@@ -355,6 +356,11 @@ classdef SAXSReduction < matlab.apps.AppBase
         function SaveCurrentMaskPreviewtoEffectiveMaskPoolButtonPushed(app, event)
             UserCallback.EffectiveMaskControl(app,event);
         end
+
+        % Button pushed function: ExportCurrentImageButton
+        function ExportCurrentImageButtonPushed(app, event)
+            UserCallback.ExportCurrentImage(app,event);
+        end
     end
 
     % Component initialization
@@ -483,6 +489,12 @@ classdef SAXSReduction < matlab.apps.AppBase
             app.LowThresholdSlider.Enable = 'off';
             app.LowThresholdSlider.Position = [14 38 209 3];
             app.LowThresholdSlider.Value = -1;
+
+            % Create ExportCurrentImageButton
+            app.ExportCurrentImageButton = uibutton(app.ImageTab, 'push');
+            app.ExportCurrentImageButton.ButtonPushedFcn = createCallbackFcn(app, @ExportCurrentImageButtonPushed, true);
+            app.ExportCurrentImageButton.Position = [578 332 240 22];
+            app.ExportCurrentImageButton.Text = 'Export Current Image';
 
             % Create ProfileTab
             app.ProfileTab = uitab(app.MainTabGroup);
