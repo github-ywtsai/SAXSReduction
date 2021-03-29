@@ -33,7 +33,7 @@ switch OS
     case 'UNIX'
         disp('The Environment checking is ignored.')
         disp('Environment variables must be configured manually in UNIX.')
-        disp('The Environment checking was bypassed.')
+        setenv('HDF5_PLUGIN_PATH','/blsw/opt/areaDetector/root/usr/lib/h5plugin');
         EnvSettingCheck = true;
     case 'MAC'
         disp('The Environment checking is ignored.')
