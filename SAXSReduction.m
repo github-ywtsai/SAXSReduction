@@ -170,7 +170,7 @@ classdef SAXSReduction < matlab.apps.AppBase
             GeneralFunc.UpdateDataStorageTable(app,[]);
             GeneralFunc.UpdateEffectiveMaskTable(app,[]);
             
-            EnvSettingCheck = GeneralFunc.EnvSetting();
+            EnvSettingCheck = EigerDataFunc.EnvSetting();
             if ~EnvSettingCheck
                 closereq
                 return

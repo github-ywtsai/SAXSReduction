@@ -1,6 +1,5 @@
 classdef GeneralFunc
     methods (Static = true)
-        EnvSettingCheck = EnvSetting();
         PresetVariables(app);
         
         UpdateCSVMaskTable(app,event);
