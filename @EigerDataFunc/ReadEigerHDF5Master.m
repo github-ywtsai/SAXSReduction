@@ -33,7 +33,7 @@ for LinkIdx = 1:NLinks
         MasterInfo.Links(LinkIdx).ImageNrLow = h5readatt(MasterInfo.Links(LinkIdx).FP,MasterInfo.Links(LinkIdx).Location,'image_nr_low');
         MasterInfo.Links(LinkIdx).ImageNrHigh = h5readatt(MasterInfo.Links(LinkIdx).FP,MasterInfo.Links(LinkIdx).Location,'image_nr_high');
     else
-        return
+        break
     end
 end
 MasterInfo.DataSheetNum = MasterInfo.Links(end).ImageNrHigh;
