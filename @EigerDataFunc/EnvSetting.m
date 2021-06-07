@@ -1,4 +1,5 @@
 function EnvSettingCheck = EnvSetting()
+% Ver. 20210607
 % EnvSettingCheck = true;
 
 if ispc
@@ -26,12 +27,12 @@ switch OS
         end
     case 'UNIX'
         disp('The Environment checking is ignored.')
-        disp('Environment variables must be configured manually in UNIX.')
+        disp('Environment variables must be configured manually on UNIX.')
         setenv('HDF5_PLUGIN_PATH','/blsw/opt/areaDetector/root/usr/lib/h5plugin');
         EnvSettingCheck = true;
     case 'MAC'
         disp('The Environment checking is ignored.')
-        disp('Environment variables must be configured manually in MAC.')
+        disp('Environment variables must be configured manually on MAC.')
         EnvSettingCheck = true;
 end
 
