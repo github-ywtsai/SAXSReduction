@@ -175,10 +175,6 @@ classdef SAXSReduction < matlab.apps.AppBase
                 closereq
                 return
             end
-            app.AdditionalInfo.Lasth5Folder = pwd;
-            app.AdditionalInfo.LastDataExportFolder = pwd;
-            app.AdditionalInfo.LastMaskExportFolder = pwd;
-            app.AdditionalInfo.LastMaskImportFolder = pwd;
         end
 
         % Menu selected function: RawDataFileMenu

@@ -34,6 +34,21 @@ app.DataStorage = cell(app.AdditionalInfo.DataStorageNum,1);
 app.DataStorageUITable.ColumnFormat = {'logical',{'Cancel','Store Current Data','Remove','Restore Stored Data','Clear All Storages'}};
 
 app.AdditionalInfo.ColormapAlbula = GenAlbulaColormap();
+app.AdditionalInfo.Lasth5Folder = pwd;
+app.AdditionalInfo.LastDataExportFolder = pwd;
+app.AdditionalInfo.LastMaskExportFolder = pwd;
+app.AdditionalInfo.LastMaskImportFolder = pwd;
+
+if isunix
+    UsersDataFF = fullfile('home','tsai.tw','UsersData');
+    if exist(UsersDataFF,'dir')
+        app.AdditionalInfo.Lasth5Folder = UsersDataFF;
+        app.AdditionalInfo.LastDataExportFolder = UsersDataFF;
+        app.AdditionalInfo.LastMaskExportFolder = UsersDataFF;
+        app.AdditionalInfo.LastMaskImportFolder = UsersDataFF;
+    end
+end
+
 
 function BuildingMaskGenTable(app)
 % for radius
