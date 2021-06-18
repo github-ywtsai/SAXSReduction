@@ -40,7 +40,7 @@ app.AdditionalInfo.LastMaskExportFolder = pwd;
 app.AdditionalInfo.LastMaskImportFolder = pwd;
 
 if isunix
-    UsersDataFF = fullfile('home','tsai.tw','UsersData');
+    UsersDataFF = fullfile('/','home','tsai.yw','UsersData');
     if exist(UsersDataFF,'dir')
         app.AdditionalInfo.Lasth5Folder = UsersDataFF;
         app.AdditionalInfo.LastDataExportFolder = UsersDataFF;
